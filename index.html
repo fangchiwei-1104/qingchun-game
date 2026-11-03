@@ -275,6 +275,17 @@ details.more summary { cursor: pointer; font-family: var(--f-display); color: va
 @media (max-width: 480px) { .mbti-axes-intro { grid-template-columns: 1fr; } }
 .mbti-axes-intro div { border-radius: 12px; padding: 10px 12px; background: var(--bg); font-size: 14.5px; display: grid; gap: 2px; }
 .mbti-axes-intro b { font-family: var(--f-display); font-weight: 400; font-size: 15px; }
+
+/* 上傳結果 */
+.upload { background: var(--hl-soft); }
+.upload h4 { color: var(--ink); }
+.who-fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 520px) { .who-fields { grid-template-columns: 1fr; } }
+.who-fields label { display: grid; gap: 4px; font-family: var(--f-display); font-size: 14px; }
+.who-fields input { font: inherit; font-size: 16px; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 10px; padding: 8px 10px; min-width: 0; }
+.who-fields input:focus { border-color: var(--plum); outline: none; }
+a.btn { text-decoration: none; display: inline-flex; align-items: center; }
+a.btn[aria-disabled="true"] { opacity: .4; pointer-events: none; }
 </style>
 </head>
 <body>
@@ -1316,6 +1327,16 @@ let P = { ends: {}, notes: {}, carry: null, carry1: null, mbch: {}, showProb: tr
 try { const raw = localStorage.getItem(STORE); if (raw) P = Object.assign(P, JSON.parse(raw)); } catch (e) {}
 function saveP() { try { localStorage.setItem(STORE, JSON.stringify(P)); } catch (e) {} }
 
+/* ================= 上傳結果到老師的 Google 表單 =================
+   view：表單的 viewform 網址；ids：各欄位的 entry 編號（取自表單「取得預先填入的連結」）。
+   view 留空時，結局頁會顯示「老師尚未設定表單」。 */
+const FORM = {
+  view: 'https://docs.google.com/forms/d/e/1FAIpQLSdeaGCnu7pGES6-HJvqNVyQ_5eirvlZjHC2yKkmT_n6OgGxHw/viewform',
+  ids: { cls: '2075655594', seat: '1721197208', name: '1902659076', chapter: '1910071982', ending: '1170554854', ocean: '2023095909',
+         mbti: '789371795', stats: '543187131', advice: '426659425', choices: '698236323', note: '78967433' },
+};
+const formReady = () => !!FORM.view && Object.values(FORM.ids).every(Boolean);
+
 /* ================= 狀態與流程 ================= */
 let S = null;
 let typer = null;
@@ -1775,6 +1796,66 @@ function adviceHTML(ch) {
   </div>`;
 }
 
+function resultFields(ch, e) {
+  const totT = TKEYS.reduce((a, t) => a + S.T[t], 0) || 1;
+  const code = mbtiOf(S.M);
+  const tally = {};
+  S.hist.forEach(h => { if (!h.k) return; const t = tally[h.k] = tally[h.k] || { p: 0, n: 0 }; h.v > 0 ? t.p++ : t.n++; });
+  const grp = { good: [], mix: [], grow: [] };
+  for (const k in ch.skills) { const t = tally[k]; if (!t) continue; grp[t.n === 0 ? 'good' : t.p > 0 ? 'mix' : 'grow'].push(ch.skills[k].name); }
+  const note = (P.notes[ch.id] || '').trim();
+  return {
+    chapter: `${ch.no} ${ch.title}`,
+    ending: e.title,
+    ocean: TKEYS.map(t => `${t} ${TRAITS[t].name} ${Math.round(S.T[t] / totT * 100)}%`).join('、'),
+    mbti: `${code} ${MBTI_TYPES[code][0]}（${MBTI_AXES.map(x => { const tot = S.M[x.a] + S.M[x.b]; const pa = tot ? Math.round(S.M[x.a] / tot * 100) : 50; return `${x.a}${pa}/${x.b}${100 - pa}`; }).join('、')}）`,
+    stats: ch.meters.map(m => `${m.label} ${S.st[m.id]}`).join('、'),
+    advice: `做得好：${grp.good.join('、') || '無'}；持續練習：${grp.mix.join('、') || '無'}；可再加強：${grp.grow.join('、') || '無'}`,
+    choices: S.hist.filter(h => h.tr).map((h, i) => `${i + 1}.${h.tr}/${h.m}${h.out ? '→' + h.out : ''}`).join(' '),
+    note: note.length > 300 ? note.slice(0, 300) + '……' : note,
+  };
+}
+
+function formURL(fields) {
+  const p = new URLSearchParams({ usp: 'pp_url' });
+  for (const k in FORM.ids) p.append('entry.' + FORM.ids[k], fields[k] || '');
+  return FORM.view + '?' + p.toString();
+}
+
+function uploadHTML() {
+  const w = P.who || {};
+  if (!formReady()) return `<div class="card upload"><h4>上傳結果給老師</h4><p>老師尚未設定上傳表單。</p></div>`;
+  return `<div class="card upload">
+    <h4>上傳結果給老師</h4>
+    <p>填好班級、座號和姓名，按「上傳結果」會打開老師的 Google 表單，結果已自動填好，<b>記得在表單最下方按「提交」</b>才算完成。</p>
+    <div class="who-fields">
+      <label for="who-cls">班級<input id="who-cls" value="${esc(w.cls || '')}" placeholder="例如 905" autocomplete="off"></label>
+      <label for="who-seat">座號<input id="who-seat" value="${esc(w.seat || '')}" placeholder="例如 12" inputmode="numeric" autocomplete="off"></label>
+      <label for="who-name">姓名<input id="who-name" value="${esc(w.name || '')}" placeholder="例如 王小明" autocomplete="off"></label>
+    </div>
+    <div class="row"><a class="btn" id="upload" target="_blank" rel="noopener" aria-disabled="true">上傳結果 ▸</a></div>
+  </div>`;
+}
+
+function wireUpload(dlg, ch, e) {
+  const a = dlg.querySelector('#upload');
+  if (!a) return;
+  const ins = ['cls', 'seat', 'name'].map(k => dlg.querySelector('#who-' + k));
+  const update = () => {
+    const [cls, seat, name] = ins.map(i => i.value.trim());
+    P.who = { cls, seat, name }; saveP();
+    const ok = cls && seat && name;
+    a.setAttribute('aria-disabled', ok ? 'false' : 'true');
+    if (ok) a.href = formURL(Object.assign({ cls, seat, name }, resultFields(ch, e)));
+    else a.removeAttribute('href');
+  };
+  ins.forEach(i => i.addEventListener('input', update));
+  // 反思作答改了也要更新連結
+  const ta = dlg.querySelector('textarea');
+  if (ta) ta.addEventListener('input', update);
+  update();
+}
+
 function renderEnd(dlg) {
   const ch = chap();
   if (!S.ending) S.ending = pickEnding(ch);
@@ -1805,14 +1886,16 @@ function renderEnd(dlg) {
           </details>
           <div class="card"><h4>寫下來</h4>
             <p>${{ c1: '你覺得自己在人際相處上的優勢是什麼？想精進哪一點？要如何精進？', c2: '如果你是小甄，會如何利用「我訊息」向小藝表達不滿？', c3: '如果衝突沒有解決，你認為會對人際關係以及健康產生什麼影響？', c4: '如果你的朋友被排擠，你會怎麼用「有效拒絕」和「我訊息」幫助他？你的 MBTI 結果和你平常的自己像嗎？' }[ch.id]}</p>
-            <textarea id="note-${ch.id}" placeholder="寫下你的想法（只存在這台裝置）">${esc(P.notes[ch.id] || '')}</textarea>
+            <textarea id="note-${ch.id}" placeholder="寫下你的想法，上傳結果時會一起送給老師">${esc(P.notes[ch.id] || '')}</textarea>
           </div>
+          ${uploadHTML()}
           <div class="row"><button class="btn alt" id="again">再玩一次，試試別的結局</button><button class="btn alt" id="menu">回到選單</button>${nextIdx != null ? `<button class="btn" id="nx">前往${CHAPTERS[nextIdx].no} ▸</button>` : ''}</div>
         </div>
       </div>
     </div>`;
   const ta = dlg.querySelector('textarea');
   ta.oninput = () => { P.notes[ch.id] = ta.value; saveP(); };
+  wireUpload(dlg, ch, e);
   dlg.querySelector('#again').onclick = () => startChapter(S.ci);
   dlg.querySelector('#menu').onclick = () => { S = null; render(); };
   if (nextIdx != null) dlg.querySelector('#nx').onclick = () => startChapter(nextIdx);
@@ -1824,7 +1907,7 @@ function renderEnd(dlg) {
 
 document.addEventListener('keydown', e => {
   if (e.key !== 'Enter' && e.key !== ' ') return;
-  if (e.target.closest && (e.target.closest('textarea') || e.target.closest('button') || e.target.closest('summary'))) return;
+  if (e.target.closest && e.target.closest('textarea, input, button, a, summary')) return;
   const b = [...document.querySelectorAll('.dialog [data-primary]')].find(x => !x.closest('[hidden]'));
   if (b) { e.preventDefault(); b.click(); }
 });
