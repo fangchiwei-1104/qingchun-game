@@ -82,8 +82,9 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .hero h1 { margin: 0; font-family: var(--f-display); font-weight: 400; font-size: clamp(38px, 7vw, 68px); line-height: 1.1; text-wrap: balance; }
 .hero h1 mark { background: linear-gradient(transparent 55%, var(--hl) 55% 92%, transparent 92%); color: inherit; padding: 0 .06em; }
 .hero p { margin: 0; max-width: 42em; color: var(--muted); }
-.chapters { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-@media (max-width: 860px) { .chapters { grid-template-columns: 1fr; } }
+.chapters { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 1000px) { .chapters { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .chapters { grid-template-columns: 1fr; } }
 .ch-card { text-align: left; background: var(--surface); border: 1.5px solid var(--line); border-radius: 18px; padding: 0; overflow: hidden; display: grid; grid-template-rows: auto 1fr; box-shadow: var(--shadow); transition: transform .15s, border-color .15s; }
 .ch-card:hover { transform: translateY(-3px); border-color: var(--plum); }
 .ch-card .thumb { height: 150px; position: relative; overflow: hidden; filter: var(--stage-dim); }
@@ -252,6 +253,28 @@ textarea:focus { border-color: var(--plum); outline: none; }
 .rev .ro { font-family: var(--f-display); font-size: 13px; color: var(--plum); }
 .rev .rn { color: var(--muted); }
 details.more summary { cursor: pointer; font-family: var(--f-display); color: var(--plum); }
+
+/* MBTI */
+.mchip { display: inline-flex; font-family: var(--f-display); font-size: 12.5px; letter-spacing: .08em; border: 1.5px solid var(--ink); border-radius: 6px; padding: 0 7px; color: var(--ink); }
+.mbti-head { display: flex; gap: 14px; align-items: baseline; flex-wrap: wrap; }
+.mbti-code { font-family: var(--f-display); font-size: 40px; letter-spacing: .14em; line-height: 1; }
+.mbti-code.small { font-size: 26px; }
+.mbti-name { font-family: var(--f-display); font-size: 18px; color: var(--plum); }
+.axes { display: grid; gap: 8px; }
+.axis { display: grid; grid-template-columns: 7em minmax(0, 1fr) 7em; gap: 8px; white-space: nowrap; align-items: center; font-family: var(--f-display); font-size: 13.5px; color: var(--muted); }
+.axis span:last-child { text-align: right; }
+.axis .on { color: var(--ink); }
+.axis .two { display: flex; height: 12px; border-radius: 999px; overflow: hidden; border: 1px solid var(--line); background: var(--bg); }
+.axis .two i { display: block; height: 100%; }
+.axis .two i.a { background: var(--plum); }
+.axis .two i.b { background: var(--mint); }
+.caveat { font-size: 14px; color: var(--muted); border-left: 3px solid var(--line); padding-left: 10px; }
+.intro-pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+@media (max-width: 860px) { .intro-pair { grid-template-columns: 1fr; } }
+.mbti-axes-intro { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 480px) { .mbti-axes-intro { grid-template-columns: 1fr; } }
+.mbti-axes-intro div { border-radius: 12px; padding: 10px 12px; background: var(--bg); font-size: 14.5px; display: grid; gap: 2px; }
+.mbti-axes-intro b { font-family: var(--f-display); font-weight: 400; font-size: 15px; }
 </style>
 </head>
 <body>
@@ -280,12 +303,57 @@ const TRAITS = {
 const TKEYS = ['O', 'C', 'E', 'A', 'N'];
 const tchip = t => `<span class="tchip t-${t}"><i>${t}</i>${TRAITS[t].name}</span>`;
 
+/* ================= MBTI =================
+   每個選項另外標上 MBTI 傾向字母（m），例如 'NP'、'SJ'。
+   沒標的選項依五大特質推估：開放性→N、P；盡責性→S、J；外向性→E；親和性→F；情緒敏感→I */
+const MBTI_AXES = [
+  { a: 'E', b: 'I', topic: '能量來源', an: '外向', bn: '內向', ad: '從與人互動中獲得能量', bd: '從獨處與思考中恢復能量' },
+  { a: 'S', b: 'N', topic: '接收資訊', an: '實感', bn: '直覺', ad: '重視具體事實與經驗', bd: '重視可能性與整體意義' },
+  { a: 'T', b: 'F', topic: '做決定', an: '思考', bn: '情感', ad: '依邏輯與原則判斷', bd: '重視感受與人際和諧' },
+  { a: 'J', b: 'P', topic: '生活方式', an: '判斷', bn: '感知', ad: '喜歡計畫與確定', bd: '喜歡彈性與隨機應變' },
+];
+const MBTI_TIPS = {
+  E: '你很會主動交朋友、帶動氣氛。衝突時先聽完對方再說，也給比較內向的人一點時間回應。',
+  I: '你習慣先想清楚再說。可以試著主動踏出一小步，也記得把想法說出來，別讓誤會悶著累積。',
+  S: '你重視具體事實，說「我訊息」第二步（描述情況或行為）時特別清楚。也想想這件事對別人的意義。',
+  N: '你常看見新的可能。提出新點子時，記得先和大家確認，別讓人覺得說好的約定被推翻。',
+  T: '你擅長就事論事、聚焦問題關鍵。溝通時也別忘了先接住對方的情緒。',
+  F: '你很在意別人的感受，是同理心的高手。也要記得說出自己的需要，不要一直讓步。',
+  J: '你守約定、有計畫，讓人覺得可靠。遇到臨時狀況時保留一點彈性，並和大家一起討論。',
+  P: '你很能隨機應變。改變計畫前，先跟一起約定的人說一聲，就能避免很多衝突。',
+};
+const MBTI_TYPES = {
+  INTJ: ['建築師', '有遠見、獨立思考，喜歡把事情規劃周全。'],
+  INTP: ['邏輯學家', '好奇心強，喜歡分析問題、找出背後的原理。'],
+  ENTJ: ['指揮官', '果斷有領導力，擅長帶著團隊達成目標。'],
+  ENTP: ['辯論家', '反應快、點子多，喜歡挑戰新想法。'],
+  INFJ: ['提倡者', '善解人意、有理想，常默默關心身邊的人。'],
+  INFP: ['調停者', '溫柔真誠，重視內心的價值與別人的感受。'],
+  ENFJ: ['主人公', '熱情有感染力，擅長鼓舞和照顧大家。'],
+  ENFP: ['競選者', '開朗又有創意，很會帶動氣氛、結交朋友。'],
+  ISTJ: ['物流師', '踏實可靠，守規則、說到做到。'],
+  ISFJ: ['守衛者', '細心體貼，默默付出、照顧別人。'],
+  ESTJ: ['總經理', '有組織力，喜歡讓事情有條理地完成。'],
+  ESFJ: ['執政官', '熱心助人，很重視團體的和諧。'],
+  ISTP: ['鑑賞家', '冷靜務實，擅長動手解決眼前的問題。'],
+  ISFP: ['探險家', '溫和隨和、有藝術感，懂得享受當下。'],
+  ESTP: ['企業家', '行動派、反應快，喜歡新鮮與挑戰。'],
+  ESFP: ['表演者', '活潑熱情，喜歡和大家一起熱鬧歡樂。'],
+};
+const DEFAULT_M = { O: 'NP', C: 'SJ', E: 'E', A: 'F', N: 'I' };
+const emptyM = () => ({ E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 });
+const mOf = o => o.m || DEFAULT_M[o.tr] || '';
+const mchip = m => m ? `<span class="mchip">${m.split('').join(' ')}</span>` : '';
+function mbtiOf(M) { return MBTI_AXES.map(x => M[x.a] >= M[x.b] ? x.a : x.b).join(''); }
+const MBTI_CAVEAT = 'MBTI 是很受歡迎的人格分類方式，適合用來認識自己、聊聊彼此的不同；但它的科學證據不如五大人格特質，同一個人在不同時候測也可能得到不同結果。這裡的結果只反映你在遊戲中的選擇，請當作自我探索的參考，不要用來替自己或別人貼標籤。';
+
 /* ================= 角色立繪 ================= */
 const CHARS = {
   xj: { name: '小君', hair: 'long', hc: '#2A2530', ribbon: true },
   xz: { name: '小甄', hair: 'bob', hc: '#1F1B26', ribbon: true },
   xy: { name: '小藝', hair: 'spiky', hc: '#26232E' },
   az: { name: '阿哲', hair: 'short', hc: '#5A3B2A' },
+  xk: { name: '小凱', hair: 'spiky', hc: '#8A5A2B' },
   ll: { name: '林老師', hair: 'teacher', hc: '#6B4630', glasses: true, shirt: '#CFE6F2' },
 };
 
@@ -436,6 +504,30 @@ const CHAPTERS = [
         { name: '沒人說話', p: .65, d: { conf: -10 }, lines: [['nar', '', '一整個早上，小君都沒等到有人開口。下課時，她一個人看著窗外。']] },
       ]},
     ]},
+    { t: 'scene', bg: 'classroom', place: '三年五班教室｜午餐時間', cast: ['xj', 'az'], board: '<span>今日午餐：咖哩飯</span>' },
+    { t: 'say', who: 'nar', text: '午餐時間，同學們三三兩兩併桌吃飯。小君端著餐盒，看到阿哲一個人坐在窗邊畫畫。' },
+    { t: 'choice', q: '小君要坐哪裡？', opts: [
+      { tr: 'O', m: 'NP', text: '走到阿哲旁邊：「你在畫什麼？好特別！我可以坐這裡看嗎？」', mood: 'smile', k: 'act', v: 1, note: '用好奇心主動認識新朋友。', out: [
+        { name: '聊起畫畫', p: .6, by: { img: .2 }, d: { az: 15, conf: 5 }, lines: [['az', 'surprised', '這是……園遊會海報的草稿。你覺得怎麼樣？'], ['xj', 'smile', '超好看！']] },
+        { name: '阿哲有點害羞', p: .4, d: { az: 5 }, lines: [['az', 'surprised', '呃……隨便畫的啦。'], ['nar', '', '阿哲把本子闔上一半，但沒有拒絕小君坐下。']] },
+      ]},
+      { tr: 'C', m: 'SJ', text: '先問值日生：「請問班上午餐座位有規定嗎？」再照規定坐好。', mood: 'neutral', k: 'img', v: 1, note: '守規矩、有禮貌。', out: [
+        { name: '值日生順便介紹大家', p: .55, d: { cls: 8 }, lines: [['nar', '', '值日生熱心地帶小君認識同組的同學，還告訴她哪天要輪值打菜。']] },
+        { name: '被安排坐在角落', p: .45, d: { conf: -5, cls: 2 }, lines: [['nar', '', '剛好只剩角落的位子。小君安靜地吃完，但記住了隔壁同學的名字。']] },
+      ]},
+      { tr: 'E', m: 'EP', text: '走到最熱鬧的那桌：「我可以一起坐嗎？我是小君！」', mood: 'smile', k: 'act', v: 1, note: '主動加入團體。', out: [
+        { name: '大家熱情歡迎', p: .55, by: { img: .2, conf: .2 }, d: { cls: 12 }, lines: [['nar', '', '那桌的同學挪出位子：「快坐快坐！你從哪間學校轉來的？」']] },
+        { name: '那桌已經坐滿', p: .45, d: { conf: -5 }, lines: [['nar', '', '有人說：「這裡滿了耶。」小君笑笑說沒關係，臉卻有點熱。']] },
+      ]},
+      { tr: 'A', m: 'SF', text: '看到小甄在幫忙分菜，主動過去幫忙，最後和分菜的同學一起吃。', mood: 'smile', k: 'pos', v: 1, note: '主動付出與協助。', out: [
+        { name: '小甄很感謝', p: .65, d: { xz: 12, cls: 5 }, lines: [['nar', '', '小甄笑著說：「你好細心喔！明天也一起吃吧！」']] },
+        { name: '忙到沒時間聊天', p: .35, d: { xz: 5 }, lines: [['nar', '', '分完菜已經快午休了，兩人只聊了幾句，但小甄記住了她的幫忙。']] },
+      ]},
+      { tr: 'N', m: 'I', text: '不知道該坐哪，乾脆拿著餐盒到走廊上自己吃。', mood: 'worried', k: 'act', v: -1, note: '一個人吃飯沒關係；想交朋友時，可以從身邊的一個人開始。', out: [
+        { name: '阿哲也出來了', p: .35, by: { az: .3 }, d: { az: 10 }, lines: [['nar', '', '過了一會兒，阿哲也拿著餐盒走出來：「教室好吵喔……我可以坐這嗎？」']] },
+        { name: '一個人吃完', p: .65, d: { conf: -5, cls: -5 }, lines: [['nar', '', '走廊很安靜。小君吃完飯，看著教室裡熱鬧的樣子，有點羨慕。']] },
+      ]},
+    ]},
     { t: 'scene', bg: 'classroom', place: '三年五班教室｜班會', cast: ['ll', 'xj', 'xy'], board: '<span>園遊會攤位討論</span>' },
     { t: 'say', who: 'll', mood: 'smile', text: '各位同學，園遊會我們班要擺攤。有誰願意幫忙準備，或有什麼好點子嗎？' },
     { t: 'say', who: 'nar', text: '教室一片安靜，大家你看我、我看你。' },
@@ -568,6 +660,33 @@ const CHAPTERS = [
       ]},
     ]},
     { t: 'say', who: 'nar', text: '終於，園遊會當天到了……' },
+    { t: 'scene', bg: 'fair', place: '園遊會當天｜中午 12:00', cast: ['xj', 'xz'], sign: s => s.f.soda ? '冰涼汽水<br>一瓶 25元' : '手工餅乾<br>一包 50元' },
+    { t: 'say', who: 'nar', text: '中午人潮湧進，攤位前排起長長的隊伍。小甄一個人收錢，手忙腳亂。' },
+    { t: 'say', who: 'xz', mood: 'worried', text: '啊，找錯錢了……對不起對不起！' },
+    { t: 'say', who: 'nar', text: '排隊的客人開始不耐煩。' },
+    { t: 'choice', q: '小君看到這個情況……', opts: [
+      { tr: 'O', m: 'NP', text: '「我來做『點單小卡』，客人先勾好要買什麼再付錢，會快很多！」', mood: 'smile', k: 'pos', v: 1, note: '用新方法解決眼前的問題。', out: [
+        { name: '隊伍順暢起來', p: .55, by: { cls: .2 }, d: { cls: 10, xz: 8 }, lines: [['nar', '', '十分鐘後，客人拿著小卡排隊，結帳快了一倍。'], ['xz', 'smile', '小君你太聰明了！']] },
+        { name: '來不及做好', p: .45, d: { xz: 3 }, lines: [['nar', '', '小卡還沒做完，中午的人潮就過了。不過小甄記得小君的好意。']] },
+      ]},
+      { tr: 'C', m: 'STJ', text: '「我負責找錢，你專心拿東西，我們分工！」把零錢按面額排好。', mood: 'neutral', k: 'pos', v: 1, note: '主動付出，有條理地分工。', out: [
+        { name: '效率大增', p: .7, d: { xz: 12, cls: 8 }, lines: [['xz', 'smile', '呼……有你在真好。']] },
+        { name: '還是有點亂', p: .3, d: { xz: 5 }, lines: [['nar', '', '客人實在太多，兩個人還是忙得團團轉，但至少沒再找錯錢。']] },
+      ]},
+      { tr: 'E', m: 'EP', text: '跑到隊伍前面跟客人聊天、說笑話，讓大家等得不無聊。', mood: 'smile', k: 'pos', v: 1, note: '用熱情帶動氣氛。', out: [
+        { name: '客人都笑了', p: .6, by: { conf: .2 }, d: { cls: 12 }, lines: [['nar', '', '排隊的客人被逗得哈哈大笑，還有人多買了兩包。']] },
+        { name: '有客人覺得吵', p: .4, d: { cls: 2 }, lines: [['nar', '', '有客人皺眉說：「快一點就好啦。」小君吐了吐舌頭，回去幫忙裝袋。']] },
+      ]},
+      { tr: 'A', m: 'F', text: '先拍拍小甄：「別緊張，慢慢來，我在旁邊幫你。」再一起收錢。', mood: 'calm', k: 'emp', v: 1, note: '先穩定對方的情緒。', out: [
+        { name: '小甄冷靜下來', p: .7, d: { xz: 15 }, lines: [['xz', 'smile', '……嗯，謝謝你。我深呼吸一下。']] },
+        { name: '小甄還是很慌', p: .3, d: { xz: 8 }, lines: [['xz', 'worried', '可是好多人在等……'], ['xj', 'calm', '沒關係，一個一個來。']] },
+      ]},
+      { tr: 'N', m: 'IP', text: '看到客人臉色不好，自己也很緊張，躲到攤位後面整理箱子。', mood: 'worried', k: 'pos', v: -1, note: '緊張時先深呼吸，挑一件自己做得到的事去幫忙。', out: [
+        { name: '小甄找她幫忙', p: .4, by: { xz: .3 }, d: { xz: 3 }, lines: [['xz', 'worried', '小君！可以幫我拿零錢嗎？'], ['xj', 'surprised', '好、好！']] },
+        { name: '錯過幫忙的時機', p: .6, d: { xz: -5, cls: -5 }, lines: [['nar', '', '等小君整理完箱子，人潮已經散了。小甄累得坐在椅子上，沒有說話。']] },
+      ]},
+    ]},
+    { t: 'say', who: 'nar', text: '太陽慢慢西斜，園遊會即將結束……' },
     { t: 'end' },
   ],
 },
@@ -693,6 +812,31 @@ const CHAPTERS = [
         { name: '互不理睬', p: .4, d: { xz: -10, stress: 5 }, lines: [['nar', '', '收攤時，兩人一句話都沒說，連眼神都避開了。']] },
       ]},
     ]},
+    { t: 'scene', bg: 'classroom', place: '三年五班教室｜收攤後', cast: ['ll', 'xy'], board: '<span>園遊會辛苦了！</span>' },
+    { t: 'say', who: 'nar', text: '收攤後，林老師把小藝叫到教室。' },
+    { t: 'say', who: 'll', mood: 'calm', text: '我聽說下午攤位那邊有點狀況。你願意跟我說說發生了什麼事嗎？' },
+    { t: 'choice', q: '小藝要怎麼跟老師說？', opts: [
+      { tr: 'O', m: 'NF', text: '「老師，我在想……是不是我和小甄對『浪費』的看法不一樣，才會吵起來？」', mood: 'neutral', k: 'focus', v: 1, note: '從雙方的觀點理解衝突。', out: [
+        { name: '老師點出衝突三階段', p: .6, d: { calm: 10, stress: -10 }, lines: [['ll', 'smile', '很好的觀察。衝突常在雙方需求不同、又無法平衡時爆發。你們現在在「衝突爆發期」，接下來要想想怎麼走到「關係修復期」。']] },
+        { name: '老師請他想想小甄的需求', p: .4, d: { calm: 5 }, lines: [['ll', 'calm', '你看見了不同。那小甄最在意的是什麼呢？想好了再告訴我。']] },
+      ]},
+      { tr: 'C', m: 'STJ', text: '照時間順序說明：幾點還剩多少、什麼時候改價、小甄什麼時候回來。', mood: 'neutral', k: 'focus', v: 1, note: '就事論事，清楚描述情況。', out: [
+        { name: '老師覺得很清楚', p: .65, d: { calm: 10 }, lines: [['ll', 'calm', '說得很清楚。那你覺得問題出在哪一個環節？'], ['xy', 'neutral', '……我改價格之前，沒有先問大家。']] },
+        { name: '老師提醒感受', p: .35, d: { calm: 5 }, lines: [['ll', 'calm', '事情經過說清楚了。那小甄當時的感受，你想過嗎？']] },
+      ]},
+      { tr: 'E', m: 'ET', text: '「老師你評評理！我明明是好意，她卻當著大家罵我！」', mood: 'angry', k: 'calm', v: -1, note: '急著找人站在自己這邊，容易忽略問題本身。', out: [
+        { name: '老師請他先冷靜', p: .6, d: { stress: 5 }, lines: [['ll', 'calm', '我聽到你很委屈。我們先深呼吸，再一起想想小甄在意什麼，好嗎？']] },
+        { name: '越說越激動', p: .4, d: { stress: 10, calm: -10 }, lines: [['nar', '', '小藝越說越大聲，老師只好讓他先去洗把臉。']] },
+      ]},
+      { tr: 'A', m: 'IF', text: '「沒事啦老師，是我不好，我自己會處理。」', mood: 'sad', k: 'focus', v: -1, note: '不想麻煩別人很體貼，但把事情說出來，才能得到幫助。', out: [
+        { name: '老師看出他在硬撐', p: .55, d: { stress: -5 }, lines: [['ll', 'worried', '真的沒事嗎？如果需要聊聊，我隨時都在。']] },
+        { name: '話題就此結束', p: .45, d: { stress: 5 }, lines: [['nar', '', '老師點點頭讓他回家。小藝走出教室，心裡還是悶悶的。']] },
+      ]},
+      { tr: 'N', m: 'IF', text: '一開口，眼淚就掉了下來，說不出話。', mood: 'sad', k: 'adjust', v: 1, note: '哭出來沒關係，情緒被接住後，才更能思考。', out: [
+        { name: '老師陪他平靜下來', p: .7, d: { stress: -15, calm: 10 }, lines: [['ll', 'calm', '哭出來沒關係。等你準備好，我們再慢慢說。']] },
+        { name: '被同學看到', p: .3, d: { stress: 10 }, lines: [['nar', '', '門外有同學經過，探頭看了一眼。小藝趕緊擦掉眼淚。']] },
+      ]},
+    ]},
     { t: 'scene', bg: 'room', night: true, place: '小藝的房間｜晚上 10:00', cast: ['xy'] },
     { t: 'say', who: 'nar', text: '回到家，小藝躺在床上，腦中一直重播下午的畫面。' },
     { t: 'choice', q: '小藝要怎麼面對現在的心情？', opts: [
@@ -756,6 +900,7 @@ const CHAPTERS = [
     place: { name: '選擇合適的時間與地點', good: '你選了安全、不受打擾的時間地點，親自去談。', tip: '當面、在安全且不受打擾的地方談；避免半夜、在眾人面前，也不要請人傳話。' },
     imsg: { name: '我訊息', good: '你用「我訊息」說出感受、情況和期望，對方比較聽得進去。', tip: '① 描述「我」的感受 ② 描述引發問題的情況或行為 ③ 簡單說出自己的期望。避免以「你」開頭指責對方。' },
     repair: { name: '關係修復', good: '在對方需要時間或仍生氣時，你保持尊重，也主動付出。', tip: '及時和解可避免誤會與偏見累積；給對方空間，不翻舊帳、不一味退讓。' },
+    coop: { name: '合作與協商', good: '再次合作時，你尊重每個人的想法，一起找出大家都能接受的方案。', tip: '協商技能：說出自己的想法，也聽別人的需求，找出雙方都能接受的方案。' },
   },
   statTips: {
     self: '自我了解偏低：溝通前先問自己「我真正在意的是什麼？」',
@@ -917,6 +1062,225 @@ const CHAPTERS = [
       ]},
     ]},
     { t: 'label', id: 'e3' },
+    { t: 'scene', bg: 'classroom', place: '三年五班教室｜一週後', cast: ['ll', 'xy', 'xz'], board: '<span>分組報告：校園改造計畫</span>' },
+    { t: 'say', who: 'll', mood: 'smile', text: '這次的分組報告，抽籤結果：小藝、小甄、阿哲同一組！' },
+    { t: 'say', who: 'nar', when: s => s.st.xz >= 55, text: '小甄轉頭對小藝笑了一下。' },
+    { t: 'say', who: 'nar', when: s => s.st.xz >= 35 && s.st.xz < 55, text: '小甄看了小藝一眼，表情有點複雜。' },
+    { t: 'say', who: 'nar', when: s => s.st.xz < 35, text: '小甄低下頭，假裝在看課本。' },
+    { t: 'say', who: 'nar', text: '第一次小組討論，阿哲想做「彩繪走廊」，小甄想做「回收站改造」，兩人僵持不下。' },
+    { t: 'choice', q: '輪到小藝發言，他會……', opts: [
+      { tr: 'O', m: 'NP', text: '「我們可以結合兩個點子：用回收材料來彩繪走廊！」', mood: 'smile', k: 'coop', v: 1, note: '協商：找出大家都能接受的新方案。', out: [
+        { name: '兩人都喜歡', p: .6, by: { xz: .3 }, d: { xz: 10, trust: 10 }, lines: [['xz', 'smile', '這樣環保又好看！不錯耶！']] },
+        { name: '小甄擔心太複雜', p: .4, d: { trust: 3 }, lines: [['xz', 'neutral', '聽起來很酷，可是時間夠嗎？我們再算算看。']] },
+      ]},
+      { tr: 'C', m: 'STJ', text: '「我們先列出時間、預算和可行性，用評分表來選主題，好嗎？」', mood: 'neutral', k: 'coop', v: 1, note: '用公平的方式協商。', out: [
+        { name: '大家覺得很公平', p: .65, d: { trust: 10, xz: 5 }, lines: [['xz', 'smile', '好啊，這次我們照討論結果做！'], ['nar', '', '小甄說完，兩人都笑了。']] },
+        { name: '阿哲覺得太死板', p: .35, d: { trust: 3 }, lines: [['nar', '', '阿哲嘀咕：「做報告還要評分表喔……」但還是一起填完了。']] },
+      ]},
+      { tr: 'E', m: 'EJ', text: '「聽我的！彩繪走廊最酷，就這麼決定了！」', mood: 'smile', k: 'coop', v: -1, note: '熱情很好，但沒有討論就決定，容易重演上次的衝突。', out: [
+        { name: '小甄皺眉', p: .7, d: { xz: -10, trust: -10 }, lines: [['xz', 'angry', '你又自己決定了？']] },
+        { name: '阿哲附和，小甄沉默', p: .3, d: { xz: -5 }, lines: [['nar', '', '阿哲開心地附和。小甄沒說話，默默把自己的企畫書收了起來。']] },
+      ]},
+      { tr: 'A', m: 'F', text: '「你們決定就好，我都可以。」', mood: 'neutral', k: 'coop', v: -1, note: '願意配合很好，但也要說出自己的想法，合作才完整。', out: [
+        { name: '小甄問他的意見', p: .5, by: { xz: .3 }, d: { xz: 5 }, lines: [['xz', 'neutral', '你也說說看嘛，你的想法也很重要。']] },
+        { name: '討論卡住了', p: .5, d: { trust: -3 }, lines: [['nar', '', '兩人還是各說各的，下課鐘響了也沒有結論。']] },
+      ]},
+      { tr: 'N', m: 'I', text: '很怕又和小甄起衝突，整場都不敢發言。', mood: 'worried', k: 'coop', v: -1, note: '怕重蹈覆轍很正常；用「我訊息」說出想法，反而能減少衝突。', out: [
+        { name: '小甄察覺了', p: .4, by: { xz: .3 }, d: { xz: 5 }, lines: [['xz', 'worried', '你今天好安靜……是因為上次的事嗎？我已經不在意了啦。']] },
+        { name: '討論裡沒有他的聲音', p: .6, d: { trust: -5 }, lines: [['nar', '', '討論結束，報告主題定了，但裡面沒有小藝的想法。']] },
+      ]},
+    ]},
+    { t: 'end' },
+  ],
+},
+{
+  id: 'c4', no: '劇本四', title: '畢業旅行分組', player: 'xj',
+  role: '你扮演國三下學期的小君。群組裡有人想排擠阿哲，你會怎麼做？',
+  focus: ['有效拒絕', '協商技能', '同理心', '尋求協助'],
+  thumb: { bg: 'classroom', cast: ['xj', 'az'], moods: { xj: 'calm', az: 'sad' }, board: '<span>畢業旅行分組</span>' },
+  meters: [
+    { id: 'az', label: '阿哲的好感', start: c => c ? Math.max(20, Math.min(75, c.az)) : 50 },
+    { id: 'self', label: '自我肯定', start: 40 },
+    { id: 'peer', label: '同儕壓力', start: 40, bad: true },
+    { id: 'cls', label: '班級氣氛', start: 50 },
+  ],
+  skills: {
+    refuse: { name: '有效拒絕', good: '面對不合理的要求，你能清楚、堅定地說「不」，也說明理由。', tip: '有效拒絕：明確說不、說明理由，必要時提出替代方案。拖延或勉強答應，壓力只會越來越大。' },
+    nego: { name: '協商技能', good: '你試著找出讓大家都能接受的方法，而不是只有輸贏。', tip: '協商技能：說出自己的立場，也聽對方的需求，找出雙方都能接受的方案。' },
+    emp: { name: '同理心', good: '你注意到阿哲的感受，用行動讓他知道自己不孤單。', tip: '先了解別人的情緒，再覺察他的顧慮，最後用行動表現你的理解。' },
+    imsg: { name: '我訊息', good: '你用「我訊息」說出感受和期望，讓對方比較聽得進去。', tip: '① 描述「我」的感受 ② 描述引發問題的情況或行為 ③ 簡單說出自己的期望。' },
+    help: { name: '尋求協助', good: '遇到自己處理不了的狀況，你懂得向信任的大人求助。', tip: '遇到排擠、霸凌或處理不了的人際問題，可以向老師、家人等信任的大人求助，這不是打小報告。' },
+  },
+  statTips: {
+    az: '和阿哲的關係還有進步空間：被排擠的人最需要的，是有人讓他知道自己不孤單。',
+    self: '自我肯定偏低：你的想法也很重要，試著溫和而堅定地說出來。',
+    peer: '同儕壓力偏高：不必為了被接納而勉強自己；可以拒絕，也可以找大人幫忙。',
+    cls: '班級氣氛受影響：排擠會讓全班都不安心，一個人站出來，常常能帶動更多人。',
+  },
+  endings: [
+    { id: 'team', title: '最棒的畢旅小組', w: s => (s.st.az - 62) + (50 - s.st.peer) * .5 + (s.f.go ? 10 : -25), text: '畢業旅行那天，阿哲在遊覽車上畫了全組的速寫，大家搶著要。小君看著窗外想：原來勇敢一點、溫柔一點，就能讓一個人不再孤單。' },
+    { id: 'brave', title: '溫和而堅定', w: s => (s.st.self - 50) + (50 - s.st.peer) * .5, text: '不是每個人都認同小君的做法，小凱到畢業前都對她有點冷淡。但小君學會了：拒絕別人時可以溫和，立場卻要堅定。她不後悔。' },
+    { id: 'drift', title: '隨波逐流', w: s => (s.st.peer - 50) + (50 - s.st.self), text: '小君最後跟著大家，沒有再替阿哲說話。畢旅照片裡大家笑得很開心，她卻一直想起阿哲一個人的背影。下一次，她想試著說「不」。' },
+    { id: 'alone', title: '空著的座位', w: s => (s.f.go ? -40 : 20) + (50 - s.st.az) * .5, text: '畢業旅行那天，遊覽車上阿哲的座位空著。小君傳訊息給他：「我們幫你拍了美術館的照片。」過了很久，阿哲回了一個字：「謝」。' },
+  ],
+  nodes: [
+    { t: 'scene', bg: 'classroom', place: '三年五班教室｜國三下學期', cast: ['ll', 'xj'], board: '<span>畢業旅行分組：四人一組</span>' },
+    { t: 'say', who: 'll', mood: 'smile', text: '畢業旅行要分組囉！每組四個人，下週五前把名單交給我。' },
+    { t: 'say', who: 'nar', when: s => s.carry, text: '經過園遊會，小君已經在班上交到朋友了。她想和大家留下國中最後的回憶。' },
+    { t: 'say', who: 'nar', when: s => !s.carry, text: '轉學過來半年，小君已經慢慢融入班級。她想和大家留下國中最後的回憶。' },
+    { t: 'scene', bg: 'room', night: true, place: '小君的房間｜晚上 9:30', cast: ['xj'] },
+    { t: 'say', who: 'nar', text: '小君的手機跳出通知，是小凱開的「畢旅一起玩」群組。' },
+    { t: 'say', who: 'nar', text: '小凱：「欸，阿哲那組誰要收？他整天畫畫好陰沉喔，我們不要找他啦，哈哈。」' },
+    { t: 'say', who: 'nar', text: '群組裡，好幾個人跟著回了「+1」。' },
+    { t: 'say', who: 'xj', mood: 'worried', text: '……這樣好像不太對。' },
+    { t: 'choice', q: '小君看著群組訊息……', opts: [
+      { tr: 'O', m: 'NP', text: '傳：「欸，阿哲畫圖超厲害，畢旅可以請他幫我們畫行程海報耶！」', mood: 'smile', k: 'nego', v: 1, note: '換個角度，讓大家看見對方的優點。', out: [
+        { name: '有人附和', p: .5, by: { cls: .2 }, d: { cls: 5, peer: -5 }, lines: [['nar', '', '小甄回：「對耶！園遊會那張海報超好看！」幾個人收回了「+1」。']] },
+        { name: '小凱酸她', p: .5, d: { peer: 5 }, lines: [['nar', '', '小凱回：「你很熱心喔～那你收他啊。」後面跟著一串笑臉。']] },
+      ]},
+      { tr: 'C', m: 'TJ', text: '傳：「分組是要大家互相合作，我覺得不應該排擠任何人。」', mood: 'neutral', k: 'refuse', v: 1, note: '有效拒絕：清楚表達立場，並說明理由。', out: [
+        { name: '有人收回 +1', p: .55, by: { self: .2 }, d: { peer: -10, cls: 5, self: 5 }, lines: [['nar', '', '群組安靜了幾分鐘，有兩個人默默收回了「+1」。']] },
+        { name: '「好啦正義使者」', p: .45, d: { peer: 5, self: 5 }, lines: [['nar', '', '小凱回：「好啦好啦，正義使者。」小君心跳很快，但沒有收回訊息。']] },
+      ]},
+      { tr: 'E', m: 'ET', text: '直接回：「我不覺得好笑。我要找阿哲同組。」', mood: 'angry', k: 'refuse', v: 1, note: '有效拒絕：明確、堅定地說出立場。', out: [
+        { name: '小甄也要加入', p: .5, by: { cls: .3 }, d: { self: 10, cls: 5, peer: -10 }, lines: [['nar', '', '小甄回：「我也要跟阿哲一組！」群組裡沒有人再說話。']] },
+        { name: '群組氣氛尷尬', p: .5, d: { peer: 10, self: 5 }, lines: [['nar', '', '群組瞬間安靜。過了一會兒，小凱私訊她：「你幹嘛那麼認真啦？」']] },
+      ]},
+      { tr: 'A', m: 'F', text: '不想讓氣氛變僵，回了一個「哈哈」的貼圖，心裡卻不太舒服。', mood: 'worried', k: 'refuse', v: -1, note: '不想破壞氣氛很正常，但附和排擠，可能讓被排擠的人更受傷。', out: [
+        { name: '截圖傳到阿哲那裡', p: .4, d: { az: -20 }, lines: [['nar', '', '隔天，有人把群組截圖傳給了阿哲。阿哲看到小君的貼圖，什麼都沒說。']] },
+        { name: '沒人發現，但心裡不舒服', p: .6, d: { self: -10, peer: 10 }, lines: [['nar', '', '那天晚上，小君翻來覆去睡不著。']] },
+      ]},
+      { tr: 'N', m: 'I', text: '很怕自己也被排擠，什麼都不敢回，默默退出群組。', mood: 'sad', k: 'refuse', v: -1, note: '退出也是一種表態，但想法沒說出來，問題仍然在。', out: [
+        { name: '小凱追問', p: .5, d: { peer: 10 }, lines: [['nar', '', '小凱私訊：「你幹嘛退群？生氣喔？」小君盯著螢幕，不知道怎麼回。']] },
+        { name: '沒人注意到', p: .5, d: { self: -5 }, lines: [['nar', '', '群組照樣熱鬧，好像沒有人發現她退出了。']] },
+      ]},
+    ]},
+    { t: 'scene', bg: 'classroom', place: '三年五班教室｜隔天下課', cast: ['xj', 'az'], board: '<span>畢旅分組名單</span>' },
+    { t: 'say', who: 'nar', text: '隔天下課，阿哲一個人坐在座位上，盯著空白的分組名單發呆。' },
+    { t: 'say', who: 'az', mood: 'sad', text: '……反正也沒人想跟我同組吧。' },
+    { t: 'choice', q: '小君走過去……', opts: [
+      { tr: 'O', m: 'NP', text: '「畢旅有一站是美術館，你一定會喜歡！要不要一起組隊規劃行程？」', mood: 'smile', k: 'emp', v: 1, note: '從對方的興趣出發，表達接納。', out: [
+        { name: '阿哲眼睛亮了', p: .6, by: { az: .3 }, d: { az: 15 }, lines: [['az', 'surprised', '美術館？……真的可以跟你們一組嗎？']] },
+        { name: '阿哲有點懷疑', p: .4, d: { az: 5 }, lines: [['az', 'neutral', '你是同情我嗎？'], ['xj', 'calm', '不是喔，我是真的想跟你一組。']] },
+      ]},
+      { tr: 'C', m: 'SJ', text: '「我們這組還差兩個人，你願意加入嗎？行程我已經查好了。」', mood: 'neutral', k: 'emp', v: 1, note: '用具體行動表達接納。', out: [
+        { name: '阿哲點頭', p: .65, d: { az: 12 }, lines: [['az', 'smile', '……好。謝謝你。']] },
+        { name: '阿哲猶豫', p: .35, d: { az: 5 }, lines: [['az', 'neutral', '讓我想一下……']] },
+      ]},
+      { tr: 'E', m: 'E', text: '大聲說：「阿哲！跟我們一組啦！一起去一定很好玩！」', mood: 'smile', k: 'emp', v: 1, note: '熱情邀請，讓對方感覺被需要。', out: [
+        { name: '阿哲笑了', p: .55, d: { az: 12, cls: 5 }, lines: [['az', 'smile', '……好啦好啦，你小聲一點。']] },
+        { name: '被大家盯著很尷尬', p: .45, d: { az: 3 }, lines: [['nar', '', '全班都轉過頭來看。阿哲把臉埋進手臂裡：「……小聲一點啦。」']] },
+      ]},
+      { tr: 'A', m: 'F', text: '坐到他旁邊：「看你好像不太開心。是不是有人說了什麼？」', mood: 'calm', k: 'emp', v: 1, note: '先了解對方的情緒。', out: [
+        { name: '阿哲說出心事', p: .7, by: { az: .2 }, d: { az: 18 }, lines: [['az', 'sad', '……我知道群組在說我。'], ['xj', 'calm', '那不是你的錯。我想跟你同組。']] },
+        { name: '阿哲說沒事', p: .3, d: { az: 5 }, lines: [['az', 'neutral', '沒事啦。']] },
+      ]},
+      { tr: 'N', m: 'IF', text: '擔心阿哲已經看到群組訊息，不知道怎麼開口，只遞給他一顆糖。', mood: 'worried', k: 'emp', v: 1, note: '不擅長說也沒關係，小小的行動也能傳達關心。', out: [
+        { name: '阿哲懂了', p: .5, by: { az: .3 }, d: { az: 10 }, lines: [['az', 'surprised', '……謝謝。']] },
+        { name: '錯過聊天的時機', p: .5, d: { az: 2 }, lines: [['nar', '', '上課鐘響了，兩人什麼都還沒說。']] },
+      ]},
+    ]},
+    { t: 'scene', bg: 'classroom', place: '三年五班教室｜午休前', cast: ['xk', 'xj'], board: '<span>畢旅分組名單</span>' },
+    { t: 'say', who: 'xk', mood: 'smile', text: '欸小君，跟我們一組啦！我們這組最好玩。不過……阿哲就不要了吧？' },
+    { t: 'choice', q: '面對小凱的邀請和條件，小君要……', opts: [
+      { tr: 'O', m: 'NP', text: '「不如我們兩組自由活動時一起逛夜市？大家都能玩到。」', mood: 'smile', k: 'nego', v: 1, note: '協商：提出替代方案。', out: [
+        { name: '小凱想了想同意', p: .45, by: { self: .3 }, d: { peer: -10, cls: 10 }, lines: [['xk', 'neutral', '……好啦，夜市可以一起。']] },
+        { name: '「那阿哲別來」', p: .55, d: { peer: 5 }, lines: [['xk', 'smile', '可以啊，那阿哲別來就好。'], ['xj', 'neutral', '……那就不用了。']] },
+      ]},
+      { tr: 'C', m: 'TJ', text: '「謝謝你邀請，但我已經答應阿哲了，我會遵守約定。」', mood: 'neutral', k: 'refuse', v: 1, note: '有效拒絕：明確說不，並說明理由。', out: [
+        { name: '小凱聳聳肩', p: .6, by: { self: .3 }, d: { peer: -10, self: 10 }, lines: [['xk', 'neutral', '好吧，隨便你。']] },
+        { name: '小凱不太高興', p: .4, d: { peer: 5, self: 5 }, lines: [['xk', 'angry', '跟他一組有什麼好玩的？']] },
+      ]},
+      { tr: 'E', m: 'ET', text: '「我不會為了排擠別人而加入一個組，這樣不對。」', mood: 'angry', k: 'refuse', v: 1, note: '有效拒絕：堅定表達立場。', out: [
+        { name: '小凱態度軟化', p: .45, by: { self: .2 }, d: { peer: -15, cls: 5 }, lines: [['xk', 'surprised', '……我只是開玩笑啦。']] },
+        { name: '小凱生氣了', p: .55, d: { peer: 10 }, lines: [['xk', 'angry', '好啊，那你們自己玩！']] },
+      ]},
+      { tr: 'A', m: 'F', text: '「呃……讓我想一想好了。」不好意思當面拒絕。', mood: 'worried', k: 'refuse', v: -1, note: '拖延不是拒絕，對方會以為你還有可能答應。', out: [
+        { name: '小凱一直催', p: .6, d: { peer: 15, self: -5 }, lines: [['nar', '', '整個下午，小凱一直傳訊息：「想好了沒？」']] },
+        { name: '小凱去找別人', p: .4, lines: [['xk', 'neutral', '那你想好再說。'], ['nar', '', '小凱轉身去找別的同學。']] },
+      ]},
+      { tr: 'N', m: 'I', text: '很怕得罪小凱，小聲答應：「好……」之後一整天都很後悔。', mood: 'sad', flag: { gaveIn: 1 }, k: 'refuse', v: -1, note: '因為害怕而答應，心裡的壓力會越來越大。', out: [
+        { name: '阿哲聽到了', p: .5, d: { az: -20, self: -10 }, lines: [['nar', '', '阿哲剛好走過，聽到了。'], ['az', 'sad', '……沒關係，我懂。']] },
+        { name: '還沒人知道', p: .5, d: { self: -15, peer: 10 }, lines: [['nar', '', '小凱開心地把小君的名字寫進名單。小君看著那張紙，胃好痛。']] },
+      ]},
+    ]},
+    { t: 'if', c: s => !s.f.gaveIn, go: 'c4night' },
+    { t: 'say', who: 'xj', mood: 'worried', text: '我答應了小凱……可是我真的想跟阿哲同組。' },
+    { t: 'choice', q: '小君要怎麼辦？', opts: [
+      { tr: 'O', m: 'N', text: '想一個兩全的方法：去問老師能不能改成抽籤分組。', mood: 'neutral', k: 'help', v: 1, note: '找信任的大人一起想辦法。', out: [
+        { name: '老師改成抽籤', p: .5, d: { peer: -10, az: 5, cls: 5 }, lines: [['nar', '', '林老師聽完，決定改成「一半自選、一半抽籤」。小君和阿哲剛好抽到同一組。']] },
+        { name: '老師要她自己決定', p: .5, d: { self: 5 }, lines: [['nar', '', '老師說：「你想清楚自己真正想要什麼，再去說出來。我相信你做得到。」']] },
+      ]},
+      { tr: 'C', m: 'J', text: '回去找小凱：「對不起，我想清楚了，我還是要跟阿哲同組。」', mood: 'neutral', k: 'refuse', v: 1, note: '答應了也可以收回，誠實說出改變的理由。', out: [
+        { name: '小凱接受了', p: .6, by: { self: .2 }, d: { peer: -10, self: 10 }, lines: [['xk', 'neutral', '……好啦，那你名字我劃掉。']] },
+        { name: '小凱嘀咕', p: .4, d: { self: 10 }, lines: [['xk', 'angry', '反反覆覆的……'], ['nar', '', '但小凱還是把她的名字劃掉了。']] },
+      ]},
+      { tr: 'E', m: 'E', text: '在群組說：「我改變主意了，我要跟阿哲一組，有人要一起嗎？」', mood: 'smile', k: 'refuse', v: 1, note: '公開表態，也邀請別人加入。', out: [
+        { name: '兩個同學也加入', p: .5, by: { cls: .3 }, d: { cls: 10, peer: -10, az: 10 }, lines: [['nar', '', '小甄和另一個同學馬上回：「我！」']] },
+        { name: '群組安靜', p: .5, d: { self: 5 }, lines: [['nar', '', '沒有人回。但小君覺得心裡輕鬆多了。']] },
+      ]},
+      { tr: 'A', m: 'F', text: '先去跟阿哲道歉：「我剛剛答應小凱，是我不好。我還是想跟你一組。」', mood: 'sad', k: 'imsg', v: 1, note: '誠實說出自己的感受和期望。', out: [
+        { name: '阿哲原諒她', p: .6, by: { az: .3 }, d: { az: 15 }, lines: [['az', 'neutral', '……我知道你也很為難。好，我們一組。']] },
+        { name: '阿哲需要時間', p: .4, d: { az: 5 }, lines: [['az', 'sad', '我想一下。']] },
+      ]},
+      { tr: 'N', m: 'IP', text: '越想越煩，乾脆兩邊都不回，等老師直接分組。', mood: 'worried', k: 'refuse', v: -1, note: '逃避不是拒絕，兩邊都會覺得被晾著。', out: [
+        { name: '被分到別組', p: .6, d: { az: -5, self: -5 }, lines: [['nar', '', '名單交出去時，小君被分到和阿哲不同的組。']] },
+        { name: '剛好和阿哲同組', p: .4, d: { az: 5 }, lines: [['nar', '', '老師幫忙分組，小君剛好和阿哲同一組。她鬆了一口氣，卻也覺得有點心虛。']] },
+      ]},
+    ]},
+    { t: 'label', id: 'c4night' },
+    { t: 'scene', bg: 'room', night: true, place: '小君的房間｜週四晚上', cast: ['xj'] },
+    { t: 'say', who: 'nar', text: '週四晚上，阿哲傳來一則私訊。' },
+    { t: 'say', who: 'nar', text: '阿哲：「其實……我在想，畢旅我還是不要去好了。」' },
+    { t: 'choice', q: '小君要怎麼回？', opts: [
+      { tr: 'O', m: 'NP', text: '「如果你怕跟大家一起，我們可以排一條只有我們這組的路線，去你想去的美術館！」', mood: 'smile', k: 'nego', v: 1, note: '提出讓對方安心的替代方案。', out: [
+        { name: '阿哲決定去', p: .55, by: { az: .4 }, d: { az: 10 }, flag: { go: 1 }, lines: [['nar', '', '阿哲：「……美術館的話，我想去。」']] },
+        { name: '阿哲還在考慮', p: .45, d: { az: 3 }, lines: [['nar', '', '阿哲：「我再想想。」']] },
+      ]},
+      { tr: 'C', m: 'SJ', text: '「我們一起把行程排好，你就知道每一站會跟誰在一起，會比較安心。」', mood: 'neutral', k: 'emp', v: 1, note: '用具體的計畫降低對方的不安。', out: [
+        { name: '阿哲安心了', p: .6, by: { az: .4 }, d: { az: 10 }, flag: { go: 1 }, lines: [['nar', '', '兩人視訊排了一小時行程。結束前，阿哲說：「好像……可以去。」']] },
+        { name: '阿哲還在考慮', p: .4, d: { az: 3 }, lines: [['nar', '', '阿哲：「謝謝，我再想想。」']] },
+      ]},
+      { tr: 'E', m: 'E', text: '「不行啦！沒有你多無聊！明天我帶你去跟大家介紹你的畫！」', mood: 'smile', k: 'emp', v: -1, note: '熱情很溫暖，但先聽聽對方為什麼不想去。', out: [
+        { name: '阿哲被說動', p: .5, by: { az: .4 }, d: { az: 8 }, flag: { go: 1 }, lines: [['nar', '', '阿哲：「……好啦，我去。可是不要介紹我的畫啦！」']] },
+        { name: '阿哲覺得有壓力', p: .5, d: { az: -5 }, lines: [['nar', '', '阿哲：「……你不懂啦。」之後就沒再回訊息。']] },
+      ]},
+      { tr: 'A', m: 'F', text: '「我聽到你很難過。不管你決定去不去，我都是你的朋友。」', mood: 'calm', k: 'emp', v: 1, note: '先接住對方的情緒，給對方選擇的空間。', out: [
+        { name: '阿哲說出擔心後決定去', p: .6, by: { az: .4 }, d: { az: 15 }, flag: { go: 1 }, lines: [['nar', '', '阿哲傳了很長一段話，說他怕自己在遊覽車上沒人說話。最後他說：「……有你在的話，我想去。」']] },
+        { name: '阿哲需要時間', p: .4, d: { az: 8 }, lines: [['nar', '', '阿哲：「謝謝你。我再想想。」']] },
+      ]},
+      { tr: 'N', m: 'IF', text: '「你不去的話……其實我也不太想去了。」', mood: 'sad', k: 'emp', v: -1, note: '感同身受很深刻，但兩個人一起退縮，問題沒有解決。', out: [
+        { name: '兩人互相打氣', p: .4, by: { az: .3 }, d: { az: 5 }, flag: { go: 1 }, lines: [['nar', '', '阿哲：「欸，你不能不去啦。……那我們都去吧。」']] },
+        { name: '兩人都想放棄', p: .6, d: { az: 3, self: -10 }, lines: [['nar', '', '兩人聊到半夜，都覺得畢旅好像沒那麼重要了。']] },
+      ]},
+    ]},
+    { t: 'scene', bg: 'classroom', place: '三年五班教室｜美術課', cast: ['xk', 'az', 'xj'], board: '<span>美術課：我的國中回憶</span>' },
+    { t: 'say', who: 'nar', text: '美術課上，阿哲畫了一張全班在園遊會的速寫。' },
+    { t: 'say', who: 'xk', mood: 'smile', text: '欸大家看，阿哲又在畫那種陰沉的東西，哈哈。' },
+    { t: 'say', who: 'az', mood: 'sad', text: '……' },
+    { t: 'choice', q: '小凱又在大家面前取笑阿哲。小君要……', opts: [
+      { tr: 'O', m: 'NT', text: '「小凱，你看過他畫的園遊會海報嗎？那張全校都在拍照耶。」', mood: 'neutral', k: 'nego', v: 1, note: '用事實換個角度，化解嘲弄。', out: [
+        { name: '大家附和', p: .55, by: { cls: .2 }, d: { cls: 10, peer: -10, az: 5 }, lines: [['nar', '', '有同學說：「對耶，那張超讚！」小凱撇撇嘴，沒再說話。']] },
+        { name: '「那又怎樣」', p: .45, d: { peer: 5 }, lines: [['xk', 'smile', '那又怎樣？還不是很陰沉。']] },
+      ]},
+      { tr: 'C', m: 'SJ', text: '「我覺得不舒服，因為在大家面前取笑別人會讓人難受，我希望你停止。」', mood: 'calm', k: 'imsg', v: 1, note: '我訊息：說出感受、情況和期望。', out: [
+        { name: '小凱停了', p: .6, by: { self: .3 }, d: { peer: -15, cls: 10 }, lines: [['xk', 'surprised', '……幹嘛那麼認真。好啦。']] },
+        { name: '小凱嘴硬', p: .4, d: { peer: -5, self: 5 }, lines: [['xk', 'neutral', '我又沒說錯。'], ['nar', '', '但之後整堂課，小凱都沒再說話。']] },
+      ]},
+      { tr: 'E', m: 'ET', text: '「夠了吧！你一直針對阿哲，真的很過分！」', mood: 'angry', k: 'imsg', v: -1, note: '勇敢站出來很棒，但「你訊息」容易讓對方防衛，衝突可能升高。', out: [
+        { name: '小凱收斂', p: .45, d: { peer: -10, az: 5 }, lines: [['xk', 'neutral', '……好啦好啦。']] },
+        { name: '吵了起來', p: .55, d: { cls: -10, peer: 5 }, lines: [['xk', 'angry', '關你什麼事？'], ['nar', '', '美術老師只好出面制止。']] },
+      ]},
+      { tr: 'A', m: 'F', text: '不跟小凱爭，走到阿哲身邊陪著他，下課再私下關心。', mood: 'calm', k: 'emp', v: 1, note: '讓被嘲笑的人知道自己不孤單。', out: [
+        { name: '阿哲很感動', p: .7, d: { az: 15 }, lines: [['az', 'neutral', '……謝謝你坐過來。']] },
+        { name: '小凱繼續說', p: .3, d: { peer: 5, az: 8 }, lines: [['nar', '', '小凱又說了幾句，但阿哲旁邊有小君陪著，看起來沒那麼難過了。']] },
+      ]},
+      { tr: 'N', m: 'I', text: '很生氣，但怕被針對，下課後私下告訴林老師。', mood: 'worried', k: 'help', v: 1, note: '向信任的大人求助，不是打小報告。', out: [
+        { name: '老師找小凱談', p: .65, d: { peer: -15, cls: 5 }, lines: [['nar', '', '隔天，林老師找小凱談了很久。之後，小凱再也沒在班上取笑阿哲。']] },
+        { name: '老師說會留意', p: .35, d: { peer: -5 }, lines: [['nar', '', '林老師謝謝小君告訴她，說會多留意班上的狀況。']] },
+      ]},
+    ]},
+    { t: 'say', who: 'nar', text: '星期五，分組名單交出去了。畢業旅行的日子終於到了……' },
     { t: 'end' },
   ],
 },
@@ -925,9 +1289,30 @@ const CHAPTERS = [
 const avgF = s => (s.st.xz + s.st.xy + s.st.az) / 3;
 const bestF = s => ['xz', 'xy', 'az'].reduce((a, b) => s.st[b] > s.st[a] ? b : a);
 
+/* 尚未逐一標 m 的選擇：依節點順序，每列 5 個值依序對應 O、C、E、A、N 選項 */
+const MB_TABLE = {
+  c1: [['NP', 'SJ', 'EP', 'SF', 'I'], ['EN', 'IJ', 'E', 'SF', 'I'], ['NP', 'STJ', 'E', 'IF', 'I'], ['NF', 'TJ', 'ET', 'F', 'IF'],
+       ['NP', 'SJ', 'E', 'F', 'F'], ['N', 'ST', 'E', 'F', 'I'], ['NP', 'TJ', 'E', 'F', 'P']],
+  c2: [['NP', 'J', 'EP', 'FP', 'I'], ['NT', 'TJ', 'E', 'F', 'P'], ['NF', 'ST', 'ET', 'F', 'IF'], ['IN', 'J', 'EJ', 'F', 'I'],
+       ['IN', 'J', 'E', 'F', 'P'], ['N', 'SJ', 'E', 'F', 'I']],
+  c3: [['NF', 'TJ', 'EP', 'F', 'I'], ['N', 'J', 'E', 'F', 'I'], ['NF', 'ST', 'ET', 'F', 'I'], ['IN', 'J', 'E', 'IF', 'IP'],
+       ['N', 'J', 'ET', 'F', 'I'], ['NF', 'SJ', 'E', 'F', 'P'], ['NT', 'J', 'EP', 'F', 'I']],
+};
+const MB_BUILD = { c3: [['N', 'S', 'ET', 'F', 'I'], ['N', 'ST', 'T', 'P', 'I'], ['NP', 'J', 'T', 'F', 'I']] };
+CHAPTERS.forEach(ch => {
+  let k = 0;
+  ch.nodes.forEach(n => {
+    if (n.t === 'choice' && !n.opts.some(o => o.m)) {
+      const row = (MB_TABLE[ch.id] || [])[k++];
+      if (row) n.opts.forEach(o => { o.m = row[TKEYS.indexOf(o.tr)]; });
+    }
+    if (n.t === 'build' && MB_BUILD[ch.id]) n.slots.forEach((sl, j) => sl.opts.forEach(o => { o.m = o.m || MB_BUILD[ch.id][j][TKEYS.indexOf(o.tr)]; }));
+  });
+});
+
 /* ================= 進度（只存在這台裝置的瀏覽器） ================= */
 const STORE = 'qcqy-ocean-v1';
-let P = { ends: {}, notes: {}, carry: null, showProb: true, showTrait: false };
+let P = { ends: {}, notes: {}, carry: null, carry1: null, mbch: {}, showProb: true, showTrait: false };
 try { const raw = localStorage.getItem(STORE); if (raw) P = Object.assign(P, JSON.parse(raw)); } catch (e) {}
 function saveP() { try { localStorage.setItem(STORE, JSON.stringify(P)); } catch (e) {} }
 
@@ -943,9 +1328,9 @@ const toLine = l => Array.isArray(l) ? { who: l[0], mood: l[1], text: l[2] } : l
 
 function startChapter(idx) {
   const ch = CHAPTERS[idx];
-  const carry = ch.id === 'c3' ? P.carry : null;
+  const carry = ch.id === 'c3' ? P.carry : ch.id === 'c4' ? P.carry1 : null;
   S = { ci: idx, i: 0, st: { msg: 50 }, f: {}, carry, vars: {}, queue: [], jump: null, hist: [], delta: {},
-        T: { O: 0, C: 0, E: 0, A: 0, N: 0 },
+        T: { O: 0, C: 0, E: 0, A: 0, N: 0 }, M: emptyM(),
         bg: 'classroom', night: false, place: '', cast: [], moods: {}, speaker: null, extra: {}, ending: null };
   ch.meters.forEach(m => S.st[m.id] = typeof m.start === 'function' ? m.start(carry) : m.start);
   advance();
@@ -962,7 +1347,7 @@ function advance() {
     if (n.when && !n.when(S)) { S.i++; continue; }
     if (n.t === 'scene') {
       S.bg = n.bg; S.night = !!n.night; S.place = n.place; S.cast = n.cast; S.moods = {}; S.speaker = null;
-      S.extra = n.keep ? S.extra : { board: n.board, sign: n.sign };
+      S.extra = n.keep ? S.extra : { board: n.board, sign: typeof n.sign === 'function' ? n.sign(S) : n.sign };
       S.i++; continue;
     }
     if (n.t === 'label') { S.i++; continue; }
@@ -1038,12 +1423,20 @@ function renderHome() {
     <section class="hero">
       <div class="unit">人際新觀點｜分支角色扮演</div>
       <h1>一場園遊會，<br>三段<mark>青春情誼</mark></h1>
-      <p>這裡沒有標準答案。每個選擇有五個選項，分別代表五大人格特質的回應方式。你的選擇會改變角色之間的關係，關係又會影響接下來事情發生的機率。</p>
+      <p>這裡沒有標準答案。每個選擇有五個選項，分別代表五大人格特質的回應方式，同時也對應 MBTI 的四個向度。你的選擇會改變角色之間的關係，關係又會影響接下來事情發生的機率。</p>
     </section>
     <section class="ocean-intro">
       <h2>五大人格特質（Big Five / OCEAN）</h2>
       <div class="ocean-grid">${TKEYS.map(t => `<div class="t-${t}"><b>${t}　${TRAITS[t].name}</b><span>${TRAITS[t].desc}</span></div>`).join('')}</div>
     </section>
+    <div class="intro-pair">
+      <section class="ocean-intro">
+        <h2>MBTI 四個向度</h2>
+        <div class="mbti-axes-intro">${MBTI_AXES.map(x => `<div><b>${x.topic}：${x.a} ${x.an}／${x.b} ${x.bn}</b><span>${x.a}：${x.ad}；${x.b}：${x.bd}。</span></div>`).join('')}</div>
+        <p class="caveat">${MBTI_CAVEAT}</p>
+      </section>
+      ${overallMbtiHTML()}
+    </div>
     <div class="chapters">
       ${CHAPTERS.map((c, k) => {
         const got = (P.ends[c.id] || []).length;
@@ -1062,7 +1455,7 @@ function renderHome() {
     <div class="howto">
       <div><b>五種回應，沒有對錯</b>每個選項對應一種人格特質。選完會告訴你這個選擇偏向哪一種特質。</div>
       <div><b>結果有機率</b>選擇後會看到每種結果的機率條。人際數值越好，好結果的機率越高，但不保證。</div>
-      <div><b>人格傾向＋總體建議</b>結局後會分析你的人格傾向，並對應課本內容給出總體建議。</div>
+      <div><b>人格傾向＋總體建議</b>結局後會分析你的五大人格傾向與 MBTI 類型，並對應課本內容給出總體建議。</div>
     </div>`;
   app.querySelectorAll('[data-ch]').forEach(b => b.onclick = () => startChapter(+b.dataset.ch));
 }
@@ -1070,6 +1463,45 @@ function renderHome() {
 function traitBars() {
   const total = TKEYS.reduce((a, t) => a + S.T[t], 0) || 1;
   return TKEYS.map(t => `<div class="meter t-${t}"><div class="lab"><span>${t}　${TRAITS[t].name}</span><span>${S.T[t]}</span></div><div class="bar"><i class="tc" style="width:${Math.round(S.T[t] / total * 100)}%"></i></div></div>`).join('');
+}
+
+function axesHTML(M) {
+  return `<div class="axes">${MBTI_AXES.map(x => {
+    const tot = M[x.a] + M[x.b];
+    const pa = tot ? Math.round(M[x.a] / tot * 100) : 50;
+    const aOn = M[x.a] >= M[x.b];
+    return `<div class="axis"><span class="${aOn ? 'on' : ''}">${x.a} ${x.an} ${pa}%</span><div class="two"><i class="a" style="width:${pa}%"></i><i class="b" style="width:${100 - pa}%"></i></div><span class="${aOn ? '' : 'on'}">${100 - pa}% ${x.bn} ${x.b}</span></div>`;
+  }).join('')}</div>`;
+}
+
+function mbtiCardHTML(M, title) {
+  const code = mbtiOf(M);
+  const [name, desc] = MBTI_TYPES[code];
+  const close = MBTI_AXES.filter(x => Math.abs(M[x.a] - M[x.b]) <= 1).map(x => `${x.a}／${x.b}`);
+  return `<div class="card advice">
+    <h4>${title}</h4>
+    <div class="mbti-head"><span class="mbti-code">${code}</span><span class="mbti-name">${name}</span></div>
+    <p>${desc}</p>
+    ${axesHTML(M)}
+    ${close.length ? `<p class="caveat">${close.join('、')} 兩邊非常接近，代表你在這方面很有彈性，兩種方式都會用。</p>` : ''}
+    <div class="adv-group mix"><span>給 ${code} 的人際小提醒</span>${code.split('').map(l => `<div class="adv-item"><b>${l}</b><span>${MBTI_TIPS[l]}</span></div>`).join('')}</div>
+    <p class="caveat">MBTI 和五大人格有部分對應：E 接近外向性、N 接近開放性、F 接近親和性、J 接近盡責性；情緒敏感（神經質）則沒有對應的 MBTI 向度。${MBTI_CAVEAT}</p>
+  </div>`;
+}
+
+function overallMbtiHTML() {
+  const played = CHAPTERS.filter(c => P.mbch && P.mbch[c.id]);
+  if (!played.length) return `<section class="ocean-intro"><h2>你的整體 MBTI 傾向</h2><p>完成任一個劇本後，這裡會綜合你在各劇本的選擇，顯示你的整體 MBTI 傾向。</p></section>`;
+  const M = emptyM();
+  played.forEach(c => { for (const k in M) M[k] += P.mbch[c.id][k] || 0; });
+  const code = mbtiOf(M);
+  return `<section class="ocean-intro">
+    <h2>你的整體 MBTI 傾向（${played.length} 個劇本）</h2>
+    <div class="mbti-head"><span class="mbti-code">${code}</span><span class="mbti-name">${MBTI_TYPES[code][0]}</span></div>
+    <p>${MBTI_TYPES[code][1]}</p>
+    ${axesHTML(M)}
+    <p class="caveat">每個劇本以最近一次遊玩的選擇計算。</p>
+  </section>`;
 }
 
 function sideHTML() {
@@ -1089,6 +1521,11 @@ function sideHTML() {
     <div class="panel">
       <h5>你的人格傾向（選擇次數）</h5>
       ${traitBars()}
+    </div>
+    <div class="panel">
+      <h5>MBTI 傾向（目前）</h5>
+      <div class="mbti-head"><span class="mbti-code small">${Object.values(S.M).some(v => v) ? mbtiOf(S.M) : '????'}</span></div>
+      ${axesHTML(S.M)}
     </div>
     <div class="panel">
       <h5>結局收集</h5>
@@ -1228,11 +1665,13 @@ function renderChoice(dlg, n) {
     setMood(chap().player, o.mood);
     applyEffect(o);
     S.T[o.tr]++;
-    const record = { q: n.q, pick: o.text, note: o.note, k: o.k, v: o.v, tr: o.tr };
+    const m = mOf(o);
+    m.split('').forEach(l => S.M[l]++);
+    const record = { q: n.q, pick: o.text, note: o.note, k: o.k, v: o.v, tr: o.tr, m };
     S.hist.push(record);
     if (o.goto) S.jump = o.goto;
     const slot = dlg.querySelector('#slot');
-    slot.innerHTML = `<div class="picked-info">這個選擇偏向 ${tchip(o.tr)}<span>${TRAITS[o.tr].desc}</span></div>`;
+    slot.innerHTML = `<div class="picked-info">這個選擇偏向 ${tchip(o.tr)}<span>${TRAITS[o.tr].desc}</span></div><div class="picked-info">MBTI 傾向 ${mchip(m)}<span>${m.split('').map(l => { const x = MBTI_AXES.find(a => a.a === l || a.b === l); return `${l}：${l === x.a ? x.ad : x.bd}`; }).join('；')}</span></div>`;
     refreshSide();
     if (o.out) return resolveOutcomes(slot, o.out, record, continueQueue);
     S.queue = (o.lines || []).map(toLine);
@@ -1261,7 +1700,7 @@ function renderBuild(dlg, n) {
     const sum = n._fill.reduce((a, k, j) => a + n.slots[j].opts[k].w, 0);
     S.st.msg = Math.max(0, Math.min(100, 50 + sum * 8));
     S.vars.msg = n._fill.map((k, j) => n.slots[j].opts[k].text).join('');
-    n._fill.forEach((k, j) => { const o = n.slots[j].opts[k]; S.hist.push({ q: `說話：${n.slots[j].label}`, pick: o.text, note: o.note, k: 'imsg', v: o.w > 0 ? 1 : -1, tr: o.tr }); });
+    n._fill.forEach((k, j) => { const o = n.slots[j].opts[k]; S.hist.push({ q: `說話：${n.slots[j].label}`, pick: o.text, note: o.note, k: 'imsg', v: o.w > 0 ? 1 : -1, tr: o.tr, m: mOf(o) }); });
     return next();
   }
   dlg.innerHTML = `<p class="q">${n.q}</p>
@@ -1270,6 +1709,7 @@ function renderBuild(dlg, n) {
   dlg.querySelectorAll('.opt').forEach(b => b.onclick = () => {
     const o = n.slots[at].opts[+b.dataset.k];
     S.T[o.tr]++;
+    mOf(o).split('').forEach(l => S.M[l]++);
     n._fill.push(+b.dataset.k);
     refreshSide();
     renderBuild(dlg, n);
@@ -1342,10 +1782,13 @@ function renderEnd(dlg) {
   const text = typeof e.text === 'function' ? e.text(S) : e.text;
   const got = P.ends[ch.id] || [];
   if (!got.includes(e.id)) P.ends[ch.id] = got.concat(e.id);
+  if (ch.id === 'c1') P.carry1 = { az: S.st.az, end: e.id };
   if (ch.id === 'c2') P.carry = { xz: S.st.xz, calm: S.st.calm, end: e.id };
+  P.mbch = P.mbch || {};
+  P.mbch[ch.id] = Object.assign({}, S.M);
   saveP();
   const nextIdx = S.ci + 1 < CHAPTERS.length ? S.ci + 1 : null;
-  const good = ['star', 'bestie', 'peace', 'ready', 'up'].includes(e.id);
+  const good = ['star', 'bestie', 'peace', 'ready', 'up', 'team', 'brave'].includes(e.id);
   S.cast.forEach(id => setMood(id, good ? 'smile' : 'neutral'));
   dlg.innerHTML = `<div class="result">
       <span class="qtag">${ch.no}・結局</span>
@@ -1355,12 +1798,13 @@ function renderEnd(dlg) {
           <h2 class="end-title pop">${e.title}</h2>
           <p class="end-text">${text}</p>
           ${oceanHTML()}
+          ${mbtiCardHTML(S.M, '你的 MBTI 類型（本劇本）')}
           ${adviceHTML(ch)}
           <details class="card more"><summary>回顧你的選擇（${S.hist.filter(h => h.pick).length} 次）</summary>
-            <div class="review">${S.hist.map(h => `<div class="rev ${h.tr ? 't-' + h.tr : ''}"><span class="rq">${esc(h.q)}</span>${h.pick ? `<span>${esc(h.pick)}</span>` : ''}${h.tr ? `<span>${tchip(h.tr)}</span>` : ''}${h.out ? `<span class="ro">→ ${esc(h.out)}（${h.pct}%）</span>` : ''}${h.note ? `<span class="rn">${esc(h.note)}</span>` : ''}</div>`).join('')}</div>
+            <div class="review">${S.hist.map(h => `<div class="rev ${h.tr ? 't-' + h.tr : ''}"><span class="rq">${esc(h.q)}</span>${h.pick ? `<span>${esc(h.pick)}</span>` : ''}${h.tr ? `<span>${tchip(h.tr)} ${mchip(h.m)}</span>` : ''}${h.out ? `<span class="ro">→ ${esc(h.out)}（${h.pct}%）</span>` : ''}${h.note ? `<span class="rn">${esc(h.note)}</span>` : ''}</div>`).join('')}</div>
           </details>
           <div class="card"><h4>寫下來</h4>
-            <p>${ch.id === 'c1' ? '你覺得自己在人際相處上的優勢是什麼？想精進哪一點？要如何精進？' : ch.id === 'c2' ? '如果你是小甄，會如何利用「我訊息」向小藝表達不滿？' : '如果衝突沒有解決，你認為會對人際關係以及健康產生什麼影響？'}</p>
+            <p>${{ c1: '你覺得自己在人際相處上的優勢是什麼？想精進哪一點？要如何精進？', c2: '如果你是小甄，會如何利用「我訊息」向小藝表達不滿？', c3: '如果衝突沒有解決，你認為會對人際關係以及健康產生什麼影響？', c4: '如果你的朋友被排擠，你會怎麼用「有效拒絕」和「我訊息」幫助他？你的 MBTI 結果和你平常的自己像嗎？' }[ch.id]}</p>
             <textarea id="note-${ch.id}" placeholder="寫下你的想法（只存在這台裝置）">${esc(P.notes[ch.id] || '')}</textarea>
           </div>
           <div class="row"><button class="btn alt" id="again">再玩一次，試試別的結局</button><button class="btn alt" id="menu">回到選單</button>${nextIdx != null ? `<button class="btn" id="nx">前往${CHAPTERS[nextIdx].no} ▸</button>` : ''}</div>
