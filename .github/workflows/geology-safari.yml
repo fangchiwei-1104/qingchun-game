@@ -1,4 +1,4 @@
-name: Safari student review smoke test
+name: Safari student review and section tests
 on:
   push:
     branches: [qa/geology-safari]
@@ -68,6 +68,33 @@ jobs:
               click("button[onclick='go(9)']")
               assert script("return !!document.querySelector('.assessment-score')")
               print("PASS: Safari", value["capabilities"]["browserVersion"], "opened GitHub Pages, ran practice, rendered SVG, completed and restored the 15-question score.")
+              url = "https://fangchiwei-1104.github.io/qingchun-game/work-energy-review/"
+              for _ in range(15):
+                  request("POST", session + "/url", {"url": url})
+                  if script("return !!document.querySelector('#s0.on #ox0 button')"):
+                      break
+                  time.sleep(5)
+              assert script("return !!document.querySelector('#s0.on #ox0 button')")
+              click("#dots button:nth-child(2)")
+              assert script("return !!document.querySelector('#s1.on svg')")
+              click("button[onclick='go(11)']")
+              for unit in range(1, 5):
+                  click("#testUnitNav button:nth-child(%d)" % unit)
+                  click("#assessment button")
+                  for question in range(1, 11):
+                      assert script("return document.querySelector('#assessment h3').textContent").startswith("第 %d／10" % question)
+                      assert script("return document.querySelector('#assessment .assessment-nav button:last-child').disabled")
+                      click("#assessment .opt:first-child")
+                      click("#assessment .assessment-nav button:last-child")
+                  assert "／10" in script("return document.querySelector('.assessment-score').textContent")
+                  assert script("return !!document.querySelector('#assessment input[name=classCode]')")
+                  assert script("return !!document.querySelector('#assessment button[type=submit]')")
+              request("POST", session + "/refresh", {})
+              click("button[onclick='go(11)']")
+              for unit in range(1, 5):
+                  click("#testUnitNav button:nth-child(%d)" % unit)
+                  assert script("return !!document.querySelector('.assessment-score')")
+              print("PASS: Safari", value["capabilities"]["browserVersion"], "completed and restored all four 10-question tests and verified their upload forms.")
           finally:
               request("DELETE", session)
           PY
