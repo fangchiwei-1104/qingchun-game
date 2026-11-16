@@ -43,6 +43,11 @@ function doPost(event) {
     return responsePage_('成績尚未收件', '上傳代碼有誤。請回到測驗頁確認代碼後重送。');
   }
 
+  let packet;
+  try { if (typeof incoming.attempt === 'string' && incoming.attempt.length <= 1500) packet = JSON.parse(incoming.attempt); }
+  catch (error) { return responsePage_('成績尚未收件', '測驗資料有誤。請回到測驗頁重送。'); }
+  if (packet && packet.version === CH3_VERSION) return receiveWorkEnergy_(sheetId, incoming, packet);
+
   let record;
   try { record = validateSubmission_(incoming); }
   catch (error) { return responsePage_('成績尚未收件', '班級、座號或測驗資料有誤。請確認後重送。'); }
@@ -116,4 +121,76 @@ function responsePage_(title, message) {
     '<main style="max-width:32rem;margin:10vh auto;padding:1.5rem"><h1>' + escape(title) + '</h1><p>' +
     escape(message) + '</p><p>可關閉此分頁，回到複習網頁。</p></main></body></html>'
   ).setTitle(title).addMetaTag('viewport', 'width=device-width, initial-scale=1');
+}
+
+const CH3_VERSION = 'work-energy-3-v1';
+const CH3_SHEET_NAME = '第3章功與能成績';
+const CH3_BANK_KEY = [[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0]];
+const CH3_PER_TEST = 10;
+
+function receiveWorkEnergy_(sheetId, incoming, packet) {
+  let record;
+  try { record = validateWorkEnergy_(incoming, packet); }
+  catch (error) { return responsePage_('成績尚未收件', '班級、座號或本小節測驗資料有誤。請確認後重送。'); }
+
+  const lock = LockService.getScriptLock();
+  try {
+    lock.waitLock(10000);
+    const spreadsheet = SpreadsheetApp.openById(sheetId);
+    let sheet = spreadsheet.getSheetByName(CH3_SHEET_NAME);
+    if (!sheet) sheet = spreadsheet.insertSheet(CH3_SHEET_NAME);
+    if (sheet.getLastRow() === 0) {
+      sheet.setFrozenRows(1);
+      sheet.getRange('A:A').setNumberFormat('yyyy-mm-dd hh:mm:ss');
+      sheet.getRange('B:F').setNumberFormat('@');
+      sheet.appendRow(['收件時間','測驗編號','版本','班級','座號','小節','答對題數','總題數','百分制']);
+    }
+    const size = sheet.getLastRow() - 1;
+    const existing = size > 0
+      ? sheet.getRange(2, 2, size, 1).createTextFinder(record.id).matchEntireCell(true).findNext()
+      : null;
+    if (existing) {
+      const previous = sheet.getRange(existing.getRow(), 4, 1, 6).getDisplayValues()[0];
+      if (previous[0] !== record.classNo || previous[1] !== record.seat || previous[2] !== record.unit) {
+        return responsePage_('這份測驗已收件', '若班級、座號或小節需更正，請聯絡老師。');
+      }
+      return responsePage_('成績已收到', record.unit + ' 此筆成績已收件，無須重傳。' +
+        previous[5] + ' 分（' + previous[3] + '／' + previous[4] + ' 題）');
+    }
+    sheet.appendRow([new Date(),record.id,CH3_VERSION,record.classNo,record.seat,record.unit,
+      record.correct,CH3_PER_TEST,record.percent]);
+    SpreadsheetApp.flush();
+    return responsePage_('成績已收到', record.classNo + ' 班 ' + record.seat + ' 號｜' +
+      record.unit + '｜' + record.percent + ' 分（' + record.correct + '／' + CH3_PER_TEST + ' 題）');
+  } catch (error) {
+    console.error('Chapter 3 score receiver unavailable');
+    return responsePage_('目前無法確認收件', '請回到測驗頁再送一次。同一份測驗只會登記一次。');
+  } finally {
+    if (lock.hasLock()) lock.releaseLock();
+  }
+}
+
+function validateWorkEnergy_(incoming, packet) {
+  const classNo = String(incoming.classNo || '');
+  const seatInput = String(incoming.seat || '');
+  if (!/^[0-9]{3}$/.test(classNo) || !/^[0-9]{1,2}$/.test(seatInput) || Number(seatInput) < 1 ||
+      typeof packet.unit !== 'string' || !/^3-[1-4]$/.test(packet.unit) ||
+      typeof packet.id !== 'string' || !/^[a-f0-9]{32}$/.test(packet.id) ||
+      !Array.isArray(packet.answers) || packet.answers.length !== CH3_PER_TEST) throw new Error('Invalid assessment');
+  const unitNumber = Number(packet.unit.slice(-1));
+  const ids = new Set();
+  let correct = 0;
+  for (const pair of packet.answers) {
+    if (!Array.isArray(pair) || pair.length !== 2) throw new Error('Invalid answer');
+    const [id, choice] = pair;
+    if (!Number.isInteger(id) || !Number.isInteger(choice) || choice < 0 || choice > 3 || ids.has(id)) {
+      throw new Error('Invalid answer key');
+    }
+    const key = CH3_BANK_KEY[id];
+    if (!key || key[0] !== unitNumber) throw new Error('Invalid section');
+    ids.add(id);
+    if (choice === key[1]) correct++;
+  }
+  return {id:packet.id, classNo, seat:String(Number(seatInput)).padStart(2,'0'),
+    unit:packet.unit, correct, percent:correct*10};
 }
