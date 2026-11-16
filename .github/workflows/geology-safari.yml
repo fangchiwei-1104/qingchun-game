@@ -1,0 +1,73 @@
+name: Safari student review smoke test
+on:
+  push:
+    branches: [qa/geology-safari]
+permissions:
+  contents: read
+jobs:
+  safari:
+    runs-on: macos-15
+    timeout-minutes: 8
+    steps:
+      - name: Enable Safari WebDriver
+        run: sudo /usr/bin/safaridriver --enable
+      - name: Test published page in Safari
+        shell: bash
+        run: |
+          /usr/bin/safaridriver -p 4444 > /tmp/geology-safari-driver.log 2>&1 &
+          driver=$!
+          trap 'kill "$driver" 2>/dev/null || true; cat /tmp/geology-safari-driver.log' EXIT
+          python3 - <<'PY'
+          import json, time, urllib.request
+          base = "http://127.0.0.1:4444"
+          def request(method, path, data=None):
+              content = json.dumps(data).encode() if data is not None else None
+              req = urllib.request.Request(base + path, content, {"Content-Type": "application/json"}, method=method)
+              try:
+                  with urllib.request.urlopen(req, timeout=35) as response:
+                      return json.load(response)["value"]
+              except urllib.error.HTTPError as error:
+                  raise RuntimeError(error.read().decode()) from error
+          for _ in range(25):
+              try:
+                  request("GET", "/status")
+                  break
+              except (OSError, RuntimeError):
+                  time.sleep(1)
+          value = request("POST", "/session", {"capabilities": {"alwaysMatch": {"browserName": "safari"}}})
+          assert value["capabilities"]["browserName"].lower() == "safari", value
+          session = "/session/" + value["sessionId"]
+          def script(js, *args):
+              return request("POST", session + "/execute/sync", {"script": js, "args": list(args)})
+          def click(selector):
+              element = request("POST", session + "/element", {"using": "css selector", "value": selector})
+              request("POST", session + "/element/" + element["element-6066-11e4-a52e-4f735466cecf"] + "/click", {})
+          try:
+              url = "https://fangchiwei-1104.github.io/qingchun-game/geology-review/"
+              for _ in range(12):
+                  request("POST", session + "/url", {"url": url})
+                  if script("return !!document.querySelector('#s0.on #ox0 button')"):
+                      break
+                  time.sleep(5)
+              assert script("return !!document.querySelector('#s0.on #ox0 button')")
+              assert "Safari/" in script("return navigator.userAgent")
+              click("#s0 .ox:first-child button:first-child")
+              click("#s0 .ox:first-child button:last-child")
+              assert script("return !!document.querySelector('#s0 .ox.done')")
+              click("#dots button:nth-child(3)")
+              assert script("return !!document.querySelector('#s2.on #plateSvg rect')")
+              click("button[onclick='go(9)']")
+              click("#assessment button")
+              for question in range(15):
+                  assert script("return document.querySelector('#assessment .assessment-nav button:last-child').disabled")
+                  click("#assessment .opt:first-child")
+                  click("#assessment .assessment-nav button:last-child")
+              assert "/15" in script("return document.querySelector('.assessment-score').textContent").replace("／", "/").replace(" ", "")
+              assert script("return !!document.querySelector('input[name=\"seat\"]')")
+              request("POST", session + "/refresh", {})
+              click("button[onclick='go(9)']")
+              assert script("return !!document.querySelector('.assessment-score')")
+              print("PASS: Safari", value["capabilities"]["browserVersion"], "opened GitHub Pages, ran practice, rendered SVG, completed and restored the 15-question score.")
+          finally:
+              request("DELETE", session)
+          PY
