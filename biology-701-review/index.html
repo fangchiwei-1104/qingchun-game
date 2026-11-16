@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>701 自然1上 第3章 生物的運輸與防禦｜個人段考複習</title>
+<style>
+:root{--zoom:1;--bg:#f5f1e8;--ink:#1f2a37;--pri:#b4532a;--pri2:#1e6f8c;--ok:#23824f;--bad:#c0392b;--warn:#e67e22;--card:#fff;--line:#e2d9c6;--gold:#f1c40f;--soft:#fbf8f2}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Microsoft JhengHei","微軟正黑體","PingFang TC","Noto Sans TC",sans-serif;background:var(--bg);color:var(--ink);font-size:21px;line-height:1.6}
+button{font-family:inherit;cursor:pointer}
+/* ---------- header ---------- */
+header{position:sticky;top:0;z-index:50;background:#2b2118;color:#fff;box-shadow:0 2px 10px #0005;font-size:15px;line-height:1.3}
+.hrow{display:flex;align-items:center;gap:8px;padding:6px 10px;flex-wrap:wrap}
+.htitle{font-weight:700;font-size:16px;white-space:nowrap;color:#ffd9a8}
+.dots{display:flex;gap:4px;flex-wrap:wrap}
+.dot{border:1px solid #fff5;border-radius:14px;padding:3px 9px;background:#ffffff12;color:#fff;font-size:13px}
+.dot.on{background:var(--pri);border-color:#ffb37f;font-weight:700}
+.dot.seen{border-color:#9fe0b8}
+.tools{margin-left:auto;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.hbtn{background:#ffffff1c;color:#fff;border:1px solid #fff5;border-radius:8px;padding:4px 8px;font-size:14px}
+.hbtn:hover{background:#ffffff33}
+.hbtn.on{background:#ffb37f;color:#2b2118}
+.timer{display:flex;align-items:center;gap:3px;background:#0006;border-radius:10px;padding:3px 6px}
+.timer .hbtn{padding:3px 6px;font-size:13px}
+#tdisp{font:700 24px/1 Consolas,"Courier New",monospace;min-width:84px;text-align:center;padding:4px 6px;border-radius:6px;background:#ffffff1a}
+#tdisp.run{background:#23824f}
+#tdisp.warn{background:#e67e22}
+#tdisp.over{background:#c0392b;animation:blink 1s infinite}
+@keyframes blink{50%{opacity:.45}}
+.scorebar{display:none;padding:6px 10px 8px;border-top:1px solid #fff3;gap:8px;flex-wrap:wrap;align-items:center}
+.scorebar.open{display:flex}
+.gchip{display:flex;align-items:center;gap:4px;background:#ffffff18;border:1px solid #fff4;border-radius:10px;padding:3px 6px}
+.gchip b{font-size:15px}
+.gchip .sc{font:700 22px/1 Consolas,monospace;min-width:34px;text-align:center}
+.gchip button{background:#fff2;border:1px solid #fff6;color:#fff;border-radius:6px;padding:1px 6px;font-size:13px}
+.gchip.lead{background:var(--gold);color:#2b2118;border-color:#fff}
+.gchip.lead button{color:#2b2118;border-color:#2b211866}
+.gchip.bump{animation:bump .5s}
+@keyframes bump{40%{transform:scale(1.15)}}
+/* ---------- main ---------- */
+main{font-size:calc(21px*var(--zoom));max-width:1320px;margin:0 auto;padding:14px 18px 90px}
+.stage{display:none;animation:fade .35s}
+.stage.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+.shead{display:flex;align-items:center;gap:.5em;flex-wrap:wrap;margin:.2em 0 .5em}
+.snum{background:var(--pri);color:#fff;border-radius:50%;width:1.8em;height:1.8em;display:flex;align-items:center;justify-content:center;font-weight:700}
+.shead h2{margin:0;font-size:1.45em}
+.pg{background:#1e6f8c;color:#fff;border-radius:8px;padding:.05em .5em;font-size:.8em}
+.smin{background:#eadfca;border-radius:8px;padding:.05em .5em;font-size:.8em}
+.smin button{font-size:.9em;border:1px solid #b9a982;background:#fff;border-radius:6px;margin-left:.3em}
+.goal{background:#fff7e6;border-left:6px solid #f0a33a;padding:.5em .8em;border-radius:8px;margin:.4em 0 .8em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:.8em 1em;margin:.7em 0;box-shadow:0 1px 4px #0000000d}
+.card h3{margin:.1em 0 .45em;font-size:1.15em;color:#7a3416}
+.card h4{margin:.4em 0 .3em;font-size:1em;color:#1e6f8c}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:.9em}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:.9em}
+body[data-z="1"] .g3{grid-template-columns:1fr 1fr}
+body[data-z="2"] .g2,body[data-z="3"] .g2,body[data-z="4"] .g2,body[data-z="2"] .g3,body[data-z="3"] .g3,body[data-z="4"] .g3{grid-template-columns:1fr}
+.tag{display:inline-block;background:#eef5f8;color:#1e6f8c;border-radius:6px;padding:0 .4em;font-size:.8em;margin-right:.3em}
+.key{background:#fff3c4;padding:0 .2em;border-radius:4px;font-weight:700}
+.red{color:#c0392b;font-weight:700}.blue{color:#1e6f8c;font-weight:700}.grn{color:#23824f;font-weight:700}
+table.t{border-collapse:collapse;width:100%;font-size:.92em}
+table.t th,table.t td{border:1px solid #d9cfb9;padding:.3em .45em;text-align:center}
+table.t th{background:#f3eadb}
+.formula{font-family:"Cambria Math","Times New Roman",serif;background:#eef6ff;border:1px dashed #7aa7cf;border-radius:8px;padding:.3em .6em;display:inline-block;margin:.2em 0}
+/* figures */
+figure.fig{margin:.4em 0;text-align:center}
+figure.fig img{max-width:100%;max-height:22em;border-radius:10px;border:1px solid #ddd;cursor:zoom-in;background:#fff}
+figure.fig figcaption{font-size:.78em;color:#555}
+.svgbox{position:relative;background:#fff;border:1px solid var(--line);border-radius:12px;padding:.3em}
+.svgbox svg{width:100%;height:auto;display:block}
+.zbtn{position:absolute;right:.3em;top:.3em;font-size:.75em;background:#ffffffd9;border:1px solid #aaa;border-radius:6px;padding:0 .4em;z-index:2}
+/* buttons */
+.btn{background:var(--pri);color:#fff;border:none;border-radius:10px;padding:.35em .9em;font-size:.95em;margin:.15em}
+.btn.alt{background:#1e6f8c}.btn.ghost{background:#fff;color:#7a3416;border:1px solid #c9a98f}
+.btn.sm{font-size:.8em;padding:.2em .6em}
+.btn.on{outline:3px solid #f1c40f}
+.seg{display:flex;flex-wrap:wrap;gap:.3em;margin:.3em 0}
+.seg button{border:1px solid #c9a98f;background:#fff;border-radius:999px;padding:.2em .8em;font-size:.9em}
+.seg button.on{background:#7a3416;color:#fff;border-color:#7a3416}
+input[type=range]{width:100%}
+/* scaffold */
+.scaf{background:#f0f7f2;border:1px solid #b8dcc5;border-radius:10px;padding:.4em .7em;margin:.5em 0}
+.scaf .q{font-weight:700;color:#23824f}
+.scaf ol{margin:.3em 0 .1em 1.2em;padding:0}
+.scaf li{display:none}.scaf li.show{display:list-item;animation:fade .3s}
+/* OX */
+.oxgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(19em,1fr));gap:.7em}
+.ox{background:#fff;border:2px solid #e2d9c6;border-radius:12px;padding:.6em .8em;display:flex;flex-direction:column;gap:.4em}
+.ox .st{font-weight:700}
+.ox .ob{display:flex;gap:.4em}
+.ox .ob button{flex:1;font-size:1.2em;border-radius:10px;border:2px solid #ccc;background:#fafafa;padding:.1em}
+.ox .ob button.pick{border-color:#1e6f8c;background:#e5f2f7}
+.ox .ob button.btn{background:#1e6f8c;color:#fff;border-color:#1e6f8c;font-size:.85em;flex:.8}
+.ox .rv{display:none;font-size:.92em;border-top:1px dashed #ccc;padding-top:.35em}
+.ox.done .rv{display:block}
+.ox.ok{border-color:#23824f;background:#f2fbf5}.ox.ng{border-color:#c0392b;background:#fdf3f2}
+.ox.done.pendingAns{border-color:#e2d9c6;background:#fff}
+.fix{color:#23824f;font-weight:700}
+/* quiz */
+.qcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:.7em .9em;margin:.6em 0}
+.qtag{font-size:.75em;color:#1e6f8c}
+.qtext{font-weight:700;margin:.25em 0 .4em}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:.4em}
+body[data-z="3"] .opts,body[data-z="4"] .opts{grid-template-columns:1fr}
+.opt{text-align:left;background:#fbf8f2;border:2px solid #e4dccb;border-radius:10px;padding:.35em .6em;font-size:.95em}
+.opt:hover{border-color:#b4532a}
+.opt.right{background:#dff5e7;border-color:#23824f}
+.opt.wrong{background:#fde2df;border-color:#c0392b;animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.exp{margin-top:.5em;background:#f7fbff;border-radius:10px;padding:.5em .7em;border:1px solid #cfe2f1}
+.hidden{display:none!important}
+.okline{color:#23824f;font-weight:700}.badline{color:#c0392b;font-weight:700}
+.misc{color:#9b3d12;margin-top:.2em}
+.hintbtn{font-size:.8em;border:1px dashed #23824f;color:#23824f;background:#fff;border-radius:8px;margin-top:.3em}
+.hintbox{font-size:.9em;color:#23824f;margin-top:.2em}
+.award{margin-top:.45em;display:flex;flex-wrap:wrap;gap:.3em;align-items:center;font-size:.85em}
+.abtn{border:1px solid #b4532a;background:#fff;color:#b4532a;border-radius:8px;padding:.1em .55em}
+.abtn.given{background:#b4532a;color:#fff}
+.abtn.ghost{border-color:#999;color:#666}
+/* games */
+.game{background:#fff;border:2px solid #d8c7a8;border-radius:14px;padding:.6em .8em;margin:.6em 0}
+.gbar{display:flex;align-items:center;gap:.6em;flex-wrap:wrap;margin-bottom:.4em}
+.gclock{font:700 1.3em Consolas,monospace;background:#2b2118;color:#fff;border-radius:8px;padding:0 .5em}
+.pool{display:flex;flex-wrap:wrap;gap:.4em;min-height:2.4em;padding:.3em;border-radius:10px;background:#f7f2e8}
+.chip{border:2px solid #c9a98f;background:#fff;border-radius:10px;padding:.15em .6em;font-size:.95em}
+.chip.sel{background:#ffe8a3;border-color:#e0a800;transform:scale(1.06)}
+.chip.good{background:#dff5e7;border-color:#23824f;cursor:default}
+.chip.bad{animation:shake .4s;border-color:#c0392b}
+.bins{display:grid;gap:.5em;margin-top:.5em}
+.bin{border:2px dashed #b4532a;border-radius:12px;padding:.35em;min-height:4.5em;background:#fffaf3}
+.bin h5{margin:0 0 .3em;font-size:.95em;color:#7a3416;text-align:center}
+.bin .chip{font-size:.85em;margin:.15em}
+.bin.flash{background:#fde2df}
+.tip{font-size:.88em;color:#9b3d12;min-height:1.3em;margin-top:.3em}
+.result{background:#fff4d6;border-radius:10px;padding:.4em .7em;margin-top:.4em;font-weight:700}
+.ansrow{display:flex;flex-wrap:wrap;gap:.4em;min-height:2.4em;padding:.3em;border:2px dashed #1e6f8c;border-radius:10px;margin:.3em 0;background:#f2f9fc}
+.ansrow .chip .n{display:inline-block;background:#1e6f8c;color:#fff;border-radius:50%;width:1.4em;height:1.4em;text-align:center;line-height:1.4em;font-size:.75em;margin-right:.3em}
+/* info panels */
+.info{background:#fffaf0;border:2px solid #f0c27a;border-radius:12px;padding:.6em .8em;min-height:8em}
+.info h4{margin:0 0 .3em;color:#b4532a}
+.hot{cursor:pointer}
+.hot:hover{filter:brightness(1.12)}
+.pin{cursor:pointer}
+.pin:hover circle{r:9}
+.speedbar{height:1.1em;background:#eee;border-radius:6px;overflow:hidden}
+.speedbar div{height:100%;background:linear-gradient(90deg,#1e6f8c,#e67e22);width:0;transition:width .15s}
+.news{background:#fff;border:2px solid #555;border-radius:10px;padding:.6em .9em;line-height:2}
+.news .nh{font-weight:700;font-size:1.1em;border-bottom:1px solid #999;margin-bottom:.3em}
+.ns{border-bottom:3px solid #1e6f8c;cursor:pointer;padding:0 .1em}
+.ns.okk{background:#dff5e7;border-color:#23824f}.ns.ngg{background:#fde2df;border-color:#c0392b;text-decoration:line-through}
+.npop{background:#2b2118;color:#fff;border-radius:10px;padding:.5em .7em;margin-top:.5em;font-size:.92em}
+.npop button{margin:.2em;border-radius:8px;border:none;padding:.2em .7em}
+.evlist{display:flex;flex-wrap:wrap;gap:.3em;margin:.3em 0}
+.evlist span{border:1px solid #ccc;border-radius:999px;padding:0 .6em;font-size:.85em;background:#fff;color:#888}
+.evlist span.done{background:#e5f2f7;color:#1e6f8c;border-color:#1e6f8c}
+.evlist span.now{background:#b4532a;color:#fff;border-color:#b4532a}
+.tl{display:flex;gap:.3em;margin:.4em 0}
+.tl div{flex:1;border-radius:10px;padding:.4em .3em;text-align:center;color:#fff;cursor:pointer;font-weight:700;font-size:.92em}
+.tl div.sel{outline:4px solid #f1c40f}
+.mapbtns button{font-size:.85em}
+.check{list-style:none;padding:0}
+.check li{margin:.25em 0}
+.check input{transform:scale(1.4);margin-right:.5em}
+.mis10 li{margin:.25em 0}
+.cmap{display:grid;grid-template-columns:repeat(3,1fr);gap:.6em}
+body[data-z="2"] .cmap,body[data-z="3"] .cmap,body[data-z="4"] .cmap{grid-template-columns:1fr}
+.cbox{border-radius:12px;padding:.5em .7em;color:#1f2a37}
+.cbox h4{margin:0 0 .2em}
+.cbox ul{margin:.1em 0 .1em 1.1em;padding:0;font-size:.92em}
+/* teacher notes */
+.tnote{display:none;background:#203a43;color:#e8f6ff;border-radius:12px;padding:.6em .9em;margin:.6em 0;font-size:.88em;border-left:8px solid #4fc3f7}
+body.teacher .tnote{display:block}
+.tnote b{color:#ffe082}
+/* overlays */
+.overlay{position:fixed;inset:0;background:#000b;z-index:100;display:none;align-items:center;justify-content:center}
+.overlay.show{display:flex}
+.lbox{background:#fffaf2;border-radius:18px;padding:1.2em 1.5em;max-width:900px;width:94%;max-height:94vh;overflow:auto;font-size:18px}
+.lbox h1{margin:.1em 0;color:#7a3416;font-size:1.6em}
+.lbox .sub{color:#555;margin-bottom:.6em}
+.lrow{margin:.55em 0}
+.lrow label{margin-right:1em;white-space:nowrap}
+#rosterChips{display:flex;flex-wrap:wrap;gap:.3em;margin-top:.3em}
+.rchip{border:1px solid #c9a98f;background:#fff;border-radius:8px;padding:.1em .45em;font-size:.85em}
+.rchip.abs{background:#ddd;color:#999;text-decoration:line-through}
+.big{font-size:1.3em;padding:.4em 1.6em;border-radius:14px;background:#b4532a;color:#fff;border:none;margin-top:.5em}
+.hint{font-size:.85em;color:#666;margin-top:.6em}
+#pick .pcard{background:#fff;border-radius:24px;padding:1.2em 2.2em;text-align:center;min-width:min(560px,92vw);box-shadow:0 10px 40px #0008}
+#pnum{font:900 140px/1 Consolas,monospace;color:#b4532a}
+#pname{font-size:64px;font-weight:900;color:#2b2118}
+#pinfo{font-size:20px;color:#666;min-height:1.5em}
+#pick .pbtns{margin-top:.6em;display:flex;gap:.4em;justify-content:center;flex-wrap:wrap}
+#pick .pbtns button{font-size:20px}
+#viewer{background:#000e;flex-direction:column}
+#vwrap{flex:1;width:100%;overflow:hidden;position:relative;cursor:grab;touch-action:none}
+#vinner{position:absolute;left:50%;top:50%;transform-origin:0 0}
+#vinner img,#vinner svg{display:block;max-width:none;background:#fff;border-radius:8px}
+#vbar{padding:8px;display:flex;gap:8px;align-items:center;color:#fff;font-size:18px}
+#vbar button{font-size:18px;border-radius:8px;border:none;padding:4px 12px}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#2b2118;color:#fff;padding:.5em 1.1em;border-radius:12px;font-size:18px;z-index:200;opacity:0;transition:opacity .3s;pointer-events:none}
+#toast.show{opacity:1}
+.navfoot{display:flex;justify-content:space-between;margin-top:1.2em}
+.rf{font-size:1.15em}
+.rfbig{font:700 2.2em Consolas,monospace;color:#b4532a}
+
+.mybar{display:flex;flex-wrap:wrap;gap:6px;padding:4px 10px 7px;border-top:1px solid #fff3;align-items:center}
+.mybar .me{font-weight:700;color:#ffd9a8;margin-right:4px}
+.mchip{background:#ffffff18;border:1px solid #fff4;border-radius:10px;padding:2px 8px;color:#fff;font-size:14px}
+.mchip b{font:700 18px Consolas,monospace;color:#ffe082}
+.mchip.bump{animation:bump .5s;background:#f1c40f;color:#2b2118}.mchip.bump b{color:#7a3416}
+.wbtn{cursor:pointer}.wbtn:hover{background:#ffffff33}
+.ox .ob button:disabled{cursor:default}
+.ox .ob button.pick{outline:3px solid #1e6f8c}
+input[type=range]{accent-color:#2e7d32}
+header{background:#1f3a2a}
+figure.fig img{max-height:30em}
+html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+button:focus-visible, input:focus-visible, a:focus-visible { outline:3px solid #076fa0; outline-offset:3px; }
+button:disabled { cursor:default; }
+.oxgrid { grid-template-columns:repeat(auto-fit,minmax(min(100%,19em),1fr)); }
+.g2 > *, .g3 > *, .opts > *, .bins > * { min-width:0; }
+.dots { overflow-x:auto; }
+#vbar { flex-wrap:wrap; }
+#vbar span { min-width:150px; }
+#assessment h3 { margin-top:0; }
+#assessment .opt[aria-pressed="true"] { border-color:#1e6f8c; background:#dff2f8; box-shadow:inset 0 0 0 1px #1e6f8c; }
+.assessment-nav { display:flex; flex-wrap:wrap; gap:.5em; margin-top:.85em; }
+.assessment-identity { display:flex; flex-wrap:wrap; gap:.65em; margin:.85em 0; }
+.assessment-identity label { flex:1 1 7em; }
+.assessment-identity input { display:block; width:100%; min-height:44px; padding:.45em; border:1px solid #a19889; border-radius:8px; font:inherit; }
+.assessment-score { font-size:1.45em; font-weight:700; margin:.25em 0; }
+.assessment-breakdown { padding-left:1.3em; }
+.assessment-review { margin:.65em 0; }
+.assessment-status { display:block; margin:.6em 0; }
+@media (max-width:760px) {
+  body { font-size:17px; }
+  header { position:static; }
+  .hrow { align-items:flex-start; }
+  .dots { order:3; flex:1 1 100%; flex-wrap:nowrap; }
+  .dots button { flex:none; min-height:42px; }
+  .g2, .g3, .cmap, .opts { grid-template-columns:minmax(0,1fr) !important; }
+  .bins { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+  .shead { flex-wrap:wrap; }
+  .opt, .btn, .ob button { min-height:44px; }
+  .assessment-identity input { font-size:16px; }
+}
+@media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .stage,.chip { animation:none; } }
+
+#testUnitNav .seg { margin:.8em 0; }
+#testUnitNav button { min-height:44px; }
+.mybar { overflow-wrap:anywhere; }
+@media(max-width:760px){
+ .mybar { display:none; }
+ .card { overflow-x:auto; }
+ .timer { flex-wrap:wrap; }
+}
+</style>
+</head>
+<body data-z="0">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<marker id="arw" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#222"/></marker>
+<marker id="arwR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#c0392b"/></marker>
+<marker id="arwB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1f5fa8"/></marker>
+<marker id="arwG" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#e67e22"/></marker>
+</defs></svg>
+
+<header>
+ <div class="hrow">
+  <span class="htitle">🌿 第3章 生物的運輸與防禦｜個人複習</span>
+  <div class="dots" id="dots"></div>
+  <div class="tools">
+   <div class="timer">
+    <button class="hbtn" onclick="tAdj(-60)">−1分</button><button class="hbtn" onclick="tAdj(-10)">−10秒</button>
+    <span id="tdisp">1:00</span>
+    <button class="hbtn" onclick="tAdj(10)">+10秒</button><button class="hbtn" onclick="tAdj(60)">+1分</button>
+    <button class="hbtn" id="tplay" onclick="tToggle()" title="開始/暫停（空白鍵）">▶</button><button class="hbtn" onclick="tReset()">↺</button>
+   </div>
+   <button class="hbtn" id="zbtn" onclick="cycleZoom()" title="字體放大（F）">🔠 字級 1</button>
+    <button class="hbtn" type="button" onclick="go(11)">小節測驗與成績</button>
+   <button class="hbtn" onclick="downloadLog()" title="下載學習紀錄">💾 紀錄</button>
+  </div>
+ </div>
+ <div class="mybar" id="mybar"></div>
+</header>
+
+<main id="main">
+
+<!-- S0 -->
+<section class="stage" id="s0">
+ <div class="shead"><span class="snum">0</span><h2>學習導航＋前測</h2><span class="pg">課本 P86–119</span><span class="smin"></span></div>
+ <div class="goal">🎯 先做 8 題○✕，系統會推薦你<b>先複習哪一段</b>。每段流程：看圖學重點 → 互動實驗 → 明正辨反 → 練習題；答錯的題目自動收進<b>📕 錯題本</b>。</div>
+ <div class="g2">
+  <div class="card"><h3>🗺️ 本章地圖</h3>
+   <div class="cmap" style="grid-template-columns:1fr 1fr">
+    <div class="cbox" style="background:#eaf7ee"><h4>3-1 植物的運輸構造</h4><ul><li>木質部：水、礦物質</li><li>韌皮部：養分</li><li>環狀（有形成層）／散生</li><li>樹皮、木材、年輪</li></ul></div>
+    <div class="cbox" style="background:#e8f2fb"><h4>3-2 植物體內的運輸</h4><ul><li>養分：可上可下</li><li>水分：由下往上</li><li>蒸散作用＝上升動力</li><li>保衛細胞控制氣孔</li></ul></div>
+    <div class="cbox" style="background:#fbeaea"><h4>3-3 人體內的運輸</h4><ul><li>心臟、血管、血液</li><li>體循環、肺循環</li><li>淋巴系統</li></ul></div>
+    <div class="cbox" style="background:#fff7d6"><h4>3-4 人體的防禦</h4><ul><li>①皮膜 ②吞噬、發炎</li><li>③專一性防禦</li><li>疫苗：記憶性</li></ul></div>
+   </div></div>
+  
+ </div>
+ <div class="card"><h3>🩺 前測：對或錯？</h3><div class="oxgrid" id="ox0"></div><div class="result" id="ox0sum" style="margin-top:.6em">（作答後揭曉，系統會推薦你要加強的段落）</div></div>
+</section>
+
+<!-- S1 -->
+<section class="stage" id="s1">
+ <div class="shead"><span class="snum">1</span><h2>3-1 維管束：木質部與韌皮部</h2><span class="pg">課本 P88–89</span><span class="smin"></span></div>
+ <button class="btn alt" type="button" onclick="openUnitTest('3-1')">開始 3-1 小節測驗</button>
+ <div class="goal">🎯 說出<span class="key">木質部</span>與<span class="key">韌皮部</span>各運輸什麼；記住它們在<span class="key">葉（上／下）</span>和<span class="key">莖（內／外）</span>的位置。</div>
+ <div class="g2">
+  
+  <div>
+   <div class="card"><h3>📌 重點</h3>
+    <table class="t"><tr><th></th><th>木質部</th><th>韌皮部</th></tr>
+    <tr><td>運輸</td><td><b>水分、礦物質</b></td><td>光合作用製造的<b>養分</b></td></tr>
+    <tr><td>方向</td><td>由下往上</td><td>可上可下（供應處→需求處）</td></tr>
+    <tr><td>葉脈</td><td><span class="key">上側</span>（近上表皮）</td><td>下側（近下表皮）</td></tr>
+    <tr><td>莖</td><td><span class="key">內側</span></td><td>外側</td></tr>
+    <tr><td>其他</td><td>細胞壁較厚，有<b>支持</b>功能；老化後成為木材</td><td>屬於樹皮的一部分</td></tr></table>
+    <div class="misc">⚠️ 維管束從根、莖一路延伸到葉、花、果實；水果裡的白色絲狀構造就是維管束。</div></div>
+   <div class="card"><h3>🔍 點一點：莖與葉的橫切面</h3>
+    <div class="seg" id="xsSel"><button data-x="stem" class="on">莖（環狀排列）</button><button data-x="leaf">葉脈</button></div>
+    <div class="svgbox"><button class="zbtn" onclick="zoomSvg(this)">⤢ 放大</button><svg id="xsSvg" viewBox="0 0 460 300"></svg></div>
+    <div class="info" id="xsInfo" style="min-height:4em">點圖中的各部位看說明。</div></div>
+  </div>
+ </div>
+ <div class="game" id="g1sort"></div>
+ <div class="card"><h3>⚖️ 明正辨反</h3><div class="oxgrid" id="ox1"></div></div>
+ <div class="card"><h3>✏️ 練習題</h3><div id="q1"></div></div>
+</section>
+
+<!-- S2 -->
+<section class="stage" id="s2">
+ <div class="shead"><span class="snum">2</span><h2>3-1 莖的維管束排列、樹皮與年輪</h2><span class="pg">課本 P90–93</span><span class="smin"></span></div>
+ <button class="btn alt" type="button" onclick="openUnitTest('3-1')">開始 3-1 小節測驗</button>
+ <div class="goal">🎯 分辨<span class="key">環狀排列（有形成層）</span>與<span class="key">散生排列</span>；了解形成層如何讓莖加粗；解釋<span class="key">樹皮、木材、年輪</span>，以及樹皮被環剝為什麼會死。</div>
+ 
+ <div class="g2">
+  <div class="card"><h3>📌 兩種排列</h3>
+   <table class="t"><tr><th></th><th>環狀排列</th><th>散生排列</th></tr>
+   <tr><td>例子</td><td>向日葵、榕樹、朱槿、樹木</td><td>玉米、水稻、竹子、椰子</td></tr>
+   <tr><td>形成層</td><td><span class="key">有</span>（木質部與韌皮部之間）</td><td>通常<span class="key">沒有</span></td></tr>
+   <tr><td>莖加粗</td><td>可以逐年加粗</td><td>不會逐年加粗</td></tr>
+   <tr><td>葉脈</td><td>網狀脈</td><td>平行脈</td></tr></table>
+   <div style="margin-top:.4em">・<b>形成層</b>：細胞分裂，<span class="red">向內</span>產生新木質部、<span class="red">向外</span>產生新韌皮部 → 莖加粗<br>
+   ・由內而外：<span class="key">老木質部 → 新木質部 → 形成層 → 新韌皮部 → 老韌皮部 → 表皮</span><br>
+   ・<b>樹皮</b>＝韌皮部及其外圍；<b>木材</b>＝堆積的（老）木質部<br>
+   ・<b>年輪</b>：春夏細胞<b>大、色淺</b>；秋冬細胞<b>小、色深</b>；四季分明的地方年輪最明顯</div></div>
+  
+ </div>
+ <div class="card"><h3>🌳 年輪產生器</h3>
+  <div class="g2"><div class="svgbox"><button class="zbtn" onclick="zoomSvg(this)">⤢ 放大</button><svg id="ringSvg" viewBox="0 0 420 420"></svg></div>
+   <div>
+    <div>樹齡：<b id="ryv">6</b> 年<input type="range" id="ryr" min="1" max="15" value="6"></div>
+    <div class="seg" id="climSel"><button data-c="temp" class="on">溫帶（四季分明）</button><button data-c="trop">熱帶雨林（終年溫暖多雨）</button></div>
+    <div class="info" id="ringOut"></div></div></div>
+ </div>
+ <div class="g2"><div class="game" id="g2order"></div><div class="game" id="g2girdle"></div></div>
+ <div class="g2">
+  <div class="card"><h3>🐿️ 為什麼「環剝樹皮」會死，「樹幹中空」卻能活？</h3>
+   ・樹皮含<b>韌皮部</b> → 被啃一圈 → 葉製造的養分<b>送不到根</b> → 根細胞缺養分死亡 → 根無法吸水 → 枝葉缺水枯死。<br>
+   ・神木中心是<b>不具運輸功能的老化木質部</b>，外圍仍有新木質部運輸水分 → 中空也能活。</div></div>
+ <div class="game" id="g2sort"></div>
+ <div class="card"><h3>⚖️ 明正辨反</h3><div class="oxgrid" id="ox2"></div></div>
+ <div class="card"><h3>✏️ 練習題</h3><div id="q2"></div></div>
+</section>
+
+<!-- S3 -->
+<section class="stage" id="s3">
+ <div class="shead"><span class="snum">3</span><h2>3-2 植物體內的養分與水分運輸</h2><span class="pg">課本 P94–99</span><span class="smin"></span></div>
+ <button class="btn alt" type="button" onclick="openUnitTest('3-2')">開始 3-2 小節測驗</button>
+ <div class="goal">🎯 描述養分（韌皮部）與水分（木質部）的運輸方向；說明<span class="key">根毛</span>、<span class="key">蒸散作用</span>與<span class="key">保衛細胞</span>的角色。</div>
+
+ <div class="g2">
+  <div class="card"><h3>📌 重點</h3>
+   ・<b>養分</b>（韌皮部）：由供應部位 → 需求或儲存部位，<span class="key">可由上而下，也可由下而上</span>（例：木棉落葉後，春天用根部儲存的養分開花）<br>
+   ・<b>水分＋礦物質</b>（木質部）：<span class="key">由下往上</span>；根毛增加吸收面積，水以<b>滲透作用</b>進入根<br>
+   ・<b>蒸散作用</b>：水變成水蒸氣由<b>氣孔</b>散失 → 把木質部中的水<span class="red">向上拉升</span> → 水分上升的<b>主要動力</b><br>
+   ・<b>氣孔</b>：水蒸氣、氧氣、二氧化碳的通道（<span class="red">不吸收水分</span>）；保衛細胞吸水膨脹 → 張開；失水 → 關閉<br>
+   ・通常白天張開、晚上關閉；乾燥缺水時白天也會關閉</div>
+  
+ </div>
+ <div class="card"><h3>🍃 氣孔開關模擬</h3>
+  <div class="g2"><div class="svgbox"><svg id="stoSvg" viewBox="0 0 420 240"></svg></div>
+   <div><div class="seg" id="stoSel"><button data-s="day" class="on">☀️ 白天水分充足</button><button data-s="night">🌙 夜晚</button><button data-s="dry">🏜️ 白天但乾旱缺水</button></div><div class="info" id="stoOut"></div></div></div>
+ </div>
+ <div class="card"><h3>🧪 芹菜吸水實驗模擬（P95 延伸）</h3>
+  <div class="g2"><div class="svgbox"><svg id="celSvg" viewBox="0 0 520 300"></svg></div>
+   <div>
+    <div><b>甲量筒的芹菜：</b></div>
+    <div class="seg" id="celLeaf"><button data-v="1" class="on">保留葉片</button><button data-v="0">摘除葉片</button></div>
+    <div class="seg" id="celVas"><button data-v="0" class="on">葉背不處理</button><button data-v="1">葉背塗凡士林（堵住氣孔）</button></div>
+    <div class="seg" id="celEnv"><button data-v="1" class="on">通風、有光</button><button data-v="0">無風、陰暗</button></div>
+    <div><b>乙量筒：</b>同樣芹菜但<b>摘除葉片</b>（對照）</div>
+    <button class="btn alt" id="celGo">▶ 開始 30 分鐘實驗</button>
+    <div class="info" id="celOut"></div></div></div>
+ </div>
+ <div class="g2"><div class="game" id="g3order"></div><div class="game" id="g3sort"></div></div>
+ <div class="card"><h3>⚖️ 明正辨反</h3><div class="oxgrid" id="ox3"></div></div>
+ <div class="card"><h3>✏️ 練習題</h3><div id="q3"></div></div>
+ 
+</section>
+
+<!-- S4 -->
+<section class="stage" id="s4">
+ <div class="shead"><span class="snum">4</span><h2>3-3 心臟與血管</h2><span class="pg">課本 P100–103</span><span class="smin"></span></div>
+ <button class="btn alt" type="button" onclick="openUnitTest('3-3')">開始 3-3 小節測驗</button>
+ <div class="goal">🎯 認識心臟四個腔室與相連的血管；比較<span class="key">動脈、微血管、靜脈</span>。</div>
+ <div class="g2">
+  
+  <div class="card"><h3>❤️ 點一點：心臟構造（面對面看）</h3>
+   <div class="svgbox"><button class="zbtn" onclick="zoomSvg(this)">⤢ 放大</button><svg id="heartSvg" viewBox="0 0 520 430"></svg></div>
+   <div class="info" id="heartInfo" style="min-height:4em">點腔室或血管看說明。<br>🖐️ 記法：伸出右手、左手面對自己——課本圖的左側＝人的右心。</div></div>
+ </div>
+ <div class="g2">
+  
+  <div class="card"><h3>📌 三種血管比較（P103 觀念速記）</h3>
+   <table class="t"><tr><th></th><th>動脈</th><th>微血管</th><th>靜脈</th></tr>
+   <tr><td>功能</td><td>把血液<b>帶離</b>心臟</td><td>與組織細胞<b>交換物質</b></td><td>把血液<b>帶回</b>心臟</td></tr>
+   <tr><td>管壁</td><td>最厚、最有彈性</td><td>最薄（一層細胞）</td><td>次之</td></tr>
+   <tr><td>管腔</td><td>次之</td><td>最小</td><td>最大</td></tr>
+   <tr><td>血壓</td><td>最高</td><td>次之</td><td>最低</td></tr>
+   <tr><td>特色</td><td>脈搏</td><td>流速最慢</td><td>部分有瓣膜防逆流</td></tr></table>
+   <div class="misc">⚠️ 動脈血壓高、一破很容易大出血，所以抽血、打針多從<b>靜脈</b>。<br>⚠️ 「動脈」不一定流充氧血（肺動脈流的是缺氧血）！</div></div>
+ </div>
+ 
+ <div class="game" id="g4sort"></div>
+ <div class="card"><h3>⚖️ 明正辨反</h3><div class="oxgrid" id="ox4"></div></div>
+ <div class="card"><h3>✏️ 練習題</h3><div id="q4"></div></div>
+</section>
+
+<!-- S5 -->
+<section class="stage" id="s5">
+ <div class="shead"><span class="snum">5</span><h2>3-3 血液</h2><span class="pg">課本 P104–105</span><span class="smin"></span></div>
+ <button class="btn alt" type="button" onclick="openUnitTest('3-3')">開始 3-3 小節測驗</button>
+ <div class="goal">🎯 說出血液的組成；比較<span class="key">紅血球、白血球、血小板</span>的形狀、大小、細胞核、數量與功能。</div>
+
+ <div class="g2">
+  <div class="card"><h3>🧪 離心後的血液（點各層）</h3>
+   <div class="svgbox"><svg id="tubeSvg" viewBox="0 0 420 330"></svg></div>
+   <div class="info" id="tubeInfo" style="min-height:3em">點試管中的各層。</div></div>
+  <div class="card"><h3>📌 三種血球比較（P105 觀念速記）</h3>
+   <table class="t"><tr><th></th><th>紅血球</th><th>白血球</th><th>血小板</th></tr>
+   <tr><td>形狀</td><td>雙凹圓盤狀</td><td>圓球形（可變形）</td><td>不規則</td></tr>
+   <tr><td>大小</td><td>次之</td><td><b>最大</b></td><td><b>最小</b></td></tr>
+   <tr><td>細胞核</td><td>無</td><td><b>有</b></td><td>無</td></tr>
+   <tr><td>數量</td><td><b>最多</b></td><td><b>最少</b></td><td>次之</td></tr>
+   <tr><td>功能</td><td>含血紅素，<b>攜帶氧氣</b></td><td>吞噬病原體、產生抗體、記憶</td><td>促使<b>血液凝固</b>止血</td></tr></table>
+   <div style="margin-top:.4em">・<b>血漿</b>：主要成分是水，溶有<span class="key">養分、激素、廢物</span>（二氧化碳等）<br>・<span class="red">消化液（胰液、胃液）</span>由消化管道送到消化道，<b>不靠血液運送</b>。</div></div>
+ </div>
+ <div class="game" id="g5sort"></div>
+ <div class="card"><h3>⚖️ 明正辨反</h3><div class="oxgrid" id="ox5"></div></div>
+ <div class="card"><h3>✏️ 練習題</h3><div id="q5"></div></div>
+</section>
+
+<!-- S6 -->
+<section class="stage" id="s6">
+ <div class="shead"><span class="snum">6</span><h2>3-3 血液循環：體循環與肺循環</h2><span class="pg">課本 P106–107</span><span class="smin"></span></div>
+ <button class="btn alt" type="button" onclick="openUnitTest('3-3')">開始 3-3 小節測驗</button>
+ <div class="goal">🎯 依序說出<span class="key">體循環</span>與<span class="key">肺循環</span>的路徑；判斷哪裡是<span class="key">充氧血／缺氧血</span>；描述組織與肺部的氣體交換。</div>
+ <div class="card"><h3>🔁 血液循環動畫（點編號看說明）</h3>
+  <div class="g2"><div class="svgbox"><button class="zbtn" onclick="zoomSvg(this)">⤢ 放大</button><svg id="circSvg" viewBox="0 0 560 470"></svg></div>
+   <div><button class="btn" id="cBody">▶ 體循環（❶→❼）</button><button class="btn alt" id="cLung">▶ 肺循環（❽→⓬）</button><button class="btn ghost" id="cAll">▶ 完整一圈</button>
+    <div class="info" id="circInfo" style="margin-top:.4em">🔴 充氧血（氧氣多）　🔵 缺氧血（二氧化碳多）<br>體循環和肺循環<b>同時進行</b>，在心臟交會。</div></div></div>
+ </div>
+
+ <div class="card"><h3>📌 路徑口訣</h3>
+  <b>體循環</b>：❶左心室 → ❷主動脈 → ❸小動脈 → ❹全身組織微血管（O₂ 給細胞、CO₂ 進血液）→ ❺小靜脈 → ❻上、下大靜脈 → ❼右心房<br>
+  <b>肺循環</b>：❽右心室 → ❾肺動脈 → ❿肺部微血管（CO₂ 到肺泡、O₂ 進血液）→ ⓫肺靜脈 → ⓬左心房<br>
+  <span class="key">左心（左心房、左心室）、主動脈、肺靜脈 → 充氧血</span>；<span class="key">右心、上下大靜脈、肺動脈 → 缺氧血</span>
+  <div class="misc">⚠️ 名稱和血液種類「相反」的兩條：肺動脈流缺氧血、肺靜脈流充氧血。</div></div>
+ <div class="g2"><div class="game" id="g6order1"></div><div class="game" id="g6order2"></div></div>
+ <div class="game" id="g6sort"></div>
+ <div class="card"><h3>⚖️ 明正辨反</h3><div class="oxgrid" id="ox6"></div></div>
+ <div class="card"><h3>✏️ 練習題</h3><div id="q6"></div></div>
+</section>
+
+<!-- S7 -->
+<section class="stage" id="s7">
+ <div class="shead"><span class="snum">7</span><h2>3-3 淋巴系統</h2><span class="pg">課本 P108–109</span><span class="smin"></span></div>
+ <button class="btn alt" type="button" onclick="openUnitTest('3-3')">開始 3-3 小節測驗</button>
+ <div class="goal">🎯 說明<span class="key">血漿 → 組織液 → 淋巴 → 靜脈</span>的流動；知道淋巴結的功能。</div>
+ <div class="g2">
+  <div class="card"><h3>📌 重點</h3>
+   ・人體循環系統＝<b>心血管系統＋淋巴系統</b><br>
+   ・淋巴系統：淋巴器官（<b>淋巴結</b>）、<b>淋巴管</b>、<b>淋巴</b><br>
+   ・血漿的「部分物質」從微血管滲出 → <span class="key">組織液</span> → 滲入淋巴管 → <span class="key">淋巴</span> → 最後注入<span class="key">靜脈</span><br>
+   ・組織液、淋巴<span class="red">不含紅血球</span>（紅血球太大，留在血管內）<br>
+   ・淋巴管有瓣膜防逆流<br>
+   ・功能：維持血液組成恆定；淋巴結過濾病原體與異物，有白血球作用 → 感染時淋巴結腫大（如扁桃腺發炎）
+   <div class="game" id="g7order" style="margin-top:.6em"></div></div></div>
+ <div class="game" id="g7sort"></div>
+ <div class="card"><h3>⚖️ 明正辨反</h3><div class="oxgrid" id="ox7"></div></div>
+ <div class="card"><h3>✏️ 練習題</h3><div id="q7"></div></div>
+</section>
+
+<!-- S8 -->
+<section class="stage" id="s8">
+ <div class="shead"><span class="snum">8</span><h2>3-4 人體的防禦作用與疫苗</h2><span class="pg">課本 P114–117、P124–125</span><span class="smin"></span></div>
+ <button class="btn alt" type="button" onclick="openUnitTest('3-4')">開始 3-4 小節測驗</button>
+ <div class="goal">🎯 分辨三道防禦：<span class="key">①皮膜阻隔 ②吞噬與發炎（非專一性）③專一性防禦</span>；說明疫苗利用<span class="key">記憶性</span>。</div>
+
+ <div class="card"><h3>📌 三道防禦</h3>
+  <table class="t"><tr><th>防禦</th><th>內容</th><th>專一性？</th></tr>
+  <tr><td>① 皮膜的阻隔</td><td>皮膚、黏膜（眼、口、鼻、消化道…）阻擋；淚液、黏液；胃的鹽酸、消化酵素</td><td rowspan="2">❌ 非專一性<br>（對所有病原體）</td></tr>
+  <tr><td>② 吞噬作用與發炎反應</td><td>白血球吞噬病原體；<b>紅、熱、腫、痛</b>使白血球大量聚集</td></tr>
+  <tr><td>③ 專一性防禦</td><td>特殊白血球：破壞被感染的細胞、<b>產生抗體</b>；具<b>記憶性</b></td><td>✅ 專一性<br>（只對特定病原體）</td></tr></table>
+  <div class="misc">⚠️ 胃酸殺菌屬於①皮膜阻隔，不是吞噬作用。⚠️ 吞噬病原體的是白血球，不是紅血球。⚠️ 疫苗是「預防」，不是治療。</div></div>
+ <div class="card"><h3>💉 疫苗防禦強度圖（自己切換）</h3>
+  <div class="g2"><div class="svgbox"><button class="zbtn" onclick="zoomSvg(this)">⤢ 放大</button><svg id="vacSvg" viewBox="0 0 560 300"></svg></div>
+   <div><div class="seg" id="vacSel"><button data-v="no" class="on">沒打疫苗，第一次感染</button><button data-v="yes">先打疫苗，之後感染</button></div><div class="info" id="vacOut"></div></div></div>
+ </div>
+ <div class="game" id="g8sort"></div>
+ <div class="card"><h3>⚖️ 明正辨反</h3><div class="oxgrid" id="ox8"></div></div>
+ <div class="card"><h3>✏️ 練習題</h3><div id="q8"></div></div>
+</section>
+
+<!-- S9 -->
+<section class="stage" id="s9">
+ <div class="shead"><span class="snum">9</span><h2>練習挑戰與錯題本</h2><span class="pg">全章 P86–125</span><span class="smin"></span></div>
+ <div class="goal">在這裡自由練習或重做錯題。要上傳成績，請做「小節測驗與成績」。</div>
+ <div class="card">
+  <div class="seg" id="c9mode"><button data-m="round" class="on">📝 10題闖關</button><button data-m="rapid">⚡ 60秒快問快答</button><button data-m="wrong">📕 錯題本重練</button></div>
+  <div><b>範圍：</b><span class="seg" id="c9unit" style="display:inline-flex"><button data-u="all" class="on">全章</button><button data-u="3-1">3-1</button><button data-u="3-2">3-2</button><button data-u="3-3">3-3</button><button data-u="3-4">3-4</button></span>
+   <b>難度：</b><span class="seg" id="c9lv" style="display:inline-flex"><button data-l="0" class="on">混合</button><button data-l="1">★ 基礎</button><button data-l="2">★★ 進階</button></span></div>
+  <div id="c9area"></div>
+ </div>
+</section>
+
+<!-- S10 -->
+<section class="stage" id="s10">
+ <div class="shead"><span class="snum">10</span><h2>重點整理與自評</h2><span class="pg">課本 P118–119</span><span class="smin"></span></div>
+ <div class="goal">🎯 檢查各小節的易錯觀念，完成自評後可下載自己的學習紀錄。</div>
+ 
+ <div class="g2">
+  <div class="card"><h3>⚠️ 易錯十大</h3><ol class="mis10">
+   <li>葉：木上韌下；莖：木內韌外。</li>
+   <li>樹皮＝韌皮部及其外圍；木材＝老化木質部。</li>
+   <li>形成層：向內生木質部、向外生韌皮部；散生排列（玉米、水稻、竹）沒有。</li>
+   <li>年輪：秋冬細胞小、顏色深；四季分明才明顯。</li>
+   <li>養分可上可下；水分由下往上，動力是蒸散作用。</li>
+   <li>氣孔不吸收水分；保衛細胞吸水 → 氣孔打開。</li>
+   <li>肺動脈流缺氧血、肺靜脈流充氧血。</li>
+   <li>白血球最大、有核；紅血球最多、運氧；血小板最小、凝血。</li>
+   <li>組織液、淋巴不含紅血球；淋巴最後注入靜脈。</li>
+   <li>胃酸＝第一道；發炎、吞噬＝第二道（非專一）；抗體＝第三道（專一、記憶）。</li></ol></div>
+  <div>
+   <div class="card"><h3>✅ 我的自評</h3><ul class="check" id="selfchk"></ul><div id="selfSum" class="result"></div></div>
+   <div class="card"><h3>📈 我的學習成果</h3><div id="finalStat"></div><button class="btn alt" onclick="downloadLog()">💾 下載我的學習紀錄</button><button class="btn ghost" onclick="go(9);setTimeout(()=>$('#c9mode button[data-m=wrong]').click(),50)">📕 去錯題本重練</button></div>
+  </div>
+ </div>
+</section>
+
+<section class="stage" id="s11">
+ <div class="shead"><h2>701 班小節測驗與成績</h2></div>
+ <div class="goal">每小節獨立抽題與計分。交卷後可查看錯題解析，並上傳本小節的成績。</div>
+ <div id="testUnitNav"></div>
+ <div class="card" id="assessment"></div>
+</section>
+<div class="navfoot"><button id="prevStage" class="btn ghost" onclick="go(S.cur-1)">◀ 上一段</button><button id="nextStage" class="btn" onclick="go(S.cur+1)">下一段 ▶</button></div>
+</main>
+
+<div id="viewer" class="overlay"><div id="vwrap"><div id="vinner"></div></div>
+ <div id="vbar"><button onclick="vZoom(1.25)">＋ 放大</button><button onclick="vZoom(0.8)">－ 縮小</button><button onclick="vFit()">⟲ 符合畫面</button><span style="flex:1">滾輪縮放・拖曳移動・Esc 關閉</span><button onclick="closeViewer()">✕ 關閉</button></div></div>
+<div id="toast"></div>
+
+<script>
+"use strict";
+/* ================= utilities ================= */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+function el(tag,attrs,...kids){const e=document.createElement(tag);if(attrs)for(const k in attrs){const v=attrs[k];if(k==='class')e.className=v;else if(k==='html')e.innerHTML=v;else if(k.startsWith('on')&&typeof v==='function')e.addEventListener(k.slice(2),v);else e.setAttribute(k,v);}kids.flat().forEach(c=>{if(c!=null)e.append(c.nodeType?c:document.createTextNode(String(c)));});return e;}
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const fmt=(x,d=1)=>{const r=Math.round(x*10**d)/10**d;return Number.isInteger(r)?String(r):r.toFixed(d);};
+function toast(t){const x=$('#toast');x.textContent=t;x.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>x.classList.remove('show'),1600);}
+let uidN=0;const uid=()=>'u'+(++uidN);
+
+/* ================= roster & state ================= */
+const S={who:'訪客',pts:0,ans:0,right:0,wrong:new Set(),log:[],cur:0,zoom:0,ctime:90,autoT:true,seen:new Set(),best:0,ox:[0,0]};
+const STAGES=[{name:'導航前測',min:5},{name:'維管束',min:10},{name:'莖與年輪',min:12},{name:'水分養分運輸',min:13},{name:'心臟血管',min:12},{name:'血液',min:8},{name:'血液循環',min:13},{name:'淋巴',min:8},{name:'防禦作用',min:13},{name:'總挑戰',min:12},{name:'重點自評',min:5},{name:'小節測驗',min:0}];
+const BASE_SUM=STAGES.reduce((a,b)=>a+b.min,0);
+function stageMin(i){const m=STAGES[i].min;if(!m||!S.ctime)return m;return Math.max(3,Math.min(15,Math.round(m*S.ctime/BASE_SUM)));}
+function logIt(t){const d=new Date();S.log.push(`[${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}:${String(d.getSeconds()).padStart(2,'0')}] 階段${S.cur}｜${t}`);}
+
+/* ================= personal score ================= */
+function addPts(n,why){S.pts+=n;logIt(`${n>0?'+':''}${n} 分（${why}）`);renderMe(true);if(n>0)toast(`⭐ +${n}（${why}）`);}
+function renderMe(bump){const b=$('#mybar');if(!b)return;const rate=S.ans?Math.round(S.right/S.ans*100):0;
+ b.innerHTML=`<span class="me">👤 ${S.who}</span><span class="mchip${bump?' bump':''}">⭐ 積分 <b>${S.pts}</b></span><span class="mchip">✏️ 作答 <b>${S.right}</b>／${S.ans}（${rate}%）</span><span class="mchip">⚖️ 明正辨反 <b>${S.ox[0]}</b>／${S.ox[1]}</span><button class="mchip wbtn" onclick="go(9);setTimeout(()=>$('#c9mode button[data-m=wrong]').click(),50)">📕 錯題本 <b>${S.wrong.size}</b></button><span class="mchip">🏅 快問快答最佳 <b>${S.best}</b></span>`;
+ const fs=$('#finalStat');if(fs)fs.innerHTML=`<table class="t"><tr><th>積分</th><th>答對率</th><th>明正辨反</th><th>錯題本</th><th>已瀏覽段落</th></tr><tr><td class="red">${S.pts}</td><td>${S.right}／${S.ans}（${rate}%）</td><td>${S.ox[0]}／${S.ox[1]}</td><td>${S.wrong.size} 題待重練</td><td>${S.seen.size}／${STAGES.length}</td></tr></table>`;}
+
+/* ================= timer ================= */
+const T={left:60,set:60,run:false,iv:null};let actx=null;
+function beep(){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();[0,0.35,0.7].forEach(dt=>{const o=actx.createOscillator(),g=actx.createGain();o.frequency.value=880;o.connect(g);g.connect(actx.destination);g.gain.setValueAtTime(0.2,actx.currentTime+dt);g.gain.exponentialRampToValueAtTime(0.001,actx.currentTime+dt+0.3);o.start(actx.currentTime+dt);o.stop(actx.currentTime+dt+0.3);});}catch(e){}}
+function tRender(){const d=$('#tdisp');const a=Math.abs(T.left);d.textContent=(T.left<0?'-':'')+Math.floor(a/60)+':'+String(a%60).padStart(2,'0');d.className=T.left<=0&&(T.run||T.left<0)?'over':(T.run?((T.left<=10||T.left<=T.set*0.2)?'warn':'run'):'');}
+function tTick(){T.left--;if(T.left===0){beep();toast('⏰ 本段建議時間到！');}tRender();}
+function tToggle(){T.run=!T.run;clearInterval(T.iv);if(T.run)T.iv=setInterval(tTick,1000);$('#tplay').textContent=T.run?'⏸':'▶';tRender();}
+function tAdj(d){T.left=Math.max(0,T.left+d);if(!T.run)T.set=T.left;tRender();}
+function tSet(sec){T.left=T.set=sec;tRender();}
+function tReset(){T.left=T.set;tRender();}
+
+/* ================= zoom / teacher / viewer ================= */
+const ZL=[1,1.15,1.3,1.5,1.75];
+function cycleZoom(){S.zoom=(S.zoom+1)%5;document.documentElement.style.setProperty('--zoom',ZL[S.zoom]);document.body.dataset.z=S.zoom;$('#zbtn').textContent='🔠 字級 '+(S.zoom+1);}
+const V={s:1,x:0,y:0,drag:null,w:0,h:0};
+function openViewer(node){const inner=$('#vinner');inner.innerHTML='';let c;
+ if(node.tagName==='IMG'){c=el('img',{src:node.src});c.onload=()=>{V.w=c.naturalWidth;V.h=c.naturalHeight;vFit();};}
+ else{c=node.cloneNode(true);c.removeAttribute('id');const vb=(node.getAttribute('viewBox')||'0 0 800 600').split(/\s+/).map(Number);V.w=1200;V.h=1200*vb[3]/vb[2];c.setAttribute('width',V.w);c.setAttribute('height',V.h);}
+ inner.append(c);$('#viewer').classList.add('show');if(node.tagName!=='IMG')vFit();if(c.complete&&c.naturalWidth){V.w=c.naturalWidth;V.h=c.naturalHeight;vFit();}}
+function vApply(){$('#vinner').style.transform=`translate(${V.x}px,${V.y}px) scale(${V.s})`;}
+function vFit(){const w=$('#vwrap');const W=w.clientWidth||window.innerWidth,H=w.clientHeight||window.innerHeight-60;V.s=Math.min(W/V.w,H/V.h)*0.95;V.x=-V.w*V.s/2;V.y=-V.h*V.s/2;vApply();}
+function vZoom(f){V.x*=f;V.y*=f;V.s*=f;vApply();}
+function closeViewer(){$('#viewer').classList.remove('show');}
+function zoomSvg(btn){const svg=btn.parentElement.querySelector('svg');if(svg)openViewer(svg);}
+(function(){const w=$('#vwrap');
+ w.addEventListener('wheel',e=>{e.preventDefault();vZoom(e.deltaY<0?1.15:0.87);},{passive:false});
+ w.addEventListener('pointerdown',e=>{V.drag={x:e.clientX,y:e.clientY,ox:V.x,oy:V.y};w.setPointerCapture(e.pointerId);});
+ w.addEventListener('pointermove',e=>{if(!V.drag)return;V.x=V.drag.ox+e.clientX-V.drag.x;V.y=V.drag.oy+e.clientY-V.drag.y;vApply();});
+ w.addEventListener('pointerup',()=>{V.drag=null;});})();
+
+/* ================= navigation ================= */
+function buildDots(){const d=$('#dots');d.innerHTML='';STAGES.forEach((s,i)=>d.append(el('button',{class:'dot',title:stageMin(i)?`建議 ${stageMin(i)} 分鐘`:s.name,onclick:()=>go(i)},s.name)));}
+function go(i){if(i<0||i>=STAGES.length)return;S.cur=i;S.seen.add(i);
+ $$('.stage').forEach((s,k)=>s.classList.toggle('on',k===i));
+ $$('.dot').forEach((d,k)=>{d.classList.toggle('on',k===i);d.classList.toggle('seen',S.seen.has(k)&&k!==i);});
+ $('#prevStage').disabled=i===0;$('#nextStage').disabled=i===STAGES.length-1;
+ if(S.autoT&&stageMin(i)){tSet(stageMin(i)*60);if(T.run)tToggle();}
+ window.scrollTo(0,0);logIt(`進入階段 ${i}：${STAGES[i].name}`);renderMe();}
+function fillMins(){$$('.stage').forEach((s,i)=>{const m=s.querySelector('.smin');if(!m)return;m.innerHTML='';m.append(`⏱ 建議 ${stageMin(i)} 分鐘`,el('button',{onclick:()=>{tSet(stageMin(i)*60);if(!T.run)tToggle();}},'開始計時'));});}
+function scafNext(btn){const lis=[...btn.parentElement.querySelectorAll('li')];const n=lis.find(l=>!l.classList.contains('show'));if(n){n.classList.add('show');logIt('查看鷹架提示');}if(!lis.find(l=>!l.classList.contains('show'))){btn.textContent='✅ 提示已全部顯示';btn.disabled=true;}}
+
+/* ================= OX cards ================= */
+function oxCards(box,list,opt){opt=opt||{};box.innerHTML='';
+ list.forEach((it,idx)=>{const c=el('div',{class:'ox'});
+  const rv=el('div',{class:'rv'});
+  const answer=p=>{if(c.classList.contains('done'))return;c.classList.add('done',p===it.t?'ok':'ng');bO.disabled=bX.disabled=true;(p?bO:bX).classList.add('pick');
+   S.ox[1]++;if(p===it.t){S.ox[0]++;addPts(1,'明正辨反');}renderMe();
+   rv.innerHTML=`<b>${it.t?'○ 正確':'✕ 錯誤'}</b>　${p===it.t?'👍 判斷正確':'😮 判斷錯誤'}<br>${it.t?'📌 ':'<span class="fix">🔧 改正：</span>'}${it.e}`;
+   logIt(`明正辨反「${it.s.slice(0,16)}…」${p===it.t?'對':'錯'}`);if(opt.onAns)opt.onAns(idx,p===it.t);};
+  const bO=el('button',{onclick:()=>answer(true)},'○ 對'),bX=el('button',{onclick:()=>answer(false)},'✕ 錯');
+  c.append(el('div',{class:'st'},(opt.num?`${idx+1}. `:'')+it.s),el('div',{class:'ob'},bO,bX),rv);box.append(c);});}
+
+/* ================= quiz engine ================= */
+let posBag=[];
+function nextPos(n){if(!posBag.length)posBag=shuffle([0,1,2,3,0,1,2,3]);return posBag.pop()%n;}
+function arrange(q){const p=nextPos(q.o.length);const wrong=shuffle(q.o.filter((_,i)=>i!==q.a));wrong.splice(p,0,q.o[q.a]);return {opts:wrong,ans:p};}
+function renderQ(box,q,cfg){cfg=cfg||{};const {opts,ans}=arrange(q);const L='ABCD';
+ const card=el('div',{class:'qcard'});
+ card.append(el('div',{class:'qtag'},`${q.u}｜課本 P${q.p}｜${q.lv===2?'★★ 進階（+2）':'★ 基礎（+1）'}${S.wrong.has(q.id)?'｜📕 錯題本':''}`));
+ card.append(el('div',{class:'qtext'},(cfg.num?cfg.num+'. ':'')+q.q));
+ const ol=el('div',{class:'opts'});let done=false;const exp=el('div',{class:'exp hidden'});
+ opts.forEach((t,i)=>{const b=el('button',{class:'opt'},el('b',null,`(${L[i]}) `),t);
+  b.onclick=()=>{if(done)return;done=true;const ok=i===ans;b.classList.add(ok?'right':'wrong');ol.children[ans].classList.add('right');
+   S.ans++;if(ok){S.right++;S.wrong.delete(q.id);if(!cfg.noPts)addPts(q.lv,'答題');}else{S.wrong.add(q.id);}renderMe();
+   exp.classList.remove('hidden');exp.innerHTML=`<div class="${ok?'okline':'badline'}">${ok?'✅ 答對了！':'❌ 正確答案是 ('+L[ans]+')　已收進📕錯題本'}</div><div>📌 <b>解析：</b>${q.e}</div>${q.m?`<div class="misc">⚠️ <b>迷思提醒：</b>${q.m}</div>`:''}`;
+   logIt(`作答「${q.q.slice(0,22)}…」${ok?'正確':'錯誤'}`);if(cfg.onAns)cfg.onAns(ok);};
+  ol.append(b);});
+ card.append(ol);
+ if(q.h){const hb=el('button',{class:'hintbtn'},'🪜 鷹架提示');const hx=el('div',{class:'hintbox hidden'},'💡 '+q.h);hb.onclick=()=>{hx.classList.remove('hidden');hb.remove();logIt('使用鷹架提示');};card.append(hb,hx);}
+ card.append(exp);box.append(card);return card;}
+function renderQSet(box,list){box.innerHTML='';list.forEach((q,i)=>renderQ(box,q,{num:i+1}));}
+
+/* ================= games ================= */
+function gameClock(){let t0=0,iv=null,pen=0;const d=el('span',{class:'gclock'},'0.0 秒');
+ return {node:d,start(){t0=Date.now();pen=0;clearInterval(iv);iv=setInterval(()=>{d.textContent=((Date.now()-t0)/1000+pen).toFixed(1)+' 秒';},100);},stop(){clearInterval(iv);return (Date.now()-t0)/1000+pen;},penal(s){pen+=s;},get pen(){return pen;}};}
+function sortGame(box,cfg){
+ box.innerHTML='';const clk=gameClock();let sel=null,left=0,started=false,wrong=0;
+ const tip=el('div',{class:'tip'});const pool=el('div',{class:'pool'});
+ const bins=el('div',{class:'bins',style:`grid-template-columns:repeat(${Math.min(cfg.bins.length,4)},1fr)`});
+ const res=el('div',{class:'result hidden'});const startB=el('button',{class:'btn'},'▶ 開始計時');
+ box.append(el('h3',{style:'margin:.1em 0 .3em;color:#7a3416'},cfg.title),el('div',{class:'gbar'},startB,clk.node,el('span',{style:'font-size:.85em;color:#666'},'點一張卡片，再點正確的框。答錯加罰 5 秒。'),el('button',{class:'btn ghost sm',onclick:()=>sortGame(box,cfg)},'↺ 重來')),pool,bins,tip,res);
+ cfg.bins.forEach(b=>{const be=el('div',{class:'bin'},el('h5',null,b.label));be.onclick=()=>place(b.k,be);bins.append(be);});
+ const begin=()=>{if(started)return;started=true;clk.start();startB.disabled=true;};startB.onclick=begin;
+ shuffle(cfg.cards).forEach(cd=>{left++;const c=el('button',{class:'chip'},cd.t);c._d=cd;c.onclick=()=>{if(c.classList.contains('good'))return;begin();$$('.chip.sel').forEach(x=>x.classList.remove('sel'));sel=c;c.classList.add('sel');};pool.append(c);});
+ function place(k,be){if(!sel)return;const cd=sel._d;
+  if(cd.k===k){sel.classList.remove('sel');sel.classList.add('good');be.append(sel);tip.textContent=cd.w?'✅ '+cd.w:'✅ 正確！';sel=null;left--;
+   if(left===0){const t=clk.stop();const p=wrong===0?3:wrong<=2?2:1;res.classList.remove('hidden');res.innerHTML=`🎉 完成！時間 <span class="rfbig">${t.toFixed(1)}</span> 秒（答錯 ${wrong} 次）　獲得 ⭐+${p}`;addPts(p,cfg.title);logIt(`${cfg.title} 完成 ${t.toFixed(1)} 秒，錯 ${wrong}`);}}
+  else{wrong++;clk.penal(5);const s=sel;s.classList.add('bad');be.classList.add('flash');setTimeout(()=>{s.classList.remove('bad');be.classList.remove('flash');},450);tip.textContent='❌ 再想想：'+(cd.hint||cd.w||'');}}}
+function orderGame(box,cfg){
+ box.innerHTML='';const tip=el('div',{class:'tip'});const pool=el('div',{class:'pool'});const ans=el('div',{class:'ansrow'});const res=el('div',{class:'result hidden'});let tries=0,won=false;
+ box.append(el('h3',{style:'margin:.1em 0 .3em;color:#7a3416'},cfg.title),el('div',{style:'font-size:.9em'},cfg.prompt),pool,el('div',{style:'font-size:.85em;color:#1e6f8c'},'👇 你的順序（點已選的可退回）'),ans,
+  el('div',null,el('button',{class:'btn alt',onclick:check},'✔ 檢查'),el('button',{class:'btn ghost',onclick:()=>orderGame(box,cfg)},'↺ 重來')),tip,res);
+ shuffle(cfg.items).forEach(t=>{const c=el('button',{class:'chip'},t);c.onclick=()=>{if(won)return;if(c.parentElement===pool)ans.append(c);else pool.append(c);renum();};pool.append(c);});
+ function renum(){[...ans.children].forEach((c,i)=>{c.querySelector('.n')?.remove();c.prepend(el('span',{class:'n'},i+1));});[...pool.children].forEach(c=>c.querySelector('.n')?.remove());}
+ function check(){if(won)return;const got=[...ans.children].map(c=>c.textContent.replace(/^\d+/,''));
+  if(got.length<cfg.items.length){tip.textContent='還有項目沒排喔！';return;}tries++;
+  let ok=0;[...ans.children].forEach((c,i)=>{const r=got[i]===cfg.items[i];c.classList.toggle('good',r);c.classList.toggle('bad',!r);if(r)ok++;});
+  if(ok===cfg.items.length){won=true;const p=tries===1?2:1;res.classList.remove('hidden');res.innerHTML=`🎉 全對！⭐+${p}　`+(cfg.done||'');addPts(p,cfg.title);tip.textContent='';}
+  else tip.textContent=`對了 ${ok}／${cfg.items.length} 個位置。`+(cfg.hint?'提示：'+cfg.hint:'');logIt(`${cfg.title} 對 ${ok}`);}}
+/* numeric practice generator */
+function calcGame(box,cfg){box.innerHTML='';let P=cfg.gen(),tries=0;
+ const qd=el('div',{class:'qtext'});const inp=el('input',{type:'number',step:'any',style:'width:7em;font-size:1em'});const unit=el('span');const out=el('div',{class:'tip',style:'font-size:1em'});
+ const load=()=>{P=cfg.gen();tries=0;qd.innerHTML=P.q;unit.textContent=' '+P.unit;inp.value='';out.innerHTML='';};
+ const check=()=>{const v=parseFloat(inp.value);if(isNaN(v)){out.textContent='請先輸入數字';return;}tries++;const ok=Math.abs(v-P.ans)<=(P.tol||0.01)*Math.max(1,Math.abs(P.ans));
+  if(ok){const p=tries===1?2:1;out.innerHTML=`✅ 正確！⭐+${p}<br>📐 ${P.steps}`;addPts(p,cfg.title);logIt(`${cfg.title} 正確`);}
+  else{out.innerHTML=`❌ 再試一次！💡 ${P.hint||'先寫出公式，再代入數字。'}`;logIt(`${cfg.title} 錯誤`);}};
+ inp.addEventListener('keydown',e=>{if(e.key==='Enter')check();});
+ box.append(el('h3',{style:'margin:.1em 0 .3em;color:#7a3416'},'🧮 '+cfg.title+'（隨機出題）'),qd,el('div',null,inp,unit,' ',el('button',{class:'btn sm',onclick:check},'檢查'),el('button',{class:'btn sm ghost',onclick:()=>{out.innerHTML='📐 '+P.steps;logIt(cfg.title+' 看解法');}},'看解法'),el('button',{class:'btn sm alt',onclick:load},'換一題')),out);load();}
+
+/* ================= OX lists ================= */
+const OX={
+ s0:[{s:'植物的木質部負責運輸光合作用製造的養分。',t:false,e:'木質部運輸<b>水分和礦物質</b>；養分由<b>韌皮部</b>運輸。',go:1},
+  {s:'玉米、水稻的莖內維管束為散生排列，通常沒有形成層。',t:true,e:'所以它們的莖不會逐年加粗。',go:2},
+  {s:'蒸散作用是植物體內水分向上運輸的主要動力。',t:true,e:'水由氣孔散失，把木質部中的水向上拉升。',go:3},
+  {s:'肺動脈內流的是充氧血。',t:false,e:'肺動脈把<b>缺氧血</b>從右心室送到肺。',go:4},
+  {s:'血小板是體積最大的血球。',t:false,e:'體積最大的是<b>白血球</b>；血小板最小。',go:5},
+  {s:'體循環的起點是左心室。',t:true,e:'左心室 → 主動脈 → 全身。',go:6},
+  {s:'淋巴中含有大量紅血球。',t:false,e:'組織液、淋巴<b>不含紅血球</b>。',go:7},
+  {s:'疫苗的原理是利用專一性防禦的記憶性。',t:true,e:'再次遇到相同病原體時反應更快、更強。',go:8}],
+ s1:[{s:'葉脈中的木質部位在上側，靠近上表皮。',t:true,e:'葉：木上韌下。'},
+  {s:'莖內的維管束中，木質部在外側。',t:false,e:'莖：木質部在<b>內側</b>、韌皮部在外側。'},
+  {s:'韌皮部的細胞壁較厚，具有支持植物的功能。',t:false,e:'細胞壁較厚、有支持功能的是<b>木質部</b>。'},
+  {s:'把芹菜葉柄插在紅色溶液中，被染紅的是木質部。',t:true,e:'紅色溶液隨水分在木質部向上運輸。'},
+  {s:'維管束只存在於莖中。',t:false,e:'維管束從根、莖<b>延伸到葉、花和果實</b>。'}],
+ s2:[{s:'形成層向內產生新的木質部，向外產生新的韌皮部。',t:true,e:'所以莖能不斷加粗。'},
+  {s:'樹皮只包含最外層的表皮。',t:false,e:'樹皮包含<b>韌皮部及其外圍構造</b>。'},
+  {s:'木材主要是由韌皮部堆積而成。',t:false,e:'木材是逐年堆積的<b>木質部</b>。'},
+  {s:'秋冬長出的木質部細胞較小、顏色較深。',t:true,e:'氣候寒冷乾燥，生長慢。'},
+  {s:'終年炎熱多雨的熱帶雨林，樹木的年輪特別明顯。',t:false,e:'四季分明（溫帶）才有明顯的深淺對比；熱帶年輪較不明顯。'},
+  {s:'神木的樹幹中空仍能存活，因為中心是不具運輸功能的老化木質部。',t:true,e:'外圍的新木質部仍能運輸水分。'}],
+ s3:[{s:'氣孔可以從空氣中吸收水分。',t:false,e:'水分由<b>根</b>吸收；氣孔是水蒸氣散失和氣體進出的通道。'},
+  {s:'保衛細胞吸水膨脹時，氣孔會張開。',t:true,e:'失水時氣孔關閉。'},
+  {s:'乾旱缺水時，即使在白天，氣孔也可能關閉。',t:true,e:'減少水分散失，避免失水過多。'},
+  {s:'植物體內的養分只能由上往下運輸。',t:false,e:'養分由供應處送到需求處，<b>可上可下</b>。'},
+  {s:'根毛可以增加根吸收水分的表面積。',t:true,e:'根毛是根部表皮細胞向外突出形成。'},
+  {s:'晚上氣孔通常關閉，所以夜晚的蒸散作用比白天旺盛。',t:false,e:'氣孔白天張開，<b>白天</b>蒸散作用較旺盛。'}],
+ s4:[{s:'心臟的四個腔室中，上方是心室，下方是心房。',t:false,e:'上方是<b>心房</b>、下方是<b>心室</b>。'},
+  {s:'心臟瓣膜可以防止血液逆流。',t:true,e:'心房與心室間、心室與動脈間都有瓣膜。'},
+  {s:'動脈的管壁比靜脈厚，且富有彈性。',t:true,e:'動脈直接承受心臟擠出的血液，血壓最高。'},
+  {s:'微血管的管壁很厚，所以不能進行物質交換。',t:false,e:'微血管管壁只有<b>一層細胞</b>，有利物質交換。'},
+  {s:'所有的動脈內都流著充氧血。',t:false,e:'<b>肺動脈</b>流的是缺氧血。'}],
+ s5:[{s:'血液經分離後，上層是血球，下層是血漿。',t:false,e:'上層是<b>血漿</b>，下層是血球。'},
+  {s:'紅血球含有血紅素，可以攜帶氧氣。',t:true,e:'紅血球數量最多、無細胞核。'},
+  {s:'紅血球具有細胞核。',t:false,e:'只有<b>白血球</b>有細胞核。'},
+  {s:'血小板可以吞噬病原體。',t:false,e:'吞噬病原體的是<b>白血球</b>；血小板促使血液凝固。'},
+  {s:'血漿中溶有養分、激素和代謝廢物。',t:true,e:'血漿主要成分是水。'}],
+ s6:[{s:'肺靜脈把充氧血送回左心房。',t:true,e:'⓫肺靜脈 → ⓬左心房。'},
+  {s:'右心室把血液送到全身各處。',t:false,e:'右心室把血送到<b>肺</b>（肺循環）；送到全身的是<b>左心室</b>。'},
+  {s:'在組織微血管處，氧氣由血液擴散進入組織細胞。',t:true,e:'二氧化碳則由細胞擴散進入血液。'},
+  {s:'體循環和肺循環是輪流進行，不會同時發生。',t:false,e:'兩者<b>同時進行</b>，在心臟交會。'},
+  {s:'從手臂靜脈注射的藥物，會最先到達右心房。',t:true,e:'靜脈 → 上大靜脈 → 右心房。'}],
+ s7:[{s:'組織液滲入淋巴管後，就稱為淋巴。',t:true,e:'血漿 → 組織液 → 淋巴。'},
+  {s:'淋巴最後會注入動脈。',t:false,e:'淋巴最後注入<b>靜脈</b>，回到血液循環。'},
+  {s:'淋巴結可以過濾病原體與異物。',t:true,e:'感染時附近淋巴結可能腫大。'},
+  {s:'組織液就是全部的血液從微血管流出。',t:false,e:'只有血漿的<b>部分物質</b>滲出，紅血球不會。'},
+  {s:'淋巴系統有助於維持血液組成的恆定。',t:true,e:'並在防禦機制上很重要。'}],
+ s8:[{s:'胃分泌的鹽酸可以殺死細菌，屬於第一道防禦。',t:true,e:'消化道的酵素、鹽酸屬於皮膜阻隔。'},
+  {s:'發炎反應屬於專一性防禦作用。',t:false,e:'發炎反應屬於<b>非專一性</b>（第二道）。'},
+  {s:'吞噬病原體的是紅血球。',t:false,e:'吞噬病原體的是<b>白血球</b>。'},
+  {s:'對流感病毒產生的抗體，也能對抗其他所有病毒。',t:false,e:'專一性防禦只對<b>特定</b>病原體有效。'},
+  {s:'注射疫苗的主要目的是預防疾病，而不是治療。',t:true,e:'利用記憶性，再感染時反應快又強。'},
+  {s:'抗生素對病毒造成的疾病無效。',t:true,e:'抗生素用於細菌性感染（P125）。'}]};
+
+/* ================= question bank (all newly written) ================= */
+const BANK=[
+ {g:'s1',u:'3-1',p:'88',lv:1,q:'植物維管束中，負責運輸水分和礦物質的構造是？',o:['木質部','韌皮部','形成層','表皮'],a:0,e:'木質部運輸水分與礦物質；韌皮部運輸養分。'},
+ {g:'s1',u:'3-1',p:'88',lv:1,q:'葉片進行光合作用製造的養分，主要由哪一構造運輸到植物其他部位？',o:['韌皮部','木質部','氣孔','根毛'],a:0,e:'韌皮部運輸光合作用製造的養分。'},
+ {g:'s1',u:'3-1',p:'88–89',lv:1,q:'葉脈中木質部和韌皮部的位置關係為何？',o:['木質部在上側，韌皮部在下側','木質部在下側，韌皮部在上側','木質部在外側，韌皮部在內側','兩者混在一起，沒有固定位置'],a:0,e:'葉：木上韌下（木質部靠近上表皮）。',m:'不要和莖（木內韌外）搞混。'},
+ {g:'s1',u:'3-1',p:'89',lv:1,q:'在莖的維管束中，木質部通常位於哪裡？',o:['內側','外側','表皮上','與韌皮部重疊'],a:0,e:'莖：木內韌外。'},
+ {g:'s1',u:'3-1',p:'88',lv:2,q:'槲寄生會把特殊構造插入寄主樹木的莖中，吸取寄主的「水分與礦物質」。這個構造應該插到寄主的哪一部位？',o:['木質部','韌皮部','形成層','樹皮最外層'],a:0,e:'水分與礦物質在木質部中運輸。',h:'先想：它要的是「水」還是「養分」？'},
+ {g:'s1',u:'3-1',p:'94',lv:1,q:'吃香蕉、橘子時看到的白色絲狀構造，其實是什麼？',o:['維管束','根毛','氣孔','形成層'],a:0,e:'與果蒂相連的白色絲狀構造就是果實內的維管束（P97）。'},
+ {g:'s2',u:'3-1',p:'90–91',lv:2,q:'下列哪一組植物的莖內維管束都是散生排列？',o:['玉米、水稻','向日葵、榕樹','玉米、向日葵','榕樹、水稻'],a:0,e:'散生：玉米、水稻、竹子；環狀：向日葵、榕樹。'},
+ {g:'s2',u:'3-1',p:'91',lv:1,q:'形成層的主要功能是？',o:['細胞分裂，向內產生木質部、向外產生韌皮部，使莖加粗','運輸水分到葉片','運輸養分到根部','保護莖免受病蟲害'],a:0,e:'形成層位於木質部與韌皮部之間。'},
+ {g:'s2',u:'3-1',p:'91–92',lv:2,q:'具有形成層的木本植物，莖由中心向外的構造排列順序為何？',o:['木質部 → 形成層 → 韌皮部 → 表皮','韌皮部 → 形成層 → 木質部 → 表皮','形成層 → 木質部 → 韌皮部 → 表皮','木質部 → 韌皮部 → 形成層 → 表皮'],a:0,e:'形成層夾在木質部（內）與韌皮部（外）之間。'},
+ {g:'s2',u:'3-1',p:'92',lv:1,q:'書桌、椅子等木製品，主要是樹木的哪一部分？',o:['逐年堆積的木質部','韌皮部','形成層','表皮'],a:0,e:'木材＝形成層內側逐年堆積的木質部。'},
+ {g:'s2',u:'3-1',p:'92',lv:1,q:'「樹皮」包含哪些部分？',o:['韌皮部及其外圍的構造','木質部及其外圍的構造','只有表皮','形成層以內的部分'],a:0,e:'樹皮是樹幹的保護層，包含韌皮部。'},
+ {g:'s2',u:'3-1',p:'92',lv:2,q:'觀察年輪時，顏色較深、細胞較小的部分是在什麼時候形成的？',o:['秋、冬','春、夏','每天晚上','只在雨季'],a:0,e:'秋冬寒冷乾燥，生長慢 → 細胞小、色深；春夏 → 細胞大、色淺。'},
+ {g:'s2',u:'3-1',p:'92',lv:2,q:'下列哪一個地方的樹木，年輪最「不」明顯？',o:['終年溫暖多雨的熱帶雨林','四季分明的溫帶森林','冬季寒冷的溫帶山區','春夏多雨、秋冬乾冷的地區'],a:0,e:'終年氣候差異小，木質部細胞大小差異不明顯。'},
+ {g:'s2',u:'3-1',p:'92',lv:2,q:'某棵溫帶樹木樹幹的橫切面上，可數出 12 組深淺交替的環紋，推測這棵樹大約幾歲？',o:['約 12 歲','約 24 歲','約 6 歲','無法推測'],a:0,e:'一組深淺環紋（一圈年輪）約代表一年。',m:'一深一淺合起來才是一年，不是兩年。'},
+ {g:'s2',u:'3-1',p:'93',lv:2,q:'松鼠把樹皮啃食一圈後，樹木逐漸死亡。最主要的原因是？',o:['韌皮部被破壞，養分無法送到根部，根死亡後無法吸水','木質部被破壞，水分立刻無法上升','形成層被破壞，樹木無法長高','表皮被破壞，樹木失去保護而凍死'],a:0,e:'先是養分運送受阻 → 根細胞死亡 → 水分運送受阻 → 葉細胞死亡。'},
+ {g:'s2',u:'3-1',p:'91',lv:2,q:'竹子的莖無法像榕樹一樣逐年變粗，主要原因是？',o:['維管束散生排列，沒有形成層','沒有木質部','沒有韌皮部','葉子是平行脈所以長不粗'],a:0,e:'形成層能分裂使莖加粗；散生排列的植物通常沒有形成層。'},
+ {g:'s3',u:'3-2',p:'96',lv:1,q:'根毛的主要功能是？',o:['增加吸收水分與礦物質的表面積','進行光合作用','儲存大量養分','固定植物不倒'],a:0,e:'根毛是根部表皮細胞向外突出形成。'},
+ {g:'s3',u:'3-2',p:'96–97',lv:1,q:'高大樹木能把水分從根送到樹頂，主要動力來自？',o:['蒸散作用','光合作用','呼吸作用','地心引力'],a:0,e:'水分由氣孔蒸散，把木質部中的水不斷向上拉升。'},
+ {g:'s3',u:'3-2',p:'97',lv:1,q:'控制氣孔張開與關閉的細胞是？',o:['保衛細胞','根毛細胞','形成層細胞','表皮細胞中的葉肉細胞'],a:0,e:'兩個保衛細胞包圍一個氣孔。'},
+ {g:'s3',u:'3-2',p:'97',lv:2,q:'當保衛細胞吸水而膨脹時，會發生什麼事？',o:['保衛細胞彎曲，氣孔張開','保衛細胞變直，氣孔關閉','氣孔消失','葉片停止所有活動'],a:0,e:'吸水 → 膨脹彎曲 → 氣孔張開；失水 → 氣孔關閉。'},
+ {g:'s3',u:'3-2',p:'97',lv:2,q:'連續多日乾旱、土壤缺水時，植物在中午的氣孔最可能？',o:['關閉，以減少水分散失','全部張開，加快蒸散','張開，以吸收空氣中的水分','只在下表皮張開'],a:0,e:'缺水時即使白天也會關閉氣孔，避免失水過多。',m:'氣孔不會吸收空氣中的水分。'},
+ {g:'s3',u:'3-2',p:'97',lv:1,q:'下列何者「不是」經由氣孔進出葉片的物質？',o:['礦物質','水蒸氣','二氧化碳','氧氣'],a:0,e:'礦物質由根吸收，經木質部運輸。'},
+ {g:'s3',u:'3-2',p:'94',lv:2,q:'木棉秋冬落葉，隔年初春還沒長新葉就先開花。開花所需的養分最可能來自？',o:['根部儲存的養分，經韌皮部向上運輸','花朵自己進行光合作用','根從土壤吸收的葡萄糖','木質部運來的水分'],a:0,e:'葉片製造的養分部分送到根部儲存，春天再經韌皮部向上運輸。',m:'根不會從土壤吸收葡萄糖。'},
+ {g:'s3',u:'3-2',p:'94',lv:2,q:'關於養分在韌皮部中的運輸方向，下列何者正確？',o:['由供應部位送到需求部位，可上可下','只能由上往下','只能由下往上','只能在葉片中移動'],a:0,e:'養分運輸方向取決於哪裡供應、哪裡需要。'},
+ {g:'s3',u:'3-2',p:'96',lv:2,q:'把白色康乃馨的莖插入藍色墨水中一段時間，花瓣出現藍色紋路。藍色墨水是經由哪一構造運輸上去的？',o:['木質部','韌皮部','形成層','表皮'],a:0,e:'有色溶液隨水分沿木質部向上運輸。'},
+ {g:'s3',u:'3-2',p:'97',lv:2,q:'兩枝相同的芹菜插在水中，甲的葉背塗滿凡士林，乙不處理，放在通風處。一小時後甲量筒的水減少得比乙少，主要原因是？',o:['甲的氣孔被堵住，蒸散作用減弱','甲的根毛被破壞','甲的光合作用增加','甲的韌皮部被堵住'],a:0,e:'氣孔大多分布在葉片（葉背尤多），堵住後水分難以蒸散，向上拉水的動力變小。'},
+ {g:'s3',u:'3-2',p:'97',lv:2,q:'下列哪一種情況，植物的蒸散作用最旺盛？',o:['晴朗、有風、乾燥的白天','陰雨潮溼的夜晚','無風潮溼的夜晚','下雨的清晨'],a:0,e:'光照強、通風、空氣乾燥時氣孔張開，水分散失快。'},
+ {g:'s3',u:'3-2',p:'123',lv:2,q:'樹木醫提醒：移植樹木時要特別保護根部的土球不要崩裂。最主要的原因是？',o:['避免傷害樹根，影響水分吸收','避免土壤中的養分流失','避免樹木的年輪消失','避免形成層停止分裂'],a:0,e:'土球崩裂會傷害樹根，使樹木無法取得水分而生長不良或枯萎（P123）。'},
+ {g:'s4',u:'3-3',p:'100',lv:1,q:'人的心臟分為幾個腔室？',o:['四個（兩個心房、兩個心室）','兩個','三個','六個'],a:0,e:'上方左、右心房；下方左、右心室。'},
+ {g:'s4',u:'3-3',p:'100',lv:1,q:'心臟內瓣膜的功能是？',o:['防止血液逆流','產生血球','過濾病原體','交換氣體'],a:0,e:'心房與心室間、心室與動脈間都有瓣膜。'},
+ {g:'s4',u:'3-3',p:'101',lv:2,q:'與主動脈相連的心臟腔室是？',o:['左心室','右心室','左心房','右心房'],a:0,e:'左心室收縮，把充氧血送入主動脈（體循環起點）。'},
+ {g:'s4',u:'3-3',p:'101',lv:2,q:'肺靜脈把血液送回心臟的哪一個腔室？',o:['左心房','右心房','左心室','右心室'],a:0,e:'⓫肺靜脈 → ⓬左心房（肺循環終點）。'},
+ {g:'s4',u:'3-3',p:'100',lv:1,q:'血液在血管中流動的主要動力來源是？',o:['心臟規律的搏動','肺的呼吸','血管的收縮','重力'],a:0,e:'心臟收縮把血液擠入動脈，舒張時靜脈血流回心臟。'},
+ {g:'s4',u:'3-3',p:'102',lv:1,q:'管壁只有一層細胞，讓血液和組織細胞交換物質的血管是？',o:['微血管','動脈','靜脈','淋巴管'],a:0,e:'微血管流速最慢，有利物質交換。'},
+ {g:'s4',u:'3-3',p:'103',lv:2,q:'三種血管中，血壓最高的是？',o:['動脈','微血管','靜脈','三者相同'],a:0,e:'動脈直接接受心臟擠出的血液，血壓最高；靜脈最低。'},
+ {g:'s4',u:'3-3',p:'103',lv:2,q:'關於靜脈的敘述，何者正確？',o:['管壁較薄、管腔較大，有些靜脈內有瓣膜','管壁最厚、最有彈性','只由一層細胞構成','血壓最高、流速最快'],a:0,e:'靜脈的瓣膜可防止血液逆流，幫助血液流回心臟。'},
+ {g:'s4',u:'3-3',p:'110',lv:2,q:'中醫把脈摸到的「脈搏」是怎麼產生的？',o:['心臟收縮時血液擠入動脈，使動脈管壁週期性擴張','靜脈中的瓣膜開合','微血管進行物質交換','肺部吸氣與吐氣'],a:0,e:'脈搏與心搏次數相同。'},
+ {g:'s4',u:'3-3',p:'103',lv:1,q:'抽血或注射通常選擇靜脈，主要原因是？',o:['靜脈血壓低、流速較慢，較不易大量出血','靜脈的血液比較乾淨','靜脈的管壁最厚','靜脈中沒有血球'],a:0,e:'動脈血壓高、流速快，破損容易大出血（P103 知識快遞）。'},
+ {g:'s5',u:'3-3',p:'104',lv:1,q:'血液經分離後，上層淡黃色的液體是？',o:['血漿','血球','淋巴','組織液'],a:0,e:'上層血漿、下層血球（中間薄薄一層是白血球與血小板）。'},
+ {g:'s5',u:'3-3',p:'105',lv:1,q:'哪一種血球含有血紅素，能攜帶氧氣？',o:['紅血球','白血球','血小板','三種都可以'],a:0,e:'紅血球呈雙凹圓盤狀、無細胞核、數量最多。'},
+ {g:'s5',u:'3-3',p:'105',lv:2,q:'三種血球中，具有細胞核的是？',o:['白血球','紅血球','血小板','紅血球與血小板'],a:0,e:'只有白血球有細胞核。'},
+ {g:'s5',u:'3-3',p:'105',lv:2,q:'某人受傷後傷口一直流血不止，最可能是哪一種成分不足？',o:['血小板','紅血球','白血球','血漿中的激素'],a:0,e:'血小板促使血液凝固、阻塞傷口。'},
+ {g:'s5',u:'3-3',p:'105',lv:1,q:'人體血液中數量最多的血球是？',o:['紅血球','白血球','血小板','三者差不多'],a:0,e:'紅血球最多，白血球最少。'},
+ {g:'s5',u:'3-3',p:'104',lv:2,q:'下列哪一種物質「不」溶在血漿中隨血液運送？',o:['唾液中的澱粉酶（消化液）','葡萄糖','激素','二氧化碳等代謝廢物'],a:0,e:'消化液由消化腺分泌到消化道，不經血液運送；血漿運送養分、激素、廢物。'},
+ {g:'s5',u:'3-3',p:'105',lv:2,q:'能改變形狀穿過微血管管壁，進入組織吞噬病原體的是？',o:['白血球','紅血球','血小板','血漿'],a:0,e:'白血球種類多，有些吞噬病原體，有些產生抗體。'},
+ {g:'s6',u:'3-3',p:'106',lv:1,q:'體循環的起點是心臟的哪個腔室？',o:['左心室','右心室','左心房','右心房'],a:0,e:'❶左心室 → ❷主動脈 → 全身。'},
+ {g:'s6',u:'3-3',p:'106–107',lv:2,q:'肺循環的正確途徑為何？',o:['右心室→肺動脈→肺部微血管→肺靜脈→左心房','左心室→肺靜脈→肺部微血管→肺動脈→右心房','右心房→肺靜脈→肺部微血管→肺動脈→左心室','左心室→主動脈→肺部微血管→大靜脈→右心房'],a:0,e:'❽→❾→❿→⓫→⓬。'},
+ {g:'s6',u:'3-3',p:'106',lv:2,q:'下列哪一條血管內流的是充氧血？',o:['肺靜脈','肺動脈','上大靜脈','下大靜脈'],a:0,e:'肺靜脈帶著剛在肺部得到氧氣的血液回左心房。',m:'名稱有「靜脈」不代表一定是缺氧血。'},
+ {g:'s6',u:'3-3',p:'106',lv:2,q:'護理師在病人「腳背」的靜脈注射藥物，藥物最先到達心臟的哪個腔室？',o:['右心房','左心房','右心室','左心室'],a:0,e:'腳背靜脈 → 下大靜脈 → 右心房。'},
+ {g:'s6',u:'3-3',p:'106',lv:2,q:'藥物由腳背靜脈進入血液，隨血流到腦部。若每次血液從靜脈流入心臟算一次，藥物到達腦部前會進入心臟幾次？',o:['2 次','1 次','3 次','0 次'],a:0,e:'右心房、右心室 →（肺循環）→ 左心房、左心室 → 主動脈 → 腦。',h:'先回心臟右邊，去肺，再回心臟左邊。'},
+ {g:'s6',u:'3-3',p:'107',lv:2,q:'在身體組織的微血管處，氣體交換的方向為何？',o:['氧氣從血液擴散到細胞，二氧化碳從細胞擴散到血液','氧氣從細胞擴散到血液，二氧化碳從血液擴散到細胞','兩種氣體都從血液到細胞','兩種氣體都不會移動'],a:0,e:'血液經過組織後由充氧血變成缺氧血。'},
+ {g:'s6',u:'3-3',p:'107',lv:2,q:'在肺泡周圍的微血管，下列何者正確？',o:['二氧化碳由血液擴散到肺泡，氧氣由肺泡擴散到血液','氧氣由血液擴散到肺泡','血液在此由充氧血變成缺氧血','紅血球會進入肺泡'],a:0,e:'經過肺部後，缺氧血變回充氧血。'},
+ {g:'s7',u:'3-3',p:'108',lv:1,q:'組織液滲入淋巴管之後，稱為什麼？',o:['淋巴','血漿','血清','組織細胞'],a:0,e:'血漿 → 組織液 → 淋巴。'},
+ {g:'s7',u:'3-3',p:'108',lv:2,q:'淋巴在淋巴管中流動，最後會注入哪裡？',o:['靜脈','動脈','微血管','心室'],a:0,e:'注入靜脈，重新回到血液循環。'},
+ {g:'s7',u:'3-3',p:'108',lv:2,q:'喉嚨發炎時，頸部摸到腫大的淋巴結，原因最可能是？',o:['淋巴結在過濾病原體，白血球聚集而腫脹','淋巴結裡塞滿紅血球','淋巴結停止運作','血壓升高'],a:0,e:'淋巴結過濾病原體與異物，並引發白血球作用。'},
+ {g:'s7',u:'3-3',p:'108',lv:2,q:'下列哪一種液體中「含有紅血球」？',o:['靜脈中的血液','組織液','淋巴','血漿'],a:0,e:'紅血球留在血管內；組織液和淋巴是由血漿部分物質形成。'},
+ {g:'s7',u:'3-3',p:'100',lv:1,q:'人體的循環系統包括哪兩部分？',o:['心血管系統與淋巴系統','消化系統與呼吸系統','神經系統與內分泌系統','維管束與淋巴系統'],a:0,e:'心血管系統：心臟、血管、血液；淋巴系統：淋巴結、淋巴管、淋巴。'},
+ {g:'s8',u:'3-4',p:'114',lv:1,q:'人體防禦病原體的「第一道防禦」是？',o:['皮膚與黏膜的阻隔','白血球的吞噬作用','發炎反應','產生抗體'],a:0,e:'皮膚、黏膜，以及消化道的酵素、鹽酸。'},
+ {g:'s8',u:'3-4',p:'114',lv:1,q:'吃進不乾淨的食物後，胃液中的鹽酸殺死部分細菌，這屬於哪一種防禦？',o:['皮膜的阻隔','吞噬作用','發炎反應','專一性防禦'],a:0,e:'消化器官分泌的酵素或鹽酸屬於第一道防禦。'},
+ {g:'s8',u:'3-4',p:'115',lv:1,q:'手被割傷後，傷口出現「紅、熱、腫、痛」，這稱為？',o:['發炎反應','專一性防禦','皮膜阻隔','血液凝固'],a:0,e:'發炎反應使白血球大量聚集在傷口。'},
+ {g:'s8',u:'3-4',p:'116',lv:2,q:'下列哪一項屬於「專一性防禦」？',o:['某類白血球產生抗體，使特定病原體失去感染力','皮膚阻擋病原體','白血球吞噬入侵的細菌','傷口出現紅腫'],a:0,e:'專一性防禦：破壞被感染的細胞、產生抗體，具記憶性。'},
+ {g:'s8',u:'3-4',p:'115',lv:2,q:'「非專一性防禦」包括下列哪些？',o:['皮膜的阻隔、吞噬作用、發炎反應','只有產生抗體','只有皮膚','吞噬作用與產生抗體'],a:0,e:'第一、二道防禦都不針對特定病原體。'},
+ {g:'s8',u:'3-4',p:'117',lv:2,q:'疫苗能預防疾病，是利用專一性防禦的哪一種特性？',o:['記憶性','非專一性','可遺傳性','立即性'],a:0,e:'第二次接觸相同病原體時，反應更快、強度更強。'},
+ {g:'s8',u:'3-4',p:'117',lv:2,q:'已接種某疫苗的人，之後真正感染該病原體時，專一性防禦作用會如何？',o:['反應更快、強度更強','反應更慢、強度更弱','完全不會反應','和沒打疫苗一樣'],a:0,e:'因為身體已有記憶，會大量增生特定的白血球。'},
+ {g:'s8',u:'3-4',p:'116',lv:2,q:'小明曾得過水痘而產生對水痘病毒的防禦，這樣能保護他不得流行性感冒嗎？',o:['不能，專一性防禦只對特定病原體有效','能，抗體可以對抗所有病毒','能，因為白血球會記住所有病毒','不一定，要看他有沒有發燒'],a:0,e:'由某病原體引發的專一性防禦只能對抗該病原體。'},
+ {g:'s8',u:'3-4',p:'114',lv:1,q:'「病原體」是指什麼？',o:['會使生物生病的微生物，例如某些病毒或細菌','所有的微生物','人體內的白血球','疫苗的成分'],a:0,e:'環境中有許多微生物，其中會導致生病的稱為病原體。'},
+ {g:'s8',u:'3-4',p:'125',lv:2,q:'阿康確診流行性感冒（病毒引起），醫師不開抗生素，原因是？',o:['抗生素對病毒無效','抗生素只能用來治療發燒','流感是細菌引起的','抗生素會讓病毒變更多'],a:0,e:'抗生素用於細菌性傳染病，濫用還會篩選出抗藥性細菌（P125）。'},
+ {g:'s8',u:'3-4',p:'124',lv:1,q:'因為全面施打疫苗，第一個被人類完全撲滅的傳染病是？',o:['天花','鼠疫','流行性感冒','愛滋病'],a:0,e:'簡納利用接種牛痘預防天花（P124）。'}
+];
+BANK.forEach((q,i)=>q.id=i);
+
+/* ================= S0 ================= */
+function initS0(){const res={};oxCards($('#ox0'),OX.s0,{num:true,onAns:(i,ok)=>{res[i]=ok;upd();}});
+ function upd(){const ks=Object.keys(res);const uniq=[...new Set(ks.filter(k=>!res[k]).map(k=>OX.s0[k].go))];
+  const box=$('#ox0sum');box.innerHTML=`已作答 ${ks.length}／8 題　`+(uniq.length?'📍 建議優先複習：':(ks.length===8?'🎉 全對！可以直接挑戰「9 總挑戰」':''));
+  uniq.forEach(g=>box.append(el('button',{class:'btn sm alt',onclick:()=>go(g)},`${g} ${STAGES[g].name}`)));}}
+
+/* ================= S1 cross sections ================= */
+const XS={epi:['表皮','最外層，保護莖的內部。'],phl:['韌皮部（橘色）','位於維管束<b>外側</b>，運輸光合作用製造的<b>養分</b>（可上可下）。'],cam:['形成層（虛線）','位於木質部與韌皮部之間；細胞分裂，向內產生木質部、向外產生韌皮部 → 莖加粗。'],xyl:['木質部（藍色）','位於維管束<b>內側</b>，運輸<b>水分與礦物質</b>（由下往上）；細胞壁厚，有支持功能。'],pith:['髓（中央）','莖的中央部分（課本未特別要求，了解即可）。'],
+ lup:['上表皮','葉片上方的保護層，外有角質層。'],llow:['下表皮與氣孔','氣孔多分布在下表皮，由保衛細胞控制開閉。'],lxyl:['葉脈的木質部（藍）','在葉脈<b>上側</b>，靠近上表皮。'],lphl:['葉脈的韌皮部（橘）','在葉脈<b>下側</b>，靠近下表皮。'],meso:['葉肉細胞','含葉綠體，進行光合作用。']};
+let XSM='stem';
+function xsDraw(){let s=`<rect width="460" height="300" fill="#fbfdf7"/>`;
+ if(XSM==='stem'){const cx=150,cy=150;s+=`<circle class="hot" data-k="epi" cx="${cx}" cy="${cy}" r="128" fill="#7fb069"/><circle class="hot" data-k="pith" cx="${cx}" cy="${cy}" r="120" fill="#eef5df"/>`;
+  s+=`<circle class="hot" data-k="cam" cx="${cx}" cy="${cy}" r="84" fill="none" stroke="#2e7d32" stroke-width="5" stroke-dasharray="7 5"/>`;
+  for(let i=0;i<10;i++){const a=i/10*Math.PI*2,c=Math.cos(a),sn=Math.sin(a);
+   s+=`<ellipse class="hot" data-k="phl" cx="${cx+98*c}" cy="${cy+98*sn}" rx="13" ry="10" transform="rotate(${a*180/Math.PI} ${cx+98*c} ${cy+98*sn})" fill="#f0a54a" stroke="#a8641c"/>`;
+   s+=`<ellipse class="hot" data-k="xyl" cx="${cx+68*c}" cy="${cy+68*sn}" rx="15" ry="11" transform="rotate(${a*180/Math.PI} ${cx+68*c} ${cy+68*sn})" fill="#4a86c8" stroke="#1f4e85"/>`;}
+  const L=(y,t,x2,y2,c)=>`<line x1="${x2}" y1="${y2}" x2="300" y2="${y}" stroke="#555"/><text x="305" y="${y+5}" font-size="15" fill="${c}" font-weight="700">${t}</text>`;
+  s+=L(40,'表皮',230,62,'#3f7d2c')+L(95,'韌皮部（外側）',246,150,'#b5651d')+L(150,'形成層',234,150,'#2e7d32')+L(205,'木質部（內側）',218,150,'#1f5fa8')+L(255,'髓',150,170,'#666');
+  s+=`<text x="10" y="292" font-size="12" fill="#666">莖橫切面示意（環狀排列）：木內、韌外</text>`;}
+ else{s+=`<rect class="hot" data-k="lup" x="20" y="50" width="420" height="20" fill="#cfe8b8" stroke="#6a9a4a"/><rect x="20" y="44" width="420" height="6" fill="#e9f5df"/><text x="440" y="40" font-size="12" fill="#555" text-anchor="end">↓ 角質層</text>`;
+  for(let i=0;i<14;i++)s+=`<rect class="hot" data-k="meso" x="${24+i*30}" y="72" width="24" height="56" rx="8" fill="#8cc56e" stroke="#4f8a34"/>`;
+  for(let i=0;i<12;i++)s+=`<circle class="hot" data-k="meso" cx="${40+i*36}" cy="${170+ (i%2)*18}" r="15" fill="#a9d58e" stroke="#4f8a34"/>`;
+  s+=`<rect class="hot" data-k="llow" x="20" y="222" width="420" height="20" fill="#cfe8b8" stroke="#6a9a4a"/><rect x="330" y="222" width="16" height="20" fill="#fbfdf7"/><ellipse class="hot" data-k="llow" cx="322" cy="232" rx="9" ry="10" fill="#4f8a34"/><ellipse class="hot" data-k="llow" cx="354" cy="232" rx="9" ry="10" fill="#4f8a34"/><text x="338" y="262" font-size="12" text-anchor="middle" fill="#2e5a1d">氣孔</text>`;
+  s+=`<circle cx="200" cy="160" r="40" fill="#eef5df" stroke="#888"/><path class="hot" data-k="lxyl" d="M166 158 A34 34 0 0 1 234 158 Z" fill="#4a86c8" stroke="#1f4e85"/><path class="hot" data-k="lphl" d="M168 162 A32 32 0 0 0 232 162 Z" fill="#f0a54a" stroke="#a8641c"/>`;
+  s+=`<g font-size="15" font-weight="700" stroke="#fbfdf7" stroke-width="5" paint-order="stroke"><text x="250" y="148" fill="#1f5fa8">← 木質部（上側）</text><text x="250" y="186" fill="#b5651d">← 韌皮部（下側）</text></g><text x="24" y="40" font-size="13" fill="#3f7d2c">上表皮 ↓</text><text x="24" y="262" font-size="13" fill="#3f7d2c">下表皮 ↑</text><text x="10" y="294" font-size="12" fill="#666">葉片橫切面示意：葉脈木上、韌下</text>`;}
+ const sv=$('#xsSvg');sv.innerHTML=s;sv.querySelectorAll('.hot').forEach(h=>h.addEventListener('click',()=>{const d=XS[h.dataset.k];$('#xsInfo').innerHTML=`<h4>${d[0]}</h4>${d[1]}`;logIt('橫切面：'+d[0]);}));}
+function initS1(){$$('#xsSel button').forEach(b=>b.onclick=()=>{$$('#xsSel button').forEach(x=>x.classList.remove('on'));b.classList.add('on');XSM=b.dataset.x;xsDraw();});xsDraw();
+ sortGame($('#g1sort'),{title:'🧩 木質部？還是韌皮部？',bins:[{k:'x',label:'💧 木質部'},{k:'p',label:'🍬 韌皮部'}],cards:[
+  {t:'運輸水分',k:'x'},{t:'運輸礦物質',k:'x'},{t:'只由下往上運輸',k:'x'},{t:'葉脈的上側',k:'x'},{t:'莖的內側',k:'x'},{t:'細胞壁較厚，有支持功能',k:'x'},{t:'老化後堆積成木材',k:'x'},{t:'插紅色溶液後被染紅',k:'x',w:'紅色溶液隨水分在木質部上升。'},
+  {t:'運輸葉片製造的養分',k:'p'},{t:'運輸方向可上可下',k:'p'},{t:'葉脈的下側',k:'p'},{t:'莖的外側',k:'p'},{t:'屬於樹皮的一部分',k:'p',hint:'樹皮包含形成層外面的哪個構造？'}]});
+ oxCards($('#ox1'),OX.s1);renderQSet($('#q1'),BANK.filter(q=>q.g==='s1'));}
+
+/* ================= S2 rings ================= */
+let CLIM='temp';
+function ringDraw(){const n=+$('#ryr').value;$('#ryv').textContent=n;const cx=210,cy=210,step=Math.min(24,150/n),bark=16;let s=`<rect width="420" height="420" fill="#fff"/>`;
+ const Rw=n*step+6;s+=`<circle cx="${cx}" cy="${cy}" r="${Rw+bark}" fill="#6d4c33"/><circle cx="${cx}" cy="${cy}" r="${Rw+7}" fill="#c99b5f"/><circle cx="${cx}" cy="${cy}" r="${Rw+2}" fill="none" stroke="#2e7d32" stroke-width="3"/>`;
+ for(let y=n;y>=1;y--){const r=6+y*step;if(CLIM==='temp'){s+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="#9a6a3a"/><circle cx="${cx}" cy="${cy}" r="${r-step*0.28}" fill="#f1d4a3"/>`;}else{s+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="#ecd0a0" stroke="#e2c08a" stroke-width="0.6"/>`;}}
+ s+=`<circle cx="${cx}" cy="${cy}" r="6" fill="#8a5a2b"/>`;
+ s+=`<line x1="${cx+(Rw+bark-6)*0.7}" y1="${cy-(Rw+bark-6)*0.7}" x2="330" y2="40" stroke="#333"/><text x="300" y="34" font-size="13">樹皮（含韌皮部）</text><line x1="${cx+(Rw+2)*0.7}" y1="${cy+(Rw+2)*0.7}" x2="330" y2="392" stroke="#2e7d32"/><text x="300" y="408" font-size="13" fill="#2e7d32">形成層</text>`;
+ if(CLIM==='temp'&&n>=2){const r=6+n*step;s+=`<line x1="${cx-r+step*0.14}" y1="${cy}" x2="20" y2="390" stroke="#333"/><text x="10" y="405" font-size="12">秋冬：細胞小、色深</text><line x1="${cx-r+step*0.6}" y1="${cy-6}" x2="20" y2="30" stroke="#333"/><text x="10" y="24" font-size="12">春夏：細胞大、色淺</text>`;}
+ $('#ringSvg').innerHTML=s;
+ $('#ringOut').innerHTML=CLIM==='temp'?`溫帶四季分明：每年長出一圈「淺色（春夏）＋深色（秋冬）」→ 共 <b>${n}</b> 圈年輪，樹齡約 <b>${n}</b> 年。<br>📌 年輪是形成層內側逐年堆積的<b>木質部</b>（木材）。`:`熱帶終年溫暖多雨，木質部細胞大小差不多 → <b>年輪不明顯</b>，難以用年輪推算樹齡。`;}
+function initS2(){$('#ryr').oninput=ringDraw;$$('#climSel button').forEach(b=>b.onclick=()=>{$$('#climSel button').forEach(x=>x.classList.remove('on'));b.classList.add('on');CLIM=b.dataset.c;ringDraw();logIt('年輪 '+CLIM);});ringDraw();
+ orderGame($('#g2order'),{title:'🪵 莖由內而外的構造',prompt:'具形成層的樹木，從中心「由內而外」排列：',items:['老的木質部','新的木質部','形成層','新的韌皮部','老的韌皮部','表皮'],hint:'形成層向內產生新木質部、向外產生新韌皮部，新的都靠近形成層。'});
+ orderGame($('#g2girdle'),{title:'🐿️ 環狀剝皮後的死亡順序',prompt:'依發生先後排列：',items:['樹皮被環剝一圈','韌皮部斷裂，養分無法往下送','根部細胞缺乏養分而死亡','根無法吸收水分','枝葉缺水枯黃死亡'],hint:'先斷「養分」，再影響「水分」。'});
+ sortGame($('#g2sort'),{title:'🌻🌽 環狀排列？散生排列？',bins:[{k:'r',label:'⭕ 環狀排列'},{k:'s',label:'✳️ 散生排列'}],cards:[
+  {t:'向日葵',k:'r'},{t:'榕樹',k:'r'},{t:'朱槿',k:'r'},{t:'有形成層',k:'r'},{t:'莖能逐年加粗',k:'r'},{t:'網狀脈',k:'r'},
+  {t:'玉米',k:'s'},{t:'水稻',k:'s'},{t:'竹子',k:'s'},{t:'椰子樹',k:'s',w:'椰子樹雖然高大，但莖不會逐年明顯加粗。'},{t:'平行脈',k:'s'}]});
+ oxCards($('#ox2'),OX.s2);renderQSet($('#q2'),BANK.filter(q=>q.g==='s2'));}
+
+/* ================= S3 stomata & celery ================= */
+let STO='day',celAnim=null;
+function stoDraw(){const open=STO==='day';const g=open?34:8;let s=`<rect width="420" height="240" fill="#eef7e6"/>`;
+ const cell=(cx,dir)=>`<ellipse cx="${cx}" cy="120" rx="${open?30:24}" ry="85" fill="#6fb25a" stroke="#2e6b1f" stroke-width="3"/>`+[0,1,2,3,4].map(i=>`<circle cx="${cx+dir*(open?6:3)}" cy="${60+i*28}" r="5" fill="#2e7d32"/>`).join('');
+ s+=`<ellipse cx="210" cy="120" rx="${g/2}" ry="${open?60:30}" fill="#2b2b2b"/>`+cell(210-g/2-(open?28:22),-1)+cell(210+g/2+(open?28:22),1);
+ if(open)s+=`<g font-size="14" font-weight="700"><text x="20" y="40" fill="#1f5fa8">H₂O（水蒸氣）↗ 散失</text><text x="20" y="220" fill="#555">CO₂ 進入 ↘</text><text x="300" y="220" fill="#c0392b">O₂ 釋出 ↗</text></g>`;
+ s+=`<text x="210" y="232" font-size="15" text-anchor="middle" font-weight="700">${open?'氣孔張開':'氣孔關閉'}</text>`;$('#stoSvg').innerHTML=s;
+ $('#stoOut').innerHTML={day:'☀️ 白天、水分充足：保衛細胞<b>吸水膨脹、彎曲</b> → 氣孔<b>張開</b> → 蒸散作用旺盛、二氧化碳進入供光合作用。',night:'🌙 夜晚：保衛細胞失水 → 氣孔通常<b>關閉</b> → 蒸散作用較弱。',dry:'🏜️ 乾旱缺水：即使是白天，保衛細胞也會失水 → 氣孔<b>關閉</b>，減少水分散失，避免植物失水過多。'}[STO];}
+function celDraw(lvA,lvB){const cyl=(x,lv,lab,leaf)=>{const top=40,bot=270,h=(lv/10)*(bot-top-20);let s=`<rect x="${x}" y="${top}" width="80" height="${bot-top}" fill="none" stroke="#555" stroke-width="3"/><rect x="${x+2}" y="${bot-h}" width="76" height="${h}" fill="#7cc3ea"/>`;
+  for(let k=0;k<=10;k+=2){const y=bot-k/10*(bot-top-20);s+=`<line x1="${x+80}" y1="${y}" x2="${x+92}" y2="${y}" stroke="#555"/><text x="${x+96}" y="${y+4}" font-size="11">${k}</text>`;}
+  s+=`<rect x="${x+36}" y="${top-30}" width="8" height="${bot-top+10}" fill="#7fb069"/>`;if(leaf)s+=`<ellipse cx="${x+20}" cy="${top-24}" rx="24" ry="12" fill="#5fa04a"/><ellipse cx="${x+62}" cy="${top-30}" rx="24" ry="12" fill="#5fa04a"/>`;
+  return s+`<text x="${x+40}" y="292" font-size="14" text-anchor="middle" font-weight="700">${lab}</text><text x="${x+40}" y="${bot-h-6}" font-size="13" text-anchor="middle" fill="#1f5fa8">${lv.toFixed(1)} mL</text>`;};
+ $('#celSvg').innerHTML=`<rect width="520" height="300" fill="#fbfdff"/>`+cyl(90,lvA,'甲',C.leaf)+cyl(310,lvB,'乙（去葉）',false);}
+const C={leaf:1,vas:0,env:1};
+function celRate(){if(!C.leaf)return 0.15;let r=1.5;if(C.vas)r*=0.15;if(!C.env)r*=0.35;return Math.max(r,0.15);}
+function initS3(){$$('#stoSel button').forEach(b=>b.onclick=()=>{$$('#stoSel button').forEach(x=>x.classList.remove('on'));b.classList.add('on');STO=b.dataset.s;stoDraw();logIt('氣孔 '+STO);});stoDraw();
+ [['#celLeaf','leaf'],['#celVas','vas'],['#celEnv','env']].forEach(([id,k])=>$$(id+' button').forEach(b=>b.onclick=()=>{$$(id+' button').forEach(x=>x.classList.remove('on'));b.classList.add('on');C[k]=+b.dataset.v;cancelAnimationFrame(celAnim);celDraw(10,10);$('#celOut').innerHTML='設定好後按「開始」。';}));
+ celDraw(10,10);
+ $('#celGo').onclick=()=>{cancelAnimationFrame(celAnim);const rA=celRate(),rB=0.15;const t0=performance.now();
+  const f=now=>{const m=Math.min(30,(now-t0)/100);celDraw(10-rA*m/10,10-rB*m/10);if(m<30)celAnim=requestAnimationFrame(f);else{
+   const row=r=>[0,10,20,30].map(t=>`<td>${(10-r*t/10).toFixed(1)}</td>`).join('');
+   $('#celOut').innerHTML=`<table class="t"><tr><th>時間（分）</th><th>0</th><th>10</th><th>20</th><th>30</th></tr><tr><td>甲 (mL)</td>${row(rA)}</tr><tr><td>乙 (mL)</td>${row(rB)}</tr></table>`+(rA>0.5?'💡 甲有葉、氣孔正常、通風有光 → <b>蒸散作用旺盛</b>，吸水多。':C.leaf&&C.vas?'💡 葉背塗凡士林 → 氣孔被堵住 → 蒸散減弱，吸水變少。':C.leaf?'💡 無風陰暗 → 蒸散作用減弱，吸水變少。':'💡 甲、乙都沒有葉片 → 幾乎沒有蒸散，水位只下降一點點（甚至可能只是蒸發）。')+'<br>📌 結論：植物水分的散失（與向上運輸）和<b>葉片的蒸散作用</b>有關。';logIt('芹菜實驗 甲速率'+rA);}};
+  celAnim=requestAnimationFrame(f);};
+ orderGame($('#g3order'),{title:'💧 水分在植物體內的旅程',prompt:'依序排出水分的路徑：',items:['土壤中的水','根毛','根的木質部','莖的木質部','葉脈的木質部','由氣孔散失成水蒸氣'],hint:'由下往上，走木質部。'});
+ sortGame($('#g3sort'),{title:'🌬️ 蒸散作用會變強？還是變弱？',bins:[{k:'u',label:'⬆️ 蒸散增強'},{k:'d',label:'⬇️ 蒸散減弱'}],cards:[
+  {t:'陽光強烈',k:'u'},{t:'有風、通風良好',k:'u'},{t:'空氣乾燥',k:'u'},{t:'氣孔大量張開',k:'u'},
+  {t:'夜晚',k:'d'},{t:'潮溼無風',k:'d'},{t:'葉背塗凡士林',k:'d'},{t:'摘除大部分葉片',k:'d'},{t:'乾旱時氣孔關閉',k:'d'}]});
+ oxCards($('#ox3'),OX.s3);renderQSet($('#q3'),BANK.filter(q=>q.g==='s3'));}
+
+/* ================= S4 heart ================= */
+const HI={RA:['右心房','接收<b>上、下大靜脈</b>送回的缺氧血（體循環終點）。在面對面的圖中位於<b>左上</b>。','#5b8fd6'],RV:['右心室','把缺氧血送入<b>肺動脈</b>（肺循環起點）。','#3f74c4'],LA:['左心房','接收<b>肺靜脈</b>送回的充氧血（肺循環終點）。','#e06c6c'],LV:['左心室','把充氧血送入<b>主動脈</b>（體循環起點）；肌肉壁最厚，因為要把血送到全身。','#c94040'],
+ SVC:['上大靜脈','把上半身的缺氧血送回右心房。','#5b8fd6'],IVC:['下大靜脈','把下半身的缺氧血送回右心房。','#5b8fd6'],PA:['肺動脈','由右心室把<b>缺氧血</b>送到肺。⚠️ 是「動脈」卻流缺氧血！','#3f74c4'],AO:['主動脈','由左心室把<b>充氧血</b>送到全身，是最粗的動脈。','#c94040'],PV:['肺靜脈','由肺把<b>充氧血</b>送回左心房。⚠️ 是「靜脈」卻流充氧血！','#e06c6c'],VAL:['瓣膜','心房與心室之間、心室與動脈之間都有瓣膜，<b>防止血液逆流</b>。','#fff']};
+function heartDraw(){let s=`<rect width="520" height="430" fill="#fffaf6"/>`;
+ const P=(k,d,w)=>`<path class="hot" data-k="${k}" d="${d}" fill="none" stroke="${HI[k][2]}" stroke-width="${w||22}" stroke-linejoin="round"/>`;
+ s+=P('SVC','M165 18 L165 150')+P('IVC','M95 412 L95 205 L132 205')+P('PA','M238 300 L262 300 L262 108 M205 108 L330 108',18)+P('AO','M390 320 L470 320 L470 125',22)+P('PV','M505 62 L372 62 L372 150',18);
+ const R=(k,x,y,w,h)=>`<rect class="hot" data-k="${k}" x="${x}" y="${y}" width="${w}" height="${h}" rx="18" fill="${HI[k][2]}" stroke="#7a1d1d" stroke-width="2"/>`;
+ s+=R('RA',130,150,120,90)+R('RV',130,246,120,120)+R('LA',272,150,120,90)+R('LV',272,246,120,120);
+ s+=`<g class="hot" data-k="VAL"><rect x="150" y="238" width="80" height="10" fill="#fff" stroke="#999"/><rect x="292" y="238" width="80" height="10" fill="#fff" stroke="#999"/></g>`;
+ s+=`<g font-size="17" font-weight="700" fill="#fff" text-anchor="middle" pointer-events="none"><text x="190" y="200">右心房</text><text x="190" y="312">右心室</text><text x="332" y="200">左心房</text><text x="332" y="312">左心室</text></g>`;
+ s+=`<g font-size="14" font-weight="700" pointer-events="none" stroke="#fffaf6" stroke-width="4" paint-order="stroke"><text x="185" y="40" fill="#1f5fa8">上大靜脈</text><text x="22" y="400" fill="#1f5fa8">下大靜脈</text><text x="205" y="96" fill="#1f5fa8">肺動脈 → 肺</text><text x="470" y="96" fill="#b02a2a" text-anchor="middle">主動脈</text><text x="470" y="112" fill="#b02a2a" text-anchor="middle">→全身</text><text x="385" y="50" fill="#b02a2a">肺靜脈 ← 肺</text><text x="20" y="250" fill="#555" font-size="13">瓣膜 →</text></g><line x1="72" y1="245" x2="148" y2="243" stroke="#999"/>`;
+ s+=`<text x="260" y="420" font-size="13" text-anchor="middle" fill="#666">（面對面看：圖的左邊＝這個人的右邊）</text>`;
+ const sv=$('#heartSvg');sv.innerHTML=s;sv.querySelectorAll('.hot').forEach(h=>h.addEventListener('click',()=>{const d=HI[h.dataset.k];$('#heartInfo').innerHTML=`<h4>${d[0]}</h4>${d[1]}`;logIt('心臟：'+d[0]);}));}
+function initS4(){heartDraw();
+ sortGame($('#g4sort'),{title:'🩸 三種血管特徵分類',bins:[{k:'a',label:'動脈'},{k:'c',label:'微血管'},{k:'v',label:'靜脈'}],cards:[
+  {t:'管壁最厚、最有彈性',k:'a'},{t:'血壓最高',k:'a'},{t:'能摸到脈搏',k:'a'},{t:'把血液帶離心臟',k:'a'},
+  {t:'管壁只有一層細胞',k:'c'},{t:'與組織細胞交換物質',k:'c'},{t:'血液流速最慢',k:'c'},{t:'白血球可從管壁間隙穿出',k:'c'},
+  {t:'管腔最大',k:'v'},{t:'部分管內有瓣膜',k:'v'},{t:'血壓最低',k:'v'},{t:'把血液帶回心臟',k:'v'},{t:'抽血時常選用',k:'v'}]});
+ oxCards($('#ox4'),OX.s4);renderQSet($('#q4'),BANK.filter(q=>q.g==='s4'));}
+
+/* ================= S5 blood ================= */
+function tubeDraw(){let s=`<rect width="420" height="330" fill="#fff"/><path d="M150 20 L150 270 Q150 310 190 310 Q230 310 230 270 L230 20" fill="none" stroke="#666" stroke-width="3"/>`;
+ s+=`<path class="hot" data-k="pl" d="M152 60 L228 60 L228 170 L152 170 Z" fill="#f5d76e"/><rect class="hot" data-k="wb" x="152" y="170" width="76" height="8" fill="#f4f4f4" stroke="#bbb"/><path class="hot" data-k="rb" d="M152 178 L228 178 L228 270 Q228 308 190 308 Q152 308 152 270 Z" fill="#b3202a"/>`;
+ s+=`<g font-size="14" font-weight="700"><line x1="232" y1="110" x2="270" y2="110" stroke="#333"/><text x="275" y="115">血漿（約55%）</text><line x1="232" y1="174" x2="270" y2="174" stroke="#333"/><text x="275" y="179">白血球、血小板</text><line x1="232" y1="240" x2="270" y2="240" stroke="#333"/><text x="275" y="245">紅血球</text><text x="40" y="115" fill="#8a6d00">上層</text><text x="40" y="245" fill="#b3202a">下層：血球</text></g>`;
+ const sv=$('#tubeSvg');sv.innerHTML=s;const T={pl:'<b>血漿</b>：主要成分是水，溶有養分、激素、代謝廢物；淡黃色。',wb:'<b>白血球與血小板</b>：數量少，在血漿與紅血球之間形成一層薄薄的白色層。',rb:'<b>紅血球</b>：數量最多，比較重，沉在最下層。'};
+ sv.querySelectorAll('.hot').forEach(h=>h.addEventListener('click',()=>{$('#tubeInfo').innerHTML=T[h.dataset.k];}));}
+function initS5(){tubeDraw();
+ sortGame($('#g5sort'),{title:'🔬 血液成分特徵分類',bins:[{k:'r',label:'紅血球'},{k:'w',label:'白血球'},{k:'p',label:'血小板'},{k:'m',label:'血漿'}],cards:[
+  {t:'含血紅素，攜帶氧氣',k:'r'},{t:'數量最多',k:'r'},{t:'雙凹圓盤狀、無細胞核',k:'r'},
+  {t:'有細胞核',k:'w'},{t:'體積最大、數量最少',k:'w'},{t:'吞噬病原體',k:'w'},{t:'產生抗體',k:'w'},
+  {t:'體積最小',k:'p'},{t:'形狀不規則',k:'p'},{t:'促使血液凝固',k:'p'},
+  {t:'主要成分是水',k:'m'},{t:'溶有養分、激素和廢物',k:'m'}]});
+ oxCards($('#ox5'),OX.s5);renderQSet($('#q5'),BANK.filter(q=>q.g==='s5'));}
+
+/* ================= S6 circulation animation ================= */
+const RED='#d63a3a',BLUE='#2f6fd0';
+const NODES=[[1,355,300,'❶ 左心室','體循環起點：把充氧血送入主動脈。'],[2,486,240,'❷ 主動脈','最粗的動脈，充氧血送往全身。'],[3,486,385,'❸ 小動脈','動脈越分越細。'],[4,280,450,'❹ 組織微血管','O₂ 擴散給細胞、CO₂ 進入血液 → 充氧血變缺氧血。'],[5,150,450,'❺ 小靜脈','缺氧血匯流。'],[6,66,320,'❻ 上、下大靜脈','把缺氧血送回右心房。'],[7,205,195,'❼ 右心房','體循環終點。'],[8,205,305,'❽ 右心室','肺循環起點：把缺氧血送入肺動脈。'],[9,300,150,'❾ 肺動脈','送缺氧血到肺（名稱是動脈，卻是缺氧血）。'],[10,330,22,'❿ 肺部微血管','CO₂ 擴散到肺泡、O₂ 進入血液 → 缺氧血變充氧血。'],[11,455,120,'⓫ 肺靜脈','送充氧血回左心房（名稱是靜脈，卻是充氧血）。'],[12,355,195,'⓬ 左心房','肺循環終點。']];
+const RT={body:[[[355,280],[470,280],[470,420],[280,420]],RED,[[280,420],[90,420],[90,210],[150,210],[205,210]],BLUE],
+ lung:[[[205,280],[280,280],[280,45],[330,45]],BLUE,[[330,45],[440,45],[440,210],[355,210]],RED],
+ rv:[[[205,210],[205,280]],BLUE],lv:[[[355,210],[355,280]],RED]};
+let cAnim=null;
+function circBase(){let s=`<rect width="560" height="470" fill="#fdfbf8"/>`;
+ s+=`<defs><linearGradient id="gL" x1="0" x2="1"><stop offset="0" stop-color="${BLUE}"/><stop offset="1" stop-color="${RED}"/></linearGradient><linearGradient id="gB" x1="0" x2="1"><stop offset="0" stop-color="${BLUE}"/><stop offset="1" stop-color="${RED}"/></linearGradient></defs>`;
+ s+=`<rect x="250" y="25" width="200" height="40" rx="10" fill="url(#gL)" opacity=".85"/><text x="350" y="50" font-size="14" fill="#fff" text-anchor="middle" font-weight="700">肺</text>`;
+ s+=`<rect x="160" y="400" width="320" height="40" rx="10" fill="url(#gB)" opacity=".85"/><text x="320" y="425" font-size="14" fill="#fff" text-anchor="middle" font-weight="700">全身組織</text>`;
+ const pl=(pts,c)=>`<polyline points="${pts.map(p=>p.join(',')).join(' ')}" fill="none" stroke="${c}" stroke-width="10" stroke-linejoin="round" opacity=".55"/>`;
+ s+=pl([[355,280],[470,280],[470,420]],RED)+pl([[160,420],[90,420],[90,210],[150,210]],BLUE)+pl([[260,280],[280,280],[280,45]],BLUE)+pl([[450,45],[440,45],[440,210],[410,210]],RED);
+ s+=`<rect x="150" y="160" width="110" height="90" rx="12" fill="${BLUE}"/><rect x="150" y="255" width="110" height="100" rx="12" fill="${BLUE}"/><rect x="300" y="160" width="110" height="90" rx="12" fill="${RED}"/><rect x="300" y="255" width="110" height="100" rx="12" fill="${RED}"/>`;
+ s+=`<g font-size="13" fill="#fff" font-weight="700" text-anchor="middle"><text x="205" y="225">右心房</text><text x="205" y="335">右心室</text><text x="355" y="225">左心房</text><text x="355" y="335">左心室</text></g>`;
+ NODES.forEach(n=>{s+=`<g class="hot nd" data-n="${n[0]}"><circle cx="${n[1]}" cy="${n[2]}" r="13" fill="#fff" stroke="#333" stroke-width="2"/><text x="${n[1]}" y="${n[2]+5}" font-size="13" text-anchor="middle" font-weight="700">${n[0]}</text></g>`;});
+ s+=`<circle id="cDot" cx="-20" cy="-20" r="10" fill="${RED}" stroke="#fff" stroke-width="3"/>`;
+ return s;}
+function circInit(){const sv=$('#circSvg');sv.innerHTML=circBase();sv.querySelectorAll('.nd').forEach(g=>g.addEventListener('click',()=>{const n=NODES[+g.dataset.n-1];$('#circInfo').innerHTML=`<h4>${n[3]}</h4>${n[4]}`;logIt('循環圖：'+n[3]);}));}
+function circRun(segs,label){cancelAnimationFrame(cAnim);const legs=[];segs.forEach(sg=>{for(let i=0;i<sg.length;i+=2){const pts=sg[i],c=sg[i+1];for(let k=0;k<pts.length-1;k++){const a=pts[k],b=pts[k+1];legs.push({a,b,c,len:Math.hypot(b[0]-a[0],b[1]-a[1])});}}});
+ const total=legs.reduce((x,l)=>x+l.len,0);const t0=performance.now();const dot=$('#cDot');
+ const f=now=>{let d=(now-t0)/1000*150;if(d>total)d=total;let acc=0;for(const l of legs){if(acc+l.len>=d){const r=(d-acc)/l.len;dot.setAttribute('cx',l.a[0]+(l.b[0]-l.a[0])*r);dot.setAttribute('cy',l.a[1]+(l.b[1]-l.a[1])*r);dot.setAttribute('fill',l.c);break;}acc+=l.len;}
+  if(d<total)cAnim=requestAnimationFrame(f);};cAnim=requestAnimationFrame(f);logIt('循環動畫 '+label);
+ $('#circInfo').innerHTML=label==='body'?'<b>體循環</b>：❶左心室 → ❷主動脈 → ❸小動脈 → ❹組織微血管（變缺氧血）→ ❺小靜脈 → ❻大靜脈 → ❼右心房':label==='lung'?'<b>肺循環</b>：❽右心室 → ❾肺動脈 → ❿肺部微血管（變充氧血）→ ⓫肺靜脈 → ⓬左心房':'<b>完整一圈</b>：左心室 → 全身 → 右心房 → 右心室 → 肺 → 左心房 → 左心室';}
+function initS6(){circInit();$('#cBody').onclick=()=>circRun([RT.body],'body');$('#cLung').onclick=()=>circRun([RT.lung],'lung');$('#cAll').onclick=()=>circRun([RT.body,RT.rv,RT.lung,RT.lv],'all');
+ orderGame($('#g6order1'),{title:'🔴 體循環排序',prompt:'由「左心室」開始排列：',items:['左心室','主動脈','小動脈','組織微血管','小靜脈','上、下大靜脈','右心房']});
+ orderGame($('#g6order2'),{title:'💉 腳背靜脈注射 → 藥物到達腦部',prompt:'依血液流經的順序排列：',items:['下大靜脈','右心房','右心室','肺動脈','肺部微血管','肺靜脈','左心房','左心室','主動脈','腦部微血管'],pts:2,hint:'先回心臟右邊 → 去肺 → 回心臟左邊 → 送全身。'});
+ sortGame($('#g6sort'),{title:'🔴🔵 充氧血？缺氧血？',bins:[{k:'o',label:'🔴 充氧血'},{k:'d',label:'🔵 缺氧血'}],cards:[
+  {t:'主動脈',k:'o'},{t:'肺靜脈',k:'o',w:'剛從肺得到氧氣。'},{t:'左心房',k:'o'},{t:'左心室',k:'o'},
+  {t:'肺動脈',k:'d',w:'要送去肺排出二氧化碳。',hint:'肺動脈的血要「去」肺做什麼？'},{t:'上大靜脈',k:'d'},{t:'下大靜脈',k:'d'},{t:'右心房',k:'d'},{t:'右心室',k:'d'}]});
+ oxCards($('#ox6'),OX.s6);renderQSet($('#q6'),BANK.filter(q=>q.g==='s6'));}
+
+/* ================= S7 lymph ================= */
+function initS7(){orderGame($('#g7order'),{title:'🔄 淋巴的形成與循環',prompt:'依序排列：',items:['血液中的血漿','從微血管滲出成為組織液','滲入淋巴管成為淋巴','流經淋巴結被過濾','注入靜脈回到血液']});
+ sortGame($('#g7sort'),{title:'🔬 含有紅血球嗎？',bins:[{k:'y',label:'✅ 含紅血球'},{k:'n',label:'❌ 不含紅血球'}],cards:[
+  {t:'動脈中的血液',k:'y'},{t:'靜脈中的血液',k:'y'},{t:'微血管中的血液',k:'y'},{t:'血漿',k:'n'},{t:'組織液',k:'n',w:'只有血漿部分物質滲出。'},{t:'淋巴',k:'n',hint:'淋巴是由什麼滲進淋巴管形成的？'}]});
+ oxCards($('#ox7'),OX.s7);renderQSet($('#q7'),BANK.filter(q=>q.g==='s7'));}
+
+/* ================= S8 defense & vaccine ================= */
+let VAC='no';
+function vacDraw(){const X=t=>60+t*4.7,Y=v=>250-v*2;const bell=(t0,peak,w,rise)=>{let d='';for(let t=0;t<=100;t+=1){let v=0;const dt=t-t0;if(dt>0)v=peak*Math.exp(-Math.pow((dt-rise)/w,2));d+=(t?'L':'M')+X(t).toFixed(1)+' '+Y(v).toFixed(1);}return d;};
+ let s=`<rect width="560" height="300" fill="#fff"/><line x1="60" y1="250" x2="540" y2="250" stroke="#333" marker-end="url(#arw)"/><line x1="60" y1="250" x2="60" y2="20" stroke="#333" marker-end="url(#arw)"/><text x="530" y="272" font-size="13">時間</text><text x="66" y="22" font-size="13">專一性防禦作用強度（如抗體濃度）</text>`;
+ if(VAC==='no'){s+=`<path d="${bell(30,30,13,18)}" fill="none" stroke="#2f6fd0" stroke-width="4"/><line x1="${X(30)}" y1="250" x2="${X(30)}" y2="200" stroke="#c0392b" stroke-dasharray="4 3"/><text x="${X(30)-10}" y="195" font-size="13" fill="#c0392b">病原體入侵（第一次）</text><text x="${X(52)}" y="${Y(36)}" font-size="13" fill="#2f6fd0">反應慢、強度弱</text>`;}
+ else{s+=`<path d="${bell(10,25,11,15)}" fill="none" stroke="#2f6fd0" stroke-width="4"/><path d="${bell(60,95,10,7)}" fill="none" stroke="#e67e22" stroke-width="4"/><path d="${bell(60,30,13,18)}" fill="none" stroke="#999" stroke-width="2" stroke-dasharray="6 5"/>`;
+  s+=`<line x1="${X(10)}" y1="250" x2="${X(10)}" y2="215" stroke="#23824f" stroke-dasharray="4 3"/><text x="${X(10)-30}" y="210" font-size="13" fill="#23824f">💉 注射疫苗</text><line x1="${X(60)}" y1="250" x2="${X(60)}" y2="215" stroke="#c0392b" stroke-dasharray="4 3"/><text x="${X(60)-36}" y="270" font-size="13" fill="#c0392b">病原體入侵</text>`;
+  s+=`<text x="${X(22)}" y="${Y(32)}" font-size="13" fill="#2f6fd0">第一次反應</text><text x="${X(70)}" y="${Y(98)}" font-size="13" fill="#e67e22">第二次反應：快又強</text><text x="${X(78)}" y="${Y(20)}" font-size="12" fill="#888">（若沒打疫苗）</text>`;}
+ $('#vacSvg').innerHTML=s;$('#vacOut').innerHTML=VAC==='no'?'第一次感染：專一性防禦<b>反應慢、強度弱</b>，病原體可能先造成傷害。':'先注射疫苗（第一次反應）→ 身體產生<b>記憶</b>；之後真正感染相同病原體時，特定白血球大量增生 → <b>反應更快、強度更強</b>（橘色曲線），比沒打疫苗（灰色虛線）好得多。';}
+function initS8(){$$('#vacSel button').forEach(b=>b.onclick=()=>{$$('#vacSel button').forEach(x=>x.classList.remove('on'));b.classList.add('on');VAC=b.dataset.v;vacDraw();logIt('疫苗圖 '+VAC);});vacDraw();
+ sortGame($('#g8sort'),{title:'🛡️ 屬於哪一道防禦？',bins:[{k:1,label:'① 皮膜的阻隔'},{k:2,label:'② 吞噬作用與發炎反應'},{k:3,label:'③ 專一性防禦'}],cards:[
+  {t:'完整的皮膚阻擋細菌',k:1},{t:'鼻腔黏液黏住灰塵與病原體',k:1},{t:'眼淚中抑制細菌的物質',k:1},{t:'胃液中的鹽酸殺菌',k:1,w:'消化道的鹽酸、酵素屬第一道。',hint:'胃酸是「白血球」的功能嗎？'},
+  {t:'白血球吞噬入侵的細菌',k:2},{t:'傷口紅、熱、腫、痛',k:2},{t:'白血球大量聚集在傷口',k:2},
+  {t:'白血球產生抗體',k:3},{t:'破壞被病毒感染的細胞',k:3},{t:'具有記憶性',k:3},{t:'接種疫苗的原理',k:3}]});
+ oxCards($('#ox8'),OX.s8);renderQSet($('#q8'),BANK.filter(q=>q.g==='s8'));}
+/* ================= S9 challenge ================= */
+const C9={m:'round',u:'all',l:0};
+function c9pool(){return BANK.filter(q=>(C9.u==='all'||q.u===C9.u)&&(!C9.l||q.lv===C9.l));}
+function c9render(){const a=$('#c9area');a.innerHTML='';
+ if(C9.m==='wrong'){const list=BANK.filter(q=>S.wrong.has(q.id));
+  if(!list.length){a.append(el('div',{class:'result'},'📕 錯題本是空的！答錯的題目會自動收進來。'));return;}
+  a.append(el('div',{class:'tip',style:'font-size:1em'},`共有 ${list.length} 題待重練；答對就會移出錯題本。`));const box=el('div');a.append(box);
+  shuffle(list).forEach((q,i)=>renderQ(box,q,{num:i+1}));return;}
+ const pool=c9pool();if(!pool.length){a.textContent='此範圍沒有題目';return;}
+ if(C9.m==='round'){const qs=shuffle(pool).slice(0,10);let i=0,right=0,pts0=S.pts;const head=el('div',{class:'gbar'}),body=el('div');a.append(head,body);
+  const show=()=>{head.innerHTML='';body.innerHTML='';
+   if(i>=qs.length){body.append(el('div',{class:'result'},`🎉 闖關結束！答對 ${right}／${qs.length} 題，本回合得 ⭐${S.pts-pts0} 分 ${right===qs.length?'🏆 全對！':''}`),el('button',{class:'btn',onclick:c9render},'🔁 再闖一關'));logIt(`闖關結束 ${right}/${qs.length}`);return;}
+   head.append(el('b',null,`第 ${i+1}／${qs.length} 題`),el('span',{class:'tip'},`目前答對 ${right}`));
+   renderQ(body,qs[i],{num:i+1,onAns:ok=>{if(ok)right++;body.append(el('button',{class:'btn',onclick:()=>{i++;show();}},i+1<qs.length?'下一題 ▶':'看結果 ▶'));}});};show();}
+ else{const area=el('div');a.append(el('div',{class:'tip',style:'font-size:1em'},`規則：60 秒內連續作答；答對得該題分數（★+1、★★+2），答錯 −1 並停 1 秒看正解。目前最佳：${S.best} 分`),el('button',{class:'btn',onclick:start},'⚡ 開始 60 秒'),area);
+  function start(){let left=60,score=0,n=0,cnt=0;const qs=shuffle(pool);area.innerHTML='';
+   const clk=el('div',{class:'gbar'},el('span',{class:'gclock'},'60'),el('span',{class:'rf'},'得分：'),el('span',{class:'rfbig'},'0'),el('span',{class:'rf'},'　已答：'),el('span',{class:'rf'},'0'));const qa=el('div');area.append(clk,qa);
+   const iv=setInterval(()=>{left--;clk.children[0].textContent=left;if(left<=0){clearInterval(iv);finish();}},1000);
+   function next(){qa.innerHTML='';if(left<=0)return;const q=qs[n++%qs.length];renderQ(qa,q,{noPts:true,onAns:ok=>{cnt++;score+=ok?q.lv:-1;clk.children[2].textContent=score;clk.children[4].textContent=cnt;setTimeout(next,ok?350:1100);}});}
+   function finish(){qa.innerHTML='';const nb=score>S.best;if(nb)S.best=score;if(score>0)addPts(score,'60秒快問快答');renderMe();area.append(el('div',{class:'result'},`⏰ 時間到！共答 ${cnt} 題，得 ${score} 分 ${nb?'🏅 新紀錄！':''}`),el('button',{class:'btn',onclick:c9render},'↺ 再挑戰'));logIt(`快問快答 ${score} 分`);}
+   next();}}}
+function initS9(){
+ [['#c9mode','m'],['#c9unit','u'],['#c9lv','l']].forEach(([id,key])=>$$(id+' button').forEach(b=>b.onclick=()=>{$$(id+' button').forEach(x=>x.classList.remove('on'));b.classList.add('on');let v=b.dataset[key];if(key==='l')v=+v;C9[key]=v;c9render();}));c9render();}
+
+/* ================= S10 ================= */
+const SELF=['我能說出木質部與韌皮部的功能和位置（葉：木上韌下；莖：木內韌外）','我能分辨環狀排列與散生排列，說明形成層的作用','我能解釋樹皮、木材、年輪，以及環剝樹皮會死的原因','我能說明蒸散作用、根毛、保衛細胞與氣孔的功能','我能說出心臟四個腔室與相連的血管','我能比較動脈、微血管、靜脈','我能比較三種血球與血漿','我能依序說出體循環與肺循環，判斷充氧血與缺氧血','我能說明血漿、組織液、淋巴的關係與淋巴結功能','我能分辨三道防禦，並說明疫苗的原理'];
+function initS10(){const ul=$('#selfchk');SELF.forEach(t=>{const cb=el('input',{type:'checkbox'});cb.onchange=upd;ul.append(el('li',null,el('label',null,cb,t)));});
+ function upd(){const n=$$('#selfchk input:checked').length;$('#selfSum').textContent=`已掌握 ${n}／${SELF.length} 項 ${n===SELF.length?'🎉 準備好了！':n>=7?'💪 再把沒勾的練一次':'📖 回到對應段落再練習'}`;logIt(`自評 ${n}/${SELF.length}`);}upd();}
+
+/* ================= log ================= */
+function downloadLog(){const rate=S.ans?Math.round(S.right/S.ans*100):0;const head=[`自然1上 第3章 生物的運輸與防禦｜個人複習紀錄`,`學生：${S.who}`,`日期：${new Date().toLocaleString('zh-TW')}`,'',`積分：${S.pts}`,`答題：${S.right}／${S.ans}（${rate}%）`,`明正辨反：${S.ox[0]}／${S.ox[1]}`,`60秒快問快答最佳：${S.best}`,`已瀏覽段落：${[...S.seen].sort((a,b)=>a-b).join('、')}`,'','【錯題本（待重練）】',...BANK.filter(q=>S.wrong.has(q.id)).map(q=>`・${q.u}（P${q.p}）${q.q}`),'','【自評】',...$$('#selfchk li').map(li=>(li.querySelector('input').checked?'☑ ':'☐ ')+li.textContent),'','【過程紀錄】'];
+ const blob=new Blob([head.join('\n')+'\n'+S.log.join('\n')],{type:'text/plain;charset=utf-8'});const a=el('a',{href:URL.createObjectURL(blob),download:`第3章生物的運輸與防禦_個人複習紀錄_${S.who.replace(/\s/g,'')}_${new Date().toISOString().slice(0,10)}.txt`});document.body.append(a);a.click();a.remove();}
+
+/* ================= login & boot ================= */
+document.addEventListener('keydown',e=>{const tg=e.target.tagName;if(tg==='INPUT'||tg==='SELECT'||tg==='TEXTAREA')return;
+ if(e.key==='Escape'){closeViewer();return;}const k=e.key.toLowerCase();
+ if(e.key==='ArrowRight')go(S.cur+1);else if(e.key==='ArrowLeft')go(S.cur-1);else if(e.key===' '){e.preventDefault();tToggle();}else if(k==='f')cycleZoom();});
+const SCORE_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzM-Wx3_QHqLR9yrIUTaM2X6qrgkhSWDrcSgWVoqmrd6aMc5L46FGVNr61auLCYPkQM6A/exec';
+const TEST_VERSION = 'biology-701-3-v1';
+const TEST_KEY = TEST_VERSION + ':assessment:';
+const TEST_UNITS = {
+ '3-1':'植物的運輸構造',
+ '3-2':'植物體內的運輸',
+ '3-3':'人體內的運輸',
+ '3-4':'人體的防禦作用'
+};
+const ASSESSMENT_TOTAL=10;
+const ASSESSMENT_SIZE=4;
+let activeUnit='3-1';
+let currentTest=null;
+let questionIndex=0;
+
+function openUnitTest(unit, navigate=true){
+ activeUnit=unit;
+ currentTest=restoreTest();
+ questionIndex=currentTest ? Math.max(0,currentTest.answers.indexOf(null)) : 0;
+ if(navigate)go(11);
+ renderAssessment(false);
+}
+
+function restoreTest(){
+ try {
+  const saved=JSON.parse(localStorage.getItem(TEST_KEY+activeUnit));
+  if(!saved || typeof saved.id!=='string' || !/^[a-f0-9]{32}$/.test(saved.id))return null;
+  if(!Array.isArray(saved.items)||!Array.isArray(saved.answers)||saved.items.length!==ASSESSMENT_TOTAL||saved.answers.length!==ASSESSMENT_TOTAL)return null;
+  const ids=new Set();
+  for(let i=0;i<ASSESSMENT_TOTAL;i++){
+   const item=saved.items[i];
+   if(!item||!Number.isInteger(item.bankIndex)||BANK[item.bankIndex]?.u!==activeUnit||ids.has(item.bankIndex))return null;
+   if(!Array.isArray(item.order)||item.order.length!==ASSESSMENT_SIZE||new Set(item.order).size!==ASSESSMENT_SIZE||
+      !item.order.every(x=>Number.isInteger(x)&&x>=0&&x<ASSESSMENT_SIZE))return null;
+   if(saved.answers[i]!==null && !item.order.includes(saved.answers[i]))return null;
+   ids.add(item.bankIndex);
+  }
+  if(saved.finished&&saved.answers.includes(null))return null;
+  return saved;
+ } catch(error){return null;}
+}
+
+function saveTest(){
+ try{localStorage.setItem(TEST_KEY+activeUnit,JSON.stringify(currentTest));return true;}
+ catch(error){return false;}
+}
+
+function startAssessment(){
+ const candidates=BANK.filter(question=>question.u===activeUnit);
+ const items=shuffle(candidates).slice(0,ASSESSMENT_TOTAL)
+  .map(({id:bankIndex})=>({bankIndex,order:shuffle([0,1,2,3])}));
+ const bytes=crypto.getRandomValues(new Uint8Array(16));
+ const id=Array.from(bytes,byte=>byte.toString(16).padStart(2,'0')).join('');
+ currentTest={id,items,answers:items.map(()=>null),finished:false};
+ questionIndex=0;
+ saveTest();
+ renderAssessment(true);
+}
+
+function renderAssessment(focusHeading){
+ const box=$('#assessment');
+ box.textContent='';
+ const units=el('div',{class:'seg','aria-label':'選擇測驗小節'});
+ for(const unit of Object.keys(TEST_UNITS)){
+  units.append(el('button',{class:unit===activeUnit?'on':'','aria-pressed':String(unit===activeUnit),
+   onclick:()=>openUnitTest(unit,false)},unit+' '+TEST_UNITS[unit]));
+ }
+ $('#testUnitNav').replaceChildren(units);
+ if(!currentTest){
+  box.append(el('h3',null,activeUnit+' '+TEST_UNITS[activeUnit]),
+   el('p',null,'隨機抽出 10 題，每題 10 分。交卷前可返回修改答案。'),
+   el('button',{class:'btn',onclick:startAssessment},'開始 10 題測驗'));
+ }else if(currentTest.finished){
+  renderAssessmentResult(box);
+ }else{
+  renderAssessmentQuestion(box);
+ }
+ if(focusHeading){
+  const heading=box.querySelector('h3');
+  heading.tabIndex=-1;
+  heading.focus();
+ }
+}
+
+function renderAssessmentQuestion(box){
+ const {items,answers}=currentTest;
+ const item=items[questionIndex];
+ const q=BANK[item.bankIndex];
+ const answered=answers.filter(a=>a!==null).length;
+ const live=el('p',{class:'assessment-status',role:'status'},'已作答 '+answered+'／'+items.length+' 題');
+ const opts=el('div',{class:'opts',role:'group','aria-label':'選擇答案'});
+ const message=el('p',{role:'status'});
+ const next=el('button',{class:'btn',disabled:''},questionIndex<items.length-1?'下一題':'交卷計分');
+ const goNext=()=>{
+  if(questionIndex<items.length-1){questionIndex++;renderAssessment(true);return;}
+  const unanswered=answers.indexOf(null);
+  if(unanswered>=0){
+   questionIndex=unanswered;
+   renderAssessment(true);
+   $('#assessment .assessment-error').textContent='請答完所有題目再交卷，已回到第一道未答題。';
+   return;
+  }
+  currentTest.finished=true;
+  saveTest();
+  renderAssessment(true);
+ };
+ next.onclick=goNext;
+ next.disabled=answers[questionIndex]===null;
+ item.order.forEach((option,i)=>{
+  const button=el('button',{class:'opt',type:'button','aria-pressed':String(answers[questionIndex]===option)},'('+'ABCD'[i]+') '+q.o[option]);
+  button.onclick=()=>{
+   answers[questionIndex]=option;
+   for(const sibling of opts.children)sibling.setAttribute('aria-pressed',String(sibling===button));
+   live.textContent='已作答 '+answers.filter(a=>a!==null).length+'／'+items.length+' 題';
+   next.disabled=false;
+   if(!saveTest())message.textContent='這個瀏覽器無法儲存進度，請先完成測驗再關閉網頁。';
+  };
+  opts.append(button);
+ });
+ message.className='assessment-error';
+ const prev=el('button',{class:'btn ghost',onclick:()=>{questionIndex--;renderAssessment(true);}},'上一題');
+ prev.disabled=questionIndex===0;
+ box.append(el('h3',null,'第 '+(questionIndex+1)+'／'+items.length+' 題'),live,
+  el('p',{class:'qtext'},q.q),opts,el('div',{class:'assessment-nav'},prev,next),message);
+}
+
+function assessmentSummary(){
+ const mistakes=[];
+ currentTest.items.forEach((item,i)=>{
+  const q=BANK[item.bankIndex];
+  const chosen=currentTest.answers[i];
+  if(chosen!==q.a)mistakes.push({q,number:i+1,chosen});
+ });
+ const total=currentTest.items.length;
+ const correct=total-mistakes.length;
+ return {mistakes,correct,total,percent:10*correct};
+}
+
+function renderAssessmentResult(box){
+ const result=assessmentSummary();
+ box.append(el('h3',null,activeUnit+' '+TEST_UNITS[activeUnit]+'｜測驗成績'),
+  el('p',{class:'assessment-score'},result.percent+' 分（'+result.correct+'／'+result.total+' 題）'));
+ if(result.mistakes.length){
+  const review=el('details',{class:'assessment-review'},el('summary',null,'查看錯題與解析（'+result.mistakes.length+' 題）'));
+  for(const {q,number,chosen} of result.mistakes){
+   review.append(el('div',{class:'qcard'},el('strong',null,number+'. '+q.q),
+    el('div',null,'你的答案｜'+q.o[chosen]),el('div',null,'正確答案｜'+q.o[q.a]),
+    el('div',null,'解析｜'+q.e)));
+  }
+  box.append(review);
+ }
+ box.append(buildScoreForm(result));
+ const reset=el('button',{class:'btn ghost',onclick:()=>{
+  if(window.confirm('重測會替換這台裝置上的本小節成績。如果要保留這次成績，請先上傳。確定重新測驗？'))startAssessment();
+ }},'重新測驗');
+ box.append(reset);
+}
+
+function buildScoreForm(result){
+ const endpoint=/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(SCORE_ENDPOINT)?SCORE_ENDPOINT:'';
+ const form=el('form',{method:'post',target:'_blank',rel:'noopener'});
+ const identity=el('div',{class:'assessment-identity'});
+ const classNo=el('input',{name:'classNo',type:'text',inputmode:'numeric',pattern:'[0-9]{3}',maxlength:'3',required:'',value:'701',readonly:'',autocomplete:'off'});
+ const seat=el('input',{name:'seat',type:'text',inputmode:'numeric',pattern:'[0-9]{1,2}',maxlength:'2',required:'',autocomplete:'off'});
+ const code=el('input',{name:'classCode',type:'text',pattern:'[A-Za-z0-9]{6,16}',maxlength:'16',required:'',autocomplete:'off',autocapitalize:'off'});
+ identity.append(el('label',null,'班級',classNo),el('label',null,'座號',seat));
+ if(endpoint)identity.append(el('label',null,'老師提供的上傳代碼',code));
+ const status=el('p',{class:'assessment-status',role:'status'},endpoint
+  ?'送出後會開啟成績收件頁。請確認畫面顯示「成績已收到」。'
+  :'老師的收件端尚未啟用。目前可下載成績。');
+ form.append(el('h4',null,'上傳個人成績'),identity,status);
+ const download=el('button',{class:'btn alt',type:'button',onclick:()=>{
+  if(!classNo.reportValidity()||!seat.reportValidity()||Number(seat.value)<1){
+   status.textContent='請輸入三位數班級及正確座號。';return;
+  }
+  const content=['第3章 生物的運輸與防禦｜'+activeUnit+' '+TEST_UNITS[activeUnit],'班級 '+classNo.value+'｜座號 '+seat.value,
+   '成績 '+result.percent+' 分（'+result.correct+'／'+result.total+' 題）',
+   '測驗編號 '+currentTest.id].join('\n');
+  const url=URL.createObjectURL(new Blob([content],{type:'text/plain;charset=utf-8'}));
+  const link=el('a',{href:url,download:'biology-701-'+activeUnit+'-score.txt'});
+  document.body.append(link);link.click();link.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+ }},'下載成績');
+ const actions=el('div',{class:'assessment-nav'},download);
+ if(endpoint){
+  form.action=endpoint;
+  const payload=el('input',{type:'hidden',name:'attempt'});
+  form.append(payload);
+  actions.prepend(el('button',{class:'btn',type:'submit'},'上傳成績'));
+  form.addEventListener('submit',event=>{
+   if(Number(seat.value)<1){
+    event.preventDefault();status.textContent='座號必須大於 0。';seat.focus();return;
+   }
+   payload.value=JSON.stringify({version:TEST_VERSION,unit:activeUnit,id:currentTest.id,answers:currentTest.items.map((item,i)=>[item.bankIndex,currentTest.answers[i]])});
+   status.textContent='請查看新分頁的收件結果。若連線中斷，可重送同一筆成績。';
+  });
+ }else{
+  form.addEventListener('submit',event=>event.preventDefault());
+ }
+ form.append(actions);
+ return form;
+}
+
+function boot(){buildDots();fillMins();
+ [initS0,initS1,initS2,initS3,initS4,initS5,initS6,initS7,initS8,initS9,initS10].forEach(f=>{try{f();}catch(err){console.error(f.name,err);}});
+ openUnitTest('3-1',false);go(0);tRender();}
+boot();
+
+</script>
+</body>
+</html>
