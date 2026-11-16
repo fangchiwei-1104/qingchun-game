@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>701 自然1上 第2章 養分｜個人段考複習</title>
+<style>
+:root{--zoom:1;--bg:#f5f1e8;--ink:#1f2a37;--pri:#b4532a;--pri2:#1e6f8c;--ok:#23824f;--bad:#c0392b;--warn:#e67e22;--card:#fff;--line:#e2d9c6;--gold:#f1c40f;--soft:#fbf8f2}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Microsoft JhengHei","微軟正黑體","PingFang TC","Noto Sans TC",sans-serif;background:var(--bg);color:var(--ink);font-size:21px;line-height:1.6}
+button{font-family:inherit;cursor:pointer}
+/* ---------- header ---------- */
+header{position:sticky;top:0;z-index:50;background:#2b2118;color:#fff;box-shadow:0 2px 10px #0005;font-size:15px;line-height:1.3}
+.hrow{display:flex;align-items:center;gap:8px;padding:6px 10px;flex-wrap:wrap}
+.htitle{font-weight:700;font-size:16px;white-space:nowrap;color:#ffd9a8}
+.dots{display:flex;gap:4px;flex-wrap:wrap}
+.dot{border:1px solid #fff5;border-radius:14px;padding:3px 9px;background:#ffffff12;color:#fff;font-size:13px}
+.dot.on{background:var(--pri);border-color:#ffb37f;font-weight:700}
+.dot.seen{border-color:#9fe0b8}
+.tools{margin-left:auto;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.hbtn{background:#ffffff1c;color:#fff;border:1px solid #fff5;border-radius:8px;padding:4px 8px;font-size:14px}
+.hbtn:hover{background:#ffffff33}
+.hbtn.on{background:#ffb37f;color:#2b2118}
+.timer{display:flex;align-items:center;gap:3px;background:#0006;border-radius:10px;padding:3px 6px}
+.timer .hbtn{padding:3px 6px;font-size:13px}
+#tdisp{font:700 24px/1 Consolas,"Courier New",monospace;min-width:84px;text-align:center;padding:4px 6px;border-radius:6px;background:#ffffff1a}
+#tdisp.run{background:#23824f}
+#tdisp.warn{background:#e67e22}
+#tdisp.over{background:#c0392b;animation:blink 1s infinite}
+@keyframes blink{50%{opacity:.45}}
+.scorebar{display:none;padding:6px 10px 8px;border-top:1px solid #fff3;gap:8px;flex-wrap:wrap;align-items:center}
+.scorebar.open{display:flex}
+.gchip{display:flex;align-items:center;gap:4px;background:#ffffff18;border:1px solid #fff4;border-radius:10px;padding:3px 6px}
+.gchip b{font-size:15px}
+.gchip .sc{font:700 22px/1 Consolas,monospace;min-width:34px;text-align:center}
+.gchip button{background:#fff2;border:1px solid #fff6;color:#fff;border-radius:6px;padding:1px 6px;font-size:13px}
+.gchip.lead{background:var(--gold);color:#2b2118;border-color:#fff}
+.gchip.lead button{color:#2b2118;border-color:#2b211866}
+.gchip.bump{animation:bump .5s}
+@keyframes bump{40%{transform:scale(1.15)}}
+/* ---------- main ---------- */
+main{font-size:calc(21px*var(--zoom));max-width:1320px;margin:0 auto;padding:14px 18px 90px}
+.stage{display:none;animation:fade .35s}
+.stage.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+.shead{display:flex;align-items:center;gap:.5em;flex-wrap:wrap;margin:.2em 0 .5em}
+.snum{background:var(--pri);color:#fff;border-radius:50%;width:1.8em;height:1.8em;display:flex;align-items:center;justify-content:center;font-weight:700}
+.shead h2{margin:0;font-size:1.45em}
+.pg{background:#1e6f8c;color:#fff;border-radius:8px;padding:.05em .5em;font-size:.8em}
+.smin{background:#eadfca;border-radius:8px;padding:.05em .5em;font-size:.8em}
+.smin button{font-size:.9em;border:1px solid #b9a982;background:#fff;border-radius:6px;margin-left:.3em}
+.goal{background:#fff7e6;border-left:6px solid #f0a33a;padding:.5em .8em;border-radius:8px;margin:.4em 0 .8em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:.8em 1em;margin:.7em 0;box-shadow:0 1px 4px #0000000d}
+.card h3{margin:.1em 0 .45em;font-size:1.15em;color:#7a3416}
+.card h4{margin:.4em 0 .3em;font-size:1em;color:#1e6f8c}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:.9em}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:.9em}
+body[data-z="1"] .g3{grid-template-columns:1fr 1fr}
+body[data-z="2"] .g2,body[data-z="3"] .g2,body[data-z="4"] .g2,body[data-z="2"] .g3,body[data-z="3"] .g3,body[data-z="4"] .g3{grid-template-columns:1fr}
+.tag{display:inline-block;background:#eef5f8;color:#1e6f8c;border-radius:6px;padding:0 .4em;font-size:.8em;margin-right:.3em}
+.key{background:#fff3c4;padding:0 .2em;border-radius:4px;font-weight:700}
+.red{color:#c0392b;font-weight:700}.blue{color:#1e6f8c;font-weight:700}.grn{color:#23824f;font-weight:700}
+table.t{border-collapse:collapse;width:100%;font-size:.92em}
+table.t th,table.t td{border:1px solid #d9cfb9;padding:.3em .45em;text-align:center}
+table.t th{background:#f3eadb}
+.formula{font-family:"Cambria Math","Times New Roman",serif;background:#eef6ff;border:1px dashed #7aa7cf;border-radius:8px;padding:.3em .6em;display:inline-block;margin:.2em 0}
+/* figures */
+figure.fig{margin:.4em 0;text-align:center}
+figure.fig img{max-width:100%;max-height:22em;border-radius:10px;border:1px solid #ddd;cursor:zoom-in;background:#fff}
+figure.fig figcaption{font-size:.78em;color:#555}
+.svgbox{position:relative;background:#fff;border:1px solid var(--line);border-radius:12px;padding:.3em}
+.svgbox svg{width:100%;height:auto;display:block}
+.zbtn{position:absolute;right:.3em;top:.3em;font-size:.75em;background:#ffffffd9;border:1px solid #aaa;border-radius:6px;padding:0 .4em;z-index:2}
+/* buttons */
+.btn{background:var(--pri);color:#fff;border:none;border-radius:10px;padding:.35em .9em;font-size:.95em;margin:.15em}
+.btn.alt{background:#1e6f8c}.btn.ghost{background:#fff;color:#7a3416;border:1px solid #c9a98f}
+.btn.sm{font-size:.8em;padding:.2em .6em}
+.btn.on{outline:3px solid #f1c40f}
+.seg{display:flex;flex-wrap:wrap;gap:.3em;margin:.3em 0}
+.seg button{border:1px solid #c9a98f;background:#fff;border-radius:999px;padding:.2em .8em;font-size:.9em}
+.seg button.on{background:#7a3416;color:#fff;border-color:#7a3416}
+input[type=range]{width:100%}
+/* scaffold */
+.scaf{background:#f0f7f2;border:1px solid #b8dcc5;border-radius:10px;padding:.4em .7em;margin:.5em 0}
+.scaf .q{font-weight:700;color:#23824f}
+.scaf ol{margin:.3em 0 .1em 1.2em;padding:0}
+.scaf li{display:none}.scaf li.show{display:list-item;animation:fade .3s}
+/* OX */
+.oxgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(19em,1fr));gap:.7em}
+.ox{background:#fff;border:2px solid #e2d9c6;border-radius:12px;padding:.6em .8em;display:flex;flex-direction:column;gap:.4em}
+.ox .st{font-weight:700}
+.ox .ob{display:flex;gap:.4em}
+.ox .ob button{flex:1;font-size:1.2em;border-radius:10px;border:2px solid #ccc;background:#fafafa;padding:.1em}
+.ox .ob button.pick{border-color:#1e6f8c;background:#e5f2f7}
+.ox .ob button.btn{background:#1e6f8c;color:#fff;border-color:#1e6f8c;font-size:.85em;flex:.8}
+.ox .rv{display:none;font-size:.92em;border-top:1px dashed #ccc;padding-top:.35em}
+.ox.done .rv{display:block}
+.ox.ok{border-color:#23824f;background:#f2fbf5}.ox.ng{border-color:#c0392b;background:#fdf3f2}
+.ox.done.pendingAns{border-color:#e2d9c6;background:#fff}
+.fix{color:#23824f;font-weight:700}
+/* quiz */
+.qcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:.7em .9em;margin:.6em 0}
+.qtag{font-size:.75em;color:#1e6f8c}
+.qtext{font-weight:700;margin:.25em 0 .4em}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:.4em}
+body[data-z="3"] .opts,body[data-z="4"] .opts{grid-template-columns:1fr}
+.opt{text-align:left;background:#fbf8f2;border:2px solid #e4dccb;border-radius:10px;padding:.35em .6em;font-size:.95em}
+.opt:hover{border-color:#b4532a}
+.opt.right{background:#dff5e7;border-color:#23824f}
+.opt.wrong{background:#fde2df;border-color:#c0392b;animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.exp{margin-top:.5em;background:#f7fbff;border-radius:10px;padding:.5em .7em;border:1px solid #cfe2f1}
+.hidden{display:none!important}
+.okline{color:#23824f;font-weight:700}.badline{color:#c0392b;font-weight:700}
+.misc{color:#9b3d12;margin-top:.2em}
+.hintbtn{font-size:.8em;border:1px dashed #23824f;color:#23824f;background:#fff;border-radius:8px;margin-top:.3em}
+.hintbox{font-size:.9em;color:#23824f;margin-top:.2em}
+.award{margin-top:.45em;display:flex;flex-wrap:wrap;gap:.3em;align-items:center;font-size:.85em}
+.abtn{border:1px solid #b4532a;background:#fff;color:#b4532a;border-radius:8px;padding:.1em .55em}
+.abtn.given{background:#b4532a;color:#fff}
+.abtn.ghost{border-color:#999;color:#666}
+/* games */
+.game{background:#fff;border:2px solid #d8c7a8;border-radius:14px;padding:.6em .8em;margin:.6em 0}
+.gbar{display:flex;align-items:center;gap:.6em;flex-wrap:wrap;margin-bottom:.4em}
+.gclock{font:700 1.3em Consolas,monospace;background:#2b2118;color:#fff;border-radius:8px;padding:0 .5em}
+.pool{display:flex;flex-wrap:wrap;gap:.4em;min-height:2.4em;padding:.3em;border-radius:10px;background:#f7f2e8}
+.chip{border:2px solid #c9a98f;background:#fff;border-radius:10px;padding:.15em .6em;font-size:.95em}
+.chip.sel{background:#ffe8a3;border-color:#e0a800;transform:scale(1.06)}
+.chip.good{background:#dff5e7;border-color:#23824f;cursor:default}
+.chip.bad{animation:shake .4s;border-color:#c0392b}
+.bins{display:grid;gap:.5em;margin-top:.5em}
+.bin{border:2px dashed #b4532a;border-radius:12px;padding:.35em;min-height:4.5em;background:#fffaf3}
+.bin h5{margin:0 0 .3em;font-size:.95em;color:#7a3416;text-align:center}
+.bin .chip{font-size:.85em;margin:.15em}
+.bin.flash{background:#fde2df}
+.tip{font-size:.88em;color:#9b3d12;min-height:1.3em;margin-top:.3em}
+.result{background:#fff4d6;border-radius:10px;padding:.4em .7em;margin-top:.4em;font-weight:700}
+.ansrow{display:flex;flex-wrap:wrap;gap:.4em;min-height:2.4em;padding:.3em;border:2px dashed #1e6f8c;border-radius:10px;margin:.3em 0;background:#f2f9fc}
+.ansrow .chip .n{display:inline-block;background:#1e6f8c;color:#fff;border-radius:50%;width:1.4em;height:1.4em;text-align:center;line-height:1.4em;font-size:.75em;margin-right:.3em}
+/* info panels */
+.info{background:#fffaf0;border:2px solid #f0c27a;border-radius:12px;padding:.6em .8em;min-height:8em}
+.info h4{margin:0 0 .3em;color:#b4532a}
+.hot{cursor:pointer}
+.hot:hover{filter:brightness(1.12)}
+.pin{cursor:pointer}
+.pin:hover circle{r:9}
+.speedbar{height:1.1em;background:#eee;border-radius:6px;overflow:hidden}
+.speedbar div{height:100%;background:linear-gradient(90deg,#1e6f8c,#e67e22);width:0;transition:width .15s}
+.news{background:#fff;border:2px solid #555;border-radius:10px;padding:.6em .9em;line-height:2}
+.news .nh{font-weight:700;font-size:1.1em;border-bottom:1px solid #999;margin-bottom:.3em}
+.ns{border-bottom:3px solid #1e6f8c;cursor:pointer;padding:0 .1em}
+.ns.okk{background:#dff5e7;border-color:#23824f}.ns.ngg{background:#fde2df;border-color:#c0392b;text-decoration:line-through}
+.npop{background:#2b2118;color:#fff;border-radius:10px;padding:.5em .7em;margin-top:.5em;font-size:.92em}
+.npop button{margin:.2em;border-radius:8px;border:none;padding:.2em .7em}
+.evlist{display:flex;flex-wrap:wrap;gap:.3em;margin:.3em 0}
+.evlist span{border:1px solid #ccc;border-radius:999px;padding:0 .6em;font-size:.85em;background:#fff;color:#888}
+.evlist span.done{background:#e5f2f7;color:#1e6f8c;border-color:#1e6f8c}
+.evlist span.now{background:#b4532a;color:#fff;border-color:#b4532a}
+.tl{display:flex;gap:.3em;margin:.4em 0}
+.tl div{flex:1;border-radius:10px;padding:.4em .3em;text-align:center;color:#fff;cursor:pointer;font-weight:700;font-size:.92em}
+.tl div.sel{outline:4px solid #f1c40f}
+.mapbtns button{font-size:.85em}
+.check{list-style:none;padding:0}
+.check li{margin:.25em 0}
+.check input{transform:scale(1.4);margin-right:.5em}
+.mis10 li{margin:.25em 0}
+.cmap{display:grid;grid-template-columns:repeat(3,1fr);gap:.6em}
+body[data-z="2"] .cmap,body[data-z="3"] .cmap,body[data-z="4"] .cmap{grid-template-columns:1fr}
+.cbox{border-radius:12px;padding:.5em .7em;color:#1f2a37}
+.cbox h4{margin:0 0 .2em}
+.cbox ul{margin:.1em 0 .1em 1.1em;padding:0;font-size:.92em}
+/* teacher notes */
+.tnote{display:none;background:#203a43;color:#e8f6ff;border-radius:12px;padding:.6em .9em;margin:.6em 0;font-size:.88em;border-left:8px solid #4fc3f7}
+body.teacher .tnote{display:block}
+.tnote b{color:#ffe082}
+/* overlays */
+.overlay{position:fixed;inset:0;background:#000b;z-index:100;display:none;align-items:center;justify-content:center}
+.overlay.show{display:flex}
+.lbox{background:#fffaf2;border-radius:18px;padding:1.2em 1.5em;max-width:900px;width:94%;max-height:94vh;overflow:auto;font-size:18px}
+.lbox h1{margin:.1em 0;color:#7a3416;font-size:1.6em}
+.lbox .sub{color:#555;margin-bottom:.6em}
+.lrow{margin:.55em 0}
+.lrow label{margin-right:1em;white-space:nowrap}
+#rosterChips{display:flex;flex-wrap:wrap;gap:.3em;margin-top:.3em}
+.rchip{border:1px solid #c9a98f;background:#fff;border-radius:8px;padding:.1em .45em;font-size:.85em}
+.rchip.abs{background:#ddd;color:#999;text-decoration:line-through}
+.big{font-size:1.3em;padding:.4em 1.6em;border-radius:14px;background:#b4532a;color:#fff;border:none;margin-top:.5em}
+.hint{font-size:.85em;color:#666;margin-top:.6em}
+#pick .pcard{background:#fff;border-radius:24px;padding:1.2em 2.2em;text-align:center;min-width:min(560px,92vw);box-shadow:0 10px 40px #0008}
+#pnum{font:900 140px/1 Consolas,monospace;color:#b4532a}
+#pname{font-size:64px;font-weight:900;color:#2b2118}
+#pinfo{font-size:20px;color:#666;min-height:1.5em}
+#pick .pbtns{margin-top:.6em;display:flex;gap:.4em;justify-content:center;flex-wrap:wrap}
+#pick .pbtns button{font-size:20px}
+#viewer{background:#000e;flex-direction:column}
+#vwrap{flex:1;width:100%;overflow:hidden;position:relative;cursor:grab;touch-action:none}
+#vinner{position:absolute;left:50%;top:50%;transform-origin:0 0}
+#vinner img,#vinner svg{display:block;max-width:none;background:#fff;border-radius:8px}
+#vbar{padding:8px;display:flex;gap:8px;align-items:center;color:#fff;font-size:18px}
+#vbar button{font-size:18px;border-radius:8px;border:none;padding:4px 12px}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#2b2118;color:#fff;padding:.5em 1.1em;border-radius:12px;font-size:18px;z-index:200;opacity:0;transition:opacity .3s;pointer-events:none}
+#toast.show{opacity:1}
+.navfoot{display:flex;justify-content:space-between;margin-top:1.2em}
+.rf{font-size:1.15em}
+.rfbig{font:700 2.2em Consolas,monospace;color:#b4532a}
+
+.mybar{display:flex;flex-wrap:wrap;gap:6px;padding:4px 10px 7px;border-top:1px solid #fff3;align-items:center}
+.mybar .me{font-weight:700;color:#ffd9a8;margin-right:4px}
+.mchip{background:#ffffff18;border:1px solid #fff4;border-radius:10px;padding:2px 8px;color:#fff;font-size:14px}
+.mchip b{font:700 18px Consolas,monospace;color:#ffe082}
+.mchip.bump{animation:bump .5s;background:#f1c40f;color:#2b2118}.mchip.bump b{color:#7a3416}
+.wbtn{cursor:pointer}.wbtn:hover{background:#ffffff33}
+.ox .ob button:disabled{cursor:default}
+.ox .ob button.pick{outline:3px solid #1e6f8c}
+input[type=range]{accent-color:#2e7d32}
+header{background:#4a3218}
+figure.fig img{max-height:30em}
+html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+button:focus-visible, input:focus-visible, a:focus-visible { outline:3px solid #076fa0; outline-offset:3px; }
+button:disabled { cursor:default; }
+.oxgrid { grid-template-columns:repeat(auto-fit,minmax(min(100%,19em),1fr)); }
+.g2 > *, .g3 > *, .opts > *, .bins > * { min-width:0; }
+.dots { overflow-x:auto; }
+#vbar { flex-wrap:wrap; }
+#vbar span { min-width:150px; }
+#assessment h3 { margin-top:0; }
+#assessment .opt[aria-pressed="true"] { border-color:#1e6f8c; background:#dff2f8; box-shadow:inset 0 0 0 1px #1e6f8c; }
+.assessment-nav { display:flex; flex-wrap:wrap; gap:.5em; margin-top:.85em; }
+.assessment-identity { display:flex; flex-wrap:wrap; gap:.65em; margin:.85em 0; }
+.assessment-identity label { flex:1 1 7em; }
+.assessment-identity input { display:block; width:100%; min-height:44px; padding:.45em; border:1px solid #a19889; border-radius:8px; font:inherit; }
+.assessment-score { font-size:1.45em; font-weight:700; margin:.25em 0; }
+.assessment-breakdown { padding-left:1.3em; }
+.assessment-review { margin:.65em 0; }
+.assessment-status { display:block; margin:.6em 0; }
+@media (max-width:760px) {
+  body { font-size:17px; }
+  header { position:static; }
+  .hrow { align-items:flex-start; }
+  .dots { order:3; flex:1 1 100%; flex-wrap:nowrap; }
+  .dots button { flex:none; min-height:42px; }
+  .g2, .g3, .cmap, .opts { grid-template-columns:minmax(0,1fr) !important; }
+  .bins { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+  .shead { flex-wrap:wrap; }
+  .opt, .btn, .ob button { min-height:44px; }
+  .assessment-identity input { font-size:16px; }
+}
+@media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .stage,.chip { animation:none; } }
+
+#testUnitNav .seg { margin:.8em 0; }
+#testUnitNav button { min-height:44px; }
+.mybar { overflow-wrap:anywhere; }
+@media(max-width:760px){
+ .mybar { display:none; }
+ .card { overflow-x:auto; }
+ .timer { flex-wrap:wrap; }
+}
+
+[hidden]{display:none!important}
+</style>
+</head>
+<body data-z="0">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<marker id="arw" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#222"/></marker>
+<marker id="arwR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#c0392b"/></marker>
+</defs></svg>
+
+<header>
+ <div class="hrow">
+  <span class="htitle">🍎 第2章 養分｜個人複習</span>
+  <div class="dots" id="dots"></div>
+  <div class="tools">
+   <div class="timer">
+    <button class="hbtn" onclick="tAdj(-60)">−1分</button><button class="hbtn" onclick="tAdj(-10)">−10秒</button>
+    <span id="tdisp">1:00</span>
+    <button class="hbtn" onclick="tAdj(10)">+10秒</button><button class="hbtn" onclick="tAdj(60)">+1分</button>
+    <button class="hbtn" id="tplay" onclick="tToggle()" title="開始/暫停（空白鍵）">▶</button><button class="hbtn" onclick="tReset()">↺</button>
+   </div>
+   <button class="hbtn" id="zbtn" onclick="cycleZoom()" title="字體放大（F）">🔠 字級 1</button>
+    <button class="hbtn" type="button" onclick="go(11)">小節測驗與成績</button>
+   <button class="hbtn" onclick="downloadLog()" title="下載學習紀錄">💾 紀錄</button>
+  </div>
+ </div>
+ <div class="mybar" id="mybar"></div>
+</header>
+
+<main id="main">
+
+<!-- S0 -->
+<section class="stage" id="s0">
+ <div class="shead"><span class="snum">0</span><h2>學習導航＋前測</h2><span class="pg">課本 P54–83</span><span class="smin"></span></div>
+ <div class="goal">🎯 先做 8 題○✕，系統會推薦你<b>先複習哪一段</b>。每段流程：看重點 → 互動實驗 → 明正辨反 → 練習題；答錯的題目自動收進<b>📕 錯題本</b>。</div>
+ <div class="g2">
+  <div class="card"><h3>🗺️ 本章地圖</h3>
+   <div class="cmap" style="grid-template-columns:1fr 1fr">
+    <div class="cbox" style="background:#fff7d6"><h4>2-1 食物中的養分</h4><ul><li>六大養分：可／不能產生能量</li><li>醣4、蛋白質4、脂質9 大卡/g</li><li>碘液→澱粉；本氏液→葡萄糖</li></ul></div>
+    <div class="cbox" style="background:#e8f2fb"><h4>2-2 酵素</h4><ul><li>代謝＝分解＋合成</li><li>催化劑、可重複使用、專一性</li><li>受溫度、酸鹼性影響</li></ul></div>
+    <div class="cbox" style="background:#eaf7ee"><h4>2-3 植物如何獲得養分</h4><ul><li>葉的構造</li><li>水＋二氧化碳 → 葡萄糖＋氧氣＋水</li><li>實驗：遮光 → 去色素 → 碘液</li></ul></div>
+    <div class="cbox" style="background:#fbeaea"><h4>2-4 動物如何獲得養分</h4><ul><li>攝食 → 消化 → 吸收</li><li>消化道與消化腺</li><li>小腸絨毛吸收</li></ul></div>
+   </div></div>
+  
+ </div>
+ <div class="card"><h3>🩺 前測：對或錯？</h3><div class="oxgrid" id="ox0"></div><div class="result" id="ox0sum" style="margin-top:.6em">（作答後揭曉，系統會推薦你要加強的段落）</div></div>
+</section>
+
+<!-- S1 -->
+<section class="stage" id="s1">
+ <div class="shead"><span class="snum">1</span><h2>2-1 六大養分與能量</h2><span class="pg">課本 P56–58</span><span class="smin"></span></div>
+ <div class="goal">🎯 分類<span class="key">可產生能量／不能產生能量</span>的養分；會計算食物的熱量（大卡）；說出各養分的功能。</div>
+ <div class="g2">
+  <div class="card"><h3>📌 重點</h3>
+   ・<b>可產生能量</b>：<span class="key">醣類（碳水化合物）、蛋白質、脂質</span><br>
+   ・<b>不能產生能量</b>：<span class="key">水、礦物質、維生素</span>（但維持生理運作很重要）<br>
+   ・每公克：醣類 4 大卡、蛋白質 4 大卡、<span class="red">脂質 9 大卡</span><br>
+   ・<b>卡（cal）</b>：使 1 公克的水溫度升高 1℃ 所需的熱量；<span class="formula">1 大卡（kcal）＝ 1000 卡</span><br>
+   ・同重量的食物，熱量不一定相同 → 要看成分</div></div>
+ <div class="card"><h3>🧮 熱量計算器（看營養標示）</h3>
+  <div class="g2"><div>
+   <div>醣類（碳水化合物）：<b id="cCv">20</b> g<input type="range" id="cCr" min="0" max="80" value="20"></div>
+   <div>蛋白質：<b id="cPv">5</b> g<input type="range" id="cPr" min="0" max="40" value="5"></div>
+   <div>脂質：<b id="cFv">10</b> g<input type="range" id="cFr" min="0" max="40" value="10"></div></div>
+   <div><div class="svgbox"><svg id="calSvg" viewBox="0 0 520 170"></svg></div><div class="info" id="calOut" style="min-height:3em"></div></div></div>
+ </div>
+
+ <div class="g2"><div class="game" id="c1a"></div><div class="game" id="c1b"></div></div>
+ <div class="game" id="g1sort"></div>
+ <div class="card"><h3>⚖️ 明正辨反</h3><div class="oxgrid" id="ox1"></div></div>
+ <div class="card"><h3>✏️ 練習題</h3><div id="q1"></div></div>
+<div class="tip retry-review-notice" hidden>複習這一段的重點或練習後，按下方按鈕回到本小節測驗。也可用「下一段」複習另一個主題。</div>
+ <button class="btn alt" type="button" onclick="openUnitTest('2-1',true,true)">已複習，回到 2-1 小節測驗</button>
+</section>
+
+<!-- S2 -->
+<section class="stage" id="s2">
+ <div class="shead"><span class="snum">2</span><h2>2-1 實驗：食物中醣類的測定</h2><span class="pg">課本 P59–61</span><span class="smin"></span></div>
+ <div class="goal">🎯 會用<span class="key">碘液</span>測澱粉、<span class="key">本氏液</span>測葡萄糖，並判讀顏色；說明實驗中對照組的用意。</div>
+ 
+ <div class="card"><h3>📌 檢測重點</h3>
+  <table class="t"><tr><th></th><th>碘液</th><th>本氏液</th></tr>
+  <tr><td>檢測</td><td><b>澱粉</b></td><td><b>葡萄糖</b>（及部分醣類）</td></tr>
+  <tr><td>原本顏色</td><td>黃褐色</td><td>藍色</td></tr>
+  <tr><td>操作</td><td>直接滴加</td><td>加入後要<span class="red">隔水加熱</span></td></tr>
+  <tr><td>陽性結果</td><td><span class="key">藍黑色</span>（或紫紅色）；顏色愈深澱粉愈多</td><td>藍 → 綠 → 黃 → 橙 → <span class="key">紅</span>；愈接近紅色，葡萄糖愈多</td></tr></table>
+  <div style="margin-top:.4em">・載玻片下墊<b>白紙</b>：方便看清楚顏色變化<br>・滴一滴<b>清水</b>（或加水的試管）：作為<b>對照組</b>，和待測物比較</div></div>
+ <div class="card"><h3>🧪 虛擬檢驗台</h3>
+  <div class="g2"><div class="svgbox"><svg id="labSvg" viewBox="0 0 520 260"></svg></div>
+   <div>
+    <div><b>待測物：</b></div><div class="seg" id="labS"></div>
+    <div><b>試劑：</b></div><div class="seg" id="labR"><button data-r="iod" class="on">碘液</button><button data-r="ben">本氏液</button></div>
+    <div class="seg" id="labH"><button data-h="1" class="on">隔水加熱</button><button data-h="0">忘了加熱</button></div>
+    <div class="info" id="labOut"></div></div></div>
+ </div>
+ 
+ <div class="game" id="g2sort"></div>
+ <div class="card"><h3>⚖️ 明正辨反</h3><div class="oxgrid" id="ox2"></div></div>
+ <div class="card"><h3>✏️ 練習題</h3><div id="q2"></div></div>
+<div class="tip retry-review-notice" hidden>複習這一段的重點或練習後，按下方按鈕回到本小節測驗。也可用「下一段」複習另一個主題。</div>
+ <button class="btn alt" type="button" onclick="openUnitTest('2-1',true,true)">已複習，回到 2-1 小節測驗</button>
+</section>
+
+<!-- S3 -->
+<section class="stage" id="s3">
+ <div class="shead"><span class="snum">3</span><h2>2-2 酵素的作用與特性</h2><span class="pg">課本 P62–64</span><span class="smin"></span></div>
+ <div class="goal">🎯 說明<span class="key">代謝作用＝分解作用＋合成作用</span>；說出酵素的特性（催化、可重複使用、專一性）與影響活性的因素（溫度、酸鹼性）。</div>
+ <div class="g2">
+  <div class="card"><h3>📌 重點</h3>
+   ・<b>分解作用</b>：大分子 → 小分子（澱粉 → 葡萄糖）<br>・<b>合成作用</b>：小分子 → 大分子（葡萄糖 → 澱粉）<br>・兩者合稱<b>代謝作用</b>，都需要<b>酵素</b>參與<br>
+   ・<b>酵素（酶）</b>：催化劑，<span class="key">改變反應速率</span>、<span class="key">可重複使用</span>、本身不會被消耗；<span class="red">不能引發新反應、不改變產物總量</span><br>
+   ・受酵素作用的物質＝<b>受質</b>；<span class="key">專一性</span>：酵素只和特定受質結合（唾液澱粉酶只分解澱粉）<br>
+   ・主要成分：<b>蛋白質</b> → 容易受<span class="key">溫度、酸鹼性</span>影響；太高溫會失去活性<br>
+   ・離開生物體，在適當環境下仍可作用（例：加酶洗衣粉、市售消化酵素）<br>
+   ・<span class="red">不需要酵素</span>：鹽溶於水、擴散作用、冰融化等物理變化</div></div>
+ <div class="card"><h3>📈 酵素活性實驗室</h3>
+  <div class="seg" id="enzSel"><button data-m="t" class="on">溫度</button><button data-m="p">酸鹼性</button></div>
+  <div class="g2"><div class="svgbox"><svg id="enzSvg" viewBox="0 0 560 300"></svg></div>
+   <div><div id="enzCtl"></div><div class="info" id="enzOut"></div></div></div>
+ </div>
+ <div class="game" id="g3sort"></div>
+ <div class="card"><h3>⚖️ 明正辨反</h3><div class="oxgrid" id="ox3"></div></div>
+ <div class="card"><h3>✏️ 練習題</h3><div id="q3"></div></div>
+<div class="tip retry-review-notice" hidden>複習這一段的重點或練習後，按下方按鈕回到本小節測驗。也可用「下一段」複習另一個主題。</div>
+ <button class="btn alt" type="button" onclick="openUnitTest('2-2',true,true)">已複習，回到 2-2 小節測驗</button>
+</section>
+
+<!-- S4 -->
+<section class="stage" id="s4">
+ <div class="shead"><span class="snum">4</span><h2>2-2 實驗：唾液中酵素的作用</h2><span class="pg">課本 P65–66</span><span class="smin"></span></div>
+ <div class="goal">🎯 會設計對照實驗（操縱、控制、應變變因）；用本氏液判讀澱粉是否被唾液分解。</div>
+ <div class="g2">
+  <div class="card"><h3>📌 實驗邏輯</h3>
+   ・<b>操縱變因</b>：溫度（甲：唾液先煮沸；乙：室溫）<br>・<b>控制變因</b>：唾液、澱粉液、本氏液的量與濃度…<br>・<b>應變變因</b>：本氏液的顏色變化（有無葡萄糖等醣類產生）<br>
+   ・放入 <span class="key">35～40℃溫水</span>：接近體溫，酵素活性佳<br>
+   ・加本氏液後再<span class="key">隔水加熱</span>才會變色<br>
+   ・結果：沒煮沸的唾液 → 澱粉被分解 → 本氏液變色；煮沸過 → 酵素失去活性 → <b>維持藍色</b></div></div>
+ <div class="card"><h3>🧪 虛擬實驗：自己設定試管條件</h3>
+  <div class="g2"><div class="svgbox"><svg id="tubeSvg" viewBox="0 0 560 270"></svg></div>
+   <div id="tubeCtl"></div></div>
+  <button class="btn alt" id="tubeGo">▶ 等待 20 分鐘後加本氏液、隔水加熱</button>
+  <div class="info" id="tubeOut" style="margin-top:.4em">設定每支試管的條件後按開始。</div>
+ </div>
+ <div class="game" id="g4order"></div>
+ <div class="card"><h3>⚖️ 明正辨反</h3><div class="oxgrid" id="ox4"></div></div>
+ <div class="card"><h3>✏️ 練習題</h3><div id="q4"></div></div>
+<div class="tip retry-review-notice" hidden>複習這一段的重點或練習後，按下方按鈕回到本小節測驗。也可用「下一段」複習另一個主題。</div>
+ <button class="btn alt" type="button" onclick="openUnitTest('2-2',true,true)">已複習，回到 2-2 小節測驗</button>
+</section>
+
+<!-- S5 -->
+<section class="stage" id="s5">
+ <div class="shead"><span class="snum">5</span><h2>2-3 葉的構造</h2><span class="pg">課本 P67–69</span><span class="smin"></span></div>
+ <div class="goal">🎯 說出葉片各構造的功能；知道哪些細胞有<span class="key">葉綠體</span>。</div>
+
+ <div class="card"><h3>🔍 點一點：葉片橫切面</h3>
+  <div class="g2"><div class="svgbox"><button class="zbtn" onclick="zoomSvg(this)">⤢ 放大</button><svg id="leafSvg" viewBox="0 0 520 320"></svg></div>
+   <div class="info" id="leafInfo">點各部位看名稱與功能。</div></div>
+ </div>
+ <div class="card"><h3>📌 葉片構造表</h3>
+  <table class="t"><tr><th>構造</th><th>功能</th><th>葉綠體</th></tr>
+  <tr><td>角質層</td><td>覆蓋表皮外，<b>防止水分散失</b>（非細胞，透明）</td><td>—</td></tr>
+  <tr><td>上、下表皮</td><td>排列緊密、透明無色，<b>保護</b>、防病菌</td><td>❌</td></tr>
+  <tr><td>葉肉細胞</td><td>行<b>光合作用</b>的主要場所</td><td>✅</td></tr>
+  <tr><td>葉脈</td><td>運送水分和養分</td><td>❌</td></tr>
+  <tr><td>保衛細胞</td><td>半月形、兩兩成對，<b>控制氣孔開閉</b></td><td>✅</td></tr>
+  <tr><td>氣孔</td><td>氣體進出、水分蒸散的通道</td><td>—</td></tr></table>
+  <div class="misc">⚠️ 葉片看起來是綠色，是因為透出了葉肉細胞的顏色；表皮本身透明無色。葉片扁平而薄 → 擴大受光面積。</div></div>
+ <div class="game" id="g5sort"></div>
+ <div class="card"><h3>⚖️ 明正辨反</h3><div class="oxgrid" id="ox5"></div></div>
+ <div class="card"><h3>✏️ 練習題</h3><div id="q5"></div></div>
+<div class="tip retry-review-notice" hidden>複習這一段的重點或練習後，按下方按鈕回到本小節測驗。也可用「下一段」複習另一個主題。</div>
+ <button class="btn alt" type="button" onclick="openUnitTest('2-3',true,true)">已複習，回到 2-3 小節測驗</button>
+</section>
+
+<!-- S6 -->
+<section class="stage" id="s6">
+ <div class="shead"><span class="snum">6</span><h2>2-3 光合作用與實驗</h2><span class="pg">課本 P70–72</span><span class="smin"></span></div>
+ <div class="goal">🎯 寫出光合作用的反應；說明光合作用的意義；理解「遮光葉片」實驗的每一個步驟。</div>
+ <div class="g2">
+  <div class="card"><h3>📌 光合作用</h3>
+   <div class="formula" style="font-size:1.1em">水 ＋ 二氧化碳 ──（光能、葉綠體）──→ 葡萄糖 ＋ 氧氣 ＋ 水</div><br>
+   ・<b>反應物</b>：水（根吸收）、二氧化碳（氣孔進入）<br>・<b>條件</b>：光能、葉綠體（葉綠素等色素吸收光能）<br>・<b>產物</b>：葡萄糖（可轉成<b>澱粉</b>儲存）、氧氣<br>
+   ・<span class="red">氧氣是產物，不是必要條件</span><br>
+   ・意義：①把光能變成養分中的能量，供植物與動物利用 ②吸收 CO₂、釋放 O₂，維持大氣穩定<br>
+   ・<b>主要目的</b>（對植物）：製造葡萄糖（養分）</div></div>
+ <div class="card"><h3>🫧 水草冒泡實驗（觀察光合作用速率）</h3>
+  <div class="g2"><div class="svgbox"><svg id="bubSvg" viewBox="0 0 520 300"></svg></div>
+   <div><div>燈與水草的距離：<b id="ldv">20</b> cm<input type="range" id="ldr" min="10" max="60" value="20"></div>
+    <div class="seg" id="lOn"><button data-v="1" class="on">💡 開燈</button><button data-v="0">🌑 關燈（黑暗）</button></div>
+    <div class="info" id="bubOut"></div></div></div>
+ </div>
+ <div class="card"><h3>🍃 遮光葉片實驗（實驗2-3）逐步看</h3>
+  <div class="g2"><div class="svgbox"><svg id="foilSvg" viewBox="0 0 520 300"></svg></div>
+   <div><div class="evlist" id="foilEv"></div><div class="info" id="foilOut"></div><button class="btn ghost" id="foilPrev">◀ 上一步</button><button class="btn" id="foilNext">下一步 ▶</button></div></div>
+  
+ </div>
+ <div class="g2"><div class="game" id="g6order"></div><div class="game" id="g6sort"></div></div>
+ <div class="card"><h3>⚖️ 明正辨反</h3><div class="oxgrid" id="ox6"></div></div>
+ <div class="card"><h3>✏️ 練習題</h3><div id="q6"></div></div>
+<div class="tip retry-review-notice" hidden>複習這一段的重點或練習後，按下方按鈕回到本小節測驗。也可用「下一段」複習另一個主題。</div>
+ <button class="btn alt" type="button" onclick="openUnitTest('2-3',true,true)">已複習，回到 2-3 小節測驗</button>
+</section>
+
+<!-- S7 -->
+<section class="stage" id="s7">
+ <div class="shead"><span class="snum">7</span><h2>2-4 動物的消化：消化道與消化腺</h2><span class="pg">課本 P73–76</span><span class="smin"></span></div>
+ <div class="goal">🎯 說明<span class="key">攝食 → 消化 → 吸收</span>；分清<span class="key">消化道</span>（食物經過）與<span class="key">消化腺</span>（分泌消化液）；記住各消化液分解的養分。</div>
+ <div class="g2">
+  <div>
+   <div class="card"><h3>📌 大分子 → 小分子（消化作用）</h3>
+    <span class="key">澱粉 → 葡萄糖</span>　<span class="key">蛋白質 → 胺基酸</span>　<span class="key">脂質 → 脂肪酸＋甘油</span><br>
+    ・消化道：口腔 → 咽 → 食道 → 胃 → 小腸 → 大腸 → 肛門<br>
+    ・消化腺：唾腺、胃腺、肝臟、胰臟、腸腺（<span class="red">食物不會經過</span>肝臟、胰臟）<br>
+    ・消化道<b>蠕動</b>：推動食物、使食物和消化液混合（胃還能攪拌）</div></div></div>
+ <div class="card"><h3>🧫 消化液任務表：點格子勾選「能分解哪些養分」</h3>
+  <div id="juiceGrid"></div>
+ </div>
+ <div class="g2"><div class="game" id="g7order"></div></div>
+ <div class="game" id="g7sort"></div>
+ <div class="card"><h3>⚖️ 明正辨反</h3><div class="oxgrid" id="ox7"></div></div>
+ <div class="card"><h3>✏️ 練習題</h3><div id="q7"></div></div>
+<div class="tip retry-review-notice" hidden>複習這一段的重點或練習後，按下方按鈕回到本小節測驗。也可用「下一段」複習另一個主題。</div>
+ <button class="btn alt" type="button" onclick="openUnitTest('2-4',true,true)">已複習，回到 2-4 小節測驗</button>
+</section>
+
+<!-- S8 -->
+<section class="stage" id="s8">
+ <div class="shead"><span class="snum">8</span><h2>2-4 小腸、大腸與養分的吸收</h2><span class="pg">課本 P76–79、P82</span><span class="smin"></span></div>
+ <div class="goal">🎯 說明小腸為何是<span class="key">消化與吸收的主要場所</span>；說出絨毛、大腸、膽汁的功能；知道纖維素的作用。</div>
+ 
+ <div class="g2">
+  <div class="card"><h3>📌 重點</h3>
+   ・<b>小腸</b>：分解食物、吸收養分與水分的<b>主要場所</b><br>
+   　膽汁（肝臟分泌，<b>儲存在膽囊</b>，<span class="red">不含酵素</span>）→ <b>乳化</b>脂質成小脂肪球<br>
+   　胰液 → 分解醣類、蛋白質、脂質；腸液 → 主要分解醣類、蛋白質<br>
+   ・<b>絨毛</b>：小腸內壁的環狀皺褶上有指狀突起，<span class="key">增加吸收表面積</span>；內有<b>微血管網</b>，把養分送至全身<br>
+   ・<b>大腸</b>：吸收<b>剩餘的水分</b>，形成糞便由肛門排出（大部分水分在小腸吸收）<br>
+   ・<b>纖維素</b>：人類沒有分解纖維素的酵素，無法消化，但能<b>促進消化道蠕動</b><br>
+   ・盲腸上的<b>闌尾</b>：人類沒有消化功能<br>
+   ・牛、羊等草食動物：消化道中共生的微生物能分泌纖維素酶（P82）</div>
+  </div>
+ <div class="game" id="g8sort"></div>
+ <div class="card"><h3>⚖️ 明正辨反</h3><div class="oxgrid" id="ox8"></div></div>
+ <div class="card"><h3>✏️ 練習題</h3><div id="q8"></div></div>
+<div class="tip retry-review-notice" hidden>複習這一段的重點或練習後，按下方按鈕回到本小節測驗。也可用「下一段」複習另一個主題。</div>
+ <button class="btn alt" type="button" onclick="openUnitTest('2-4',true,true)">已複習，回到 2-4 小節測驗</button>
+</section>
+
+<!-- S9 -->
+<section class="stage" id="s9">
+ <div class="shead"><span class="snum">9</span><h2>練習挑戰與錯題本</h2><span class="pg">全章 P54–83</span><span class="smin"></span></div>
+ <div class="goal">可自由練習或重做錯題。要上傳成績，請做「小節測驗與成績」。</div>
+ <div class="card">
+  <div class="seg" id="c9mode"><button data-m="round" class="on">📝 10題闖關</button><button data-m="rapid">⚡ 60秒快問快答</button><button data-m="wrong">📕 錯題本重練</button></div>
+  <div><b>範圍：</b><span class="seg" id="c9unit" style="display:inline-flex"><button data-u="all" class="on">全章</button><button data-u="2-1">2-1</button><button data-u="2-2">2-2</button><button data-u="2-3">2-3</button><button data-u="2-4">2-4</button></span>
+   <b>難度：</b><span class="seg" id="c9lv" style="display:inline-flex"><button data-l="0" class="on">混合</button><button data-l="1">★ 基礎</button><button data-l="2">★★ 進階</button></span></div>
+  <div id="c9area"></div>
+ </div>
+</section>
+
+<!-- S10 -->
+<section class="stage" id="s10">
+ <div class="shead"><span class="snum">10</span><h2>學習地圖與自評</h2><span class="pg">課本 P80–81</span><span class="smin"></span></div>
+ <div class="goal">🎯 用學習地圖串起整章；檢查易錯點；下載自己的學習紀錄。</div>
+ 
+ <div class="g2">
+  <div class="card"><h3>⚠️ 易錯十大</h3><ol class="mis10">
+   <li>水、礦物質、維生素<b>不能</b>產生能量；脂質每克 9 大卡最高。</li>
+   <li>熱量看成分，不是看重量。</li>
+   <li>碘液測澱粉（藍黑）；本氏液測葡萄糖，<b>要隔水加熱</b>。</li>
+   <li>酵素只改變反應速率、可重複使用，不改變產物總量。</li>
+   <li>酵素主要成分是蛋白質，高溫、不適當酸鹼會失去活性。</li>
+   <li>鹽溶於水、擴散作用不需要酵素。</li>
+   <li>光合作用：氧氣是產物，不是必要條件；葡萄糖轉成澱粉儲存。</li>
+   <li>沸水軟化角質層 → 酒精（隔水加熱）去色素 → 碘液測澱粉。</li>
+   <li>膽汁由肝臟分泌、不含酵素，只乳化脂質；肝臟、胰臟食物不經過。</li>
+   <li>大部分水分在小腸吸收，大腸吸收剩餘水分；纖維素促進蠕動。</li></ol></div>
+  <div>
+   <div class="card"><h3>✅ 我的自評</h3><ul class="check" id="selfchk"></ul><div id="selfSum" class="result"></div></div>
+   <div class="card"><h3>📈 我的學習成果</h3><div id="finalStat"></div><button class="btn alt" onclick="downloadLog()">💾 下載我的學習紀錄</button><button class="btn ghost" onclick="go(9);setTimeout(()=>$('#c9mode button[data-m=wrong]').click(),50)">📕 去錯題本重練</button></div>
+  </div>
+ </div>
+</section>
+
+<section class="stage" id="s11">
+ <div class="shead"><h2>701 班小節測驗與成績</h2></div>
+ <div class="goal">每節隨機抽 10 題。低於 60 分，先複習再重測。重測會更換 5 題。</div>
+ <div id="testUnitNav"></div>
+ <div class="card" id="assessment"></div>
+</section>
+<div class="navfoot"><button id="prevStage" class="btn ghost" onclick="go(S.cur-1)">◀ 上一段</button><button id="nextStage" class="btn" onclick="go(S.cur+1)">下一段 ▶</button></div>
+</main>
+
+<div id="viewer" class="overlay"><div id="vwrap"><div id="vinner"></div></div>
+ <div id="vbar"><button onclick="vZoom(1.25)">＋ 放大</button><button onclick="vZoom(0.8)">－ 縮小</button><button onclick="vFit()">⟲ 符合畫面</button><span style="flex:1">滾輪縮放・拖曳移動・Esc 關閉</span><button onclick="closeViewer()">✕ 關閉</button></div></div>
+<div id="toast"></div>
+
+<script>
+"use strict";
+/* ================= utilities ================= */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+function el(tag,attrs,...kids){const e=document.createElement(tag);if(attrs)for(const k in attrs){const v=attrs[k];if(k==='class')e.className=v;else if(k==='html')e.innerHTML=v;else if(k.startsWith('on')&&typeof v==='function')e.addEventListener(k.slice(2),v);else e.setAttribute(k,v);}kids.flat().forEach(c=>{if(c!=null)e.append(c.nodeType?c:document.createTextNode(String(c)));});return e;}
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const fmt=(x,d=1)=>{const r=Math.round(x*10**d)/10**d;return Number.isInteger(r)?String(r):r.toFixed(d);};
+function toast(t){const x=$('#toast');x.textContent=t;x.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>x.classList.remove('show'),1600);}
+let uidN=0;const uid=()=>'u'+(++uidN);
+
+/* ================= roster & state ================= */
+const S={who:'訪客',pts:0,ans:0,right:0,wrong:new Set(),log:[],cur:0,zoom:0,ctime:90,autoT:true,seen:new Set(),best:0,ox:[0,0]};
+const STAGES=[{name:'導航前測',min:5},{name:'養分能量',min:10},{name:'醣類檢測',min:10},{name:'酵素',min:12},{name:'酵素實驗',min:10},{name:'葉的構造',min:10},{name:'光合作用',min:13},{name:'消化系統',min:13},{name:'吸收利用',min:10},{name:'總挑戰',min:12},{name:'重點自評',min:5},{name:'小節測驗',min:0}];
+const BASE_SUM=STAGES.reduce((a,b)=>a+b.min,0);
+function stageMin(i){const m=STAGES[i].min;if(!m||!S.ctime)return m;return Math.max(3,Math.min(15,Math.round(m*S.ctime/BASE_SUM)));}
+function logIt(t){const d=new Date();S.log.push(`[${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}:${String(d.getSeconds()).padStart(2,'0')}] 階段${S.cur}｜${t}`);}
+
+/* ================= personal score ================= */
+function addPts(n,why){S.pts+=n;logIt(`${n>0?'+':''}${n} 分（${why}）`);renderMe(true);if(n>0)toast(`⭐ +${n}（${why}）`);}
+function renderMe(bump){const b=$('#mybar');if(!b)return;const rate=S.ans?Math.round(S.right/S.ans*100):0;
+ b.innerHTML=`<span class="me">👤 ${S.who}</span><span class="mchip${bump?' bump':''}">⭐ 積分 <b>${S.pts}</b></span><span class="mchip">✏️ 作答 <b>${S.right}</b>／${S.ans}（${rate}%）</span><span class="mchip">⚖️ 明正辨反 <b>${S.ox[0]}</b>／${S.ox[1]}</span><button class="mchip wbtn" onclick="go(9);setTimeout(()=>$('#c9mode button[data-m=wrong]').click(),50)">📕 錯題本 <b>${S.wrong.size}</b></button><span class="mchip">🏅 快問快答最佳 <b>${S.best}</b></span>`;
+ const fs=$('#finalStat');if(fs)fs.innerHTML=`<table class="t"><tr><th>積分</th><th>答對率</th><th>明正辨反</th><th>錯題本</th><th>已瀏覽段落</th></tr><tr><td class="red">${S.pts}</td><td>${S.right}／${S.ans}（${rate}%）</td><td>${S.ox[0]}／${S.ox[1]}</td><td>${S.wrong.size} 題待重練</td><td>${S.seen.size}／${STAGES.length}</td></tr></table>`;}
+
+/* ================= timer ================= */
+const T={left:60,set:60,run:false,iv:null};let actx=null;
+function beep(){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();[0,0.35,0.7].forEach(dt=>{const o=actx.createOscillator(),g=actx.createGain();o.frequency.value=880;o.connect(g);g.connect(actx.destination);g.gain.setValueAtTime(0.2,actx.currentTime+dt);g.gain.exponentialRampToValueAtTime(0.001,actx.currentTime+dt+0.3);o.start(actx.currentTime+dt);o.stop(actx.currentTime+dt+0.3);});}catch(e){}}
+function tRender(){const d=$('#tdisp');const a=Math.abs(T.left);d.textContent=(T.left<0?'-':'')+Math.floor(a/60)+':'+String(a%60).padStart(2,'0');d.className=T.left<=0&&(T.run||T.left<0)?'over':(T.run?((T.left<=10||T.left<=T.set*0.2)?'warn':'run'):'');}
+function tTick(){T.left--;if(T.left===0){beep();toast('⏰ 本段建議時間到！');}tRender();}
+function tToggle(){T.run=!T.run;clearInterval(T.iv);if(T.run)T.iv=setInterval(tTick,1000);$('#tplay').textContent=T.run?'⏸':'▶';tRender();}
+function tAdj(d){T.left=Math.max(0,T.left+d);if(!T.run)T.set=T.left;tRender();}
+function tSet(sec){T.left=T.set=sec;tRender();}
+function tReset(){T.left=T.set;tRender();}
+
+/* ================= zoom / teacher / viewer ================= */
+const ZL=[1,1.15,1.3,1.5,1.75];
+function cycleZoom(){S.zoom=(S.zoom+1)%5;document.documentElement.style.setProperty('--zoom',ZL[S.zoom]);document.body.dataset.z=S.zoom;$('#zbtn').textContent='🔠 字級 '+(S.zoom+1);}
+const V={s:1,x:0,y:0,drag:null,w:0,h:0};
+function openViewer(node){const inner=$('#vinner');inner.innerHTML='';let c;
+ if(node.tagName==='IMG'){c=el('img',{src:node.src});c.onload=()=>{V.w=c.naturalWidth;V.h=c.naturalHeight;vFit();};}
+ else{c=node.cloneNode(true);c.removeAttribute('id');const vb=(node.getAttribute('viewBox')||'0 0 800 600').split(/\s+/).map(Number);V.w=1200;V.h=1200*vb[3]/vb[2];c.setAttribute('width',V.w);c.setAttribute('height',V.h);}
+ inner.append(c);$('#viewer').classList.add('show');if(node.tagName!=='IMG')vFit();if(c.complete&&c.naturalWidth){V.w=c.naturalWidth;V.h=c.naturalHeight;vFit();}}
+function vApply(){$('#vinner').style.transform=`translate(${V.x}px,${V.y}px) scale(${V.s})`;}
+function vFit(){const w=$('#vwrap');const W=w.clientWidth||window.innerWidth,H=w.clientHeight||window.innerHeight-60;V.s=Math.min(W/V.w,H/V.h)*0.95;V.x=-V.w*V.s/2;V.y=-V.h*V.s/2;vApply();}
+function vZoom(f){V.x*=f;V.y*=f;V.s*=f;vApply();}
+function closeViewer(){$('#viewer').classList.remove('show');}
+function zoomSvg(btn){const svg=btn.parentElement.querySelector('svg');if(svg)openViewer(svg);}
+(function(){const w=$('#vwrap');
+ w.addEventListener('wheel',e=>{e.preventDefault();vZoom(e.deltaY<0?1.15:0.87);},{passive:false});
+ w.addEventListener('pointerdown',e=>{V.drag={x:e.clientX,y:e.clientY,ox:V.x,oy:V.y};w.setPointerCapture(e.pointerId);});
+ w.addEventListener('pointermove',e=>{if(!V.drag)return;V.x=V.drag.ox+e.clientX-V.drag.x;V.y=V.drag.oy+e.clientY-V.drag.y;vApply();});
+ w.addEventListener('pointerup',()=>{V.drag=null;});})();
+
+/* ================= navigation ================= */
+function buildDots(){const d=$('#dots');d.innerHTML='';STAGES.forEach((s,i)=>d.append(el('button',{class:'dot',title:stageMin(i)?`建議 ${stageMin(i)} 分鐘`:s.name,onclick:()=>go(i)},s.name)));}
+function go(i){if(i<0||i>=STAGES.length)return;S.cur=i;S.seen.add(i);
+ $$('.stage').forEach((s,k)=>s.classList.toggle('on',k===i));
+ $$('.dot').forEach((d,k)=>{d.classList.toggle('on',k===i);d.classList.toggle('seen',S.seen.has(k)&&k!==i);});
+ $('#prevStage').disabled=i===0;$('#nextStage').disabled=i===STAGES.length-1;
+ if(S.autoT&&stageMin(i)){tSet(stageMin(i)*60);if(T.run)tToggle();}
+ window.scrollTo(0,0);logIt(`進入階段 ${i}：${STAGES[i].name}`);renderMe();}
+function fillMins(){$$('.stage').forEach((s,i)=>{const m=s.querySelector('.smin');if(!m)return;m.innerHTML='';m.append(`⏱ 建議 ${stageMin(i)} 分鐘`,el('button',{onclick:()=>{tSet(stageMin(i)*60);if(!T.run)tToggle();}},'開始計時'));});}
+function scafNext(btn){const lis=[...btn.parentElement.querySelectorAll('li')];const n=lis.find(l=>!l.classList.contains('show'));if(n){n.classList.add('show');logIt('查看鷹架提示');}if(!lis.find(l=>!l.classList.contains('show'))){btn.textContent='✅ 提示已全部顯示';btn.disabled=true;}}
+
+/* ================= OX cards ================= */
+function oxCards(box,list,opt){opt=opt||{};box.innerHTML='';
+ list.forEach((it,idx)=>{const c=el('div',{class:'ox'});
+  const rv=el('div',{class:'rv'});
+  const answer=p=>{if(c.classList.contains('done'))return;c.classList.add('done',p===it.t?'ok':'ng');bO.disabled=bX.disabled=true;(p?bO:bX).classList.add('pick');
+   S.ox[1]++;if(p===it.t){S.ox[0]++;addPts(1,'明正辨反');}renderMe();
+   rv.innerHTML=`<b>${it.t?'○ 正確':'✕ 錯誤'}</b>　${p===it.t?'👍 判斷正確':'😮 判斷錯誤'}<br>${it.t?'📌 ':'<span class="fix">🔧 改正：</span>'}${it.e}`;
+   logIt(`明正辨反「${it.s.slice(0,16)}…」${p===it.t?'對':'錯'}`);if(opt.onAns)opt.onAns(idx,p===it.t);};
+  const bO=el('button',{onclick:()=>answer(true)},'○ 對'),bX=el('button',{onclick:()=>answer(false)},'✕ 錯');
+  c.append(el('div',{class:'st'},(opt.num?`${idx+1}. `:'')+it.s),el('div',{class:'ob'},bO,bX),rv);box.append(c);});}
+
+/* ================= quiz engine ================= */
+let posBag=[];
+function nextPos(n){if(!posBag.length)posBag=shuffle([0,1,2,3,0,1,2,3]);return posBag.pop()%n;}
+function arrange(q){const p=nextPos(q.o.length);const wrong=shuffle(q.o.filter((_,i)=>i!==q.a));wrong.splice(p,0,q.o[q.a]);return {opts:wrong,ans:p};}
+function renderQ(box,q,cfg){cfg=cfg||{};const {opts,ans}=arrange(q);const L='ABCD';
+ const card=el('div',{class:'qcard'});
+ card.append(el('div',{class:'qtag'},`${q.u}｜課本 P${q.p}｜${q.lv===2?'★★ 進階（+2）':'★ 基礎（+1）'}${S.wrong.has(q.id)?'｜📕 錯題本':''}`));
+ card.append(el('div',{class:'qtext'},(cfg.num?cfg.num+'. ':'')+q.q));
+ const ol=el('div',{class:'opts'});let done=false;const exp=el('div',{class:'exp hidden'});
+ opts.forEach((t,i)=>{const b=el('button',{class:'opt'},el('b',null,`(${L[i]}) `),t);
+  b.onclick=()=>{if(done)return;done=true;const ok=i===ans;b.classList.add(ok?'right':'wrong');ol.children[ans].classList.add('right');
+   S.ans++;if(ok){S.right++;S.wrong.delete(q.id);if(!cfg.noPts)addPts(q.lv,'答題');}else{S.wrong.add(q.id);}renderMe();
+   exp.classList.remove('hidden');exp.innerHTML=`<div class="${ok?'okline':'badline'}">${ok?'✅ 答對了！':'❌ 正確答案是 ('+L[ans]+')　已收進📕錯題本'}</div><div>📌 <b>解析：</b>${q.e}</div>${q.m?`<div class="misc">⚠️ <b>迷思提醒：</b>${q.m}</div>`:''}`;
+   logIt(`作答「${q.q.slice(0,22)}…」${ok?'正確':'錯誤'}`);if(cfg.onAns)cfg.onAns(ok);};
+  ol.append(b);});
+ card.append(ol);
+ if(q.h){const hb=el('button',{class:'hintbtn'},'🪜 鷹架提示');const hx=el('div',{class:'hintbox hidden'},'💡 '+q.h);hb.onclick=()=>{hx.classList.remove('hidden');hb.remove();logIt('使用鷹架提示');};card.append(hb,hx);}
+ card.append(exp);box.append(card);return card;}
+function renderQSet(box,list){box.innerHTML='';list.forEach((q,i)=>renderQ(box,q,{num:i+1}));}
+
+/* ================= games ================= */
+function gameClock(){let t0=0,iv=null,pen=0;const d=el('span',{class:'gclock'},'0.0 秒');
+ return {node:d,start(){t0=Date.now();pen=0;clearInterval(iv);iv=setInterval(()=>{d.textContent=((Date.now()-t0)/1000+pen).toFixed(1)+' 秒';},100);},stop(){clearInterval(iv);return (Date.now()-t0)/1000+pen;},penal(s){pen+=s;},get pen(){return pen;}};}
+function sortGame(box,cfg){
+ box.innerHTML='';const clk=gameClock();let sel=null,left=0,started=false,wrong=0;
+ const tip=el('div',{class:'tip'});const pool=el('div',{class:'pool'});
+ const bins=el('div',{class:'bins',style:`grid-template-columns:repeat(${Math.min(cfg.bins.length,4)},1fr)`});
+ const res=el('div',{class:'result hidden'});const startB=el('button',{class:'btn'},'▶ 開始計時');
+ box.append(el('h3',{style:'margin:.1em 0 .3em;color:#7a3416'},cfg.title),el('div',{class:'gbar'},startB,clk.node,el('span',{style:'font-size:.85em;color:#666'},'點一張卡片，再點正確的框。答錯加罰 5 秒。'),el('button',{class:'btn ghost sm',onclick:()=>sortGame(box,cfg)},'↺ 重來')),pool,bins,tip,res);
+ cfg.bins.forEach(b=>{const be=el('div',{class:'bin'},el('h5',null,b.label));be.onclick=()=>place(b.k,be);bins.append(be);});
+ const begin=()=>{if(started)return;started=true;clk.start();startB.disabled=true;};startB.onclick=begin;
+ shuffle(cfg.cards).forEach(cd=>{left++;const c=el('button',{class:'chip'},cd.t);c._d=cd;c.onclick=()=>{if(c.classList.contains('good'))return;begin();$$('.chip.sel').forEach(x=>x.classList.remove('sel'));sel=c;c.classList.add('sel');};pool.append(c);});
+ function place(k,be){if(!sel)return;const cd=sel._d;
+  if(cd.k===k){sel.classList.remove('sel');sel.classList.add('good');be.append(sel);tip.textContent=cd.w?'✅ '+cd.w:'✅ 正確！';sel=null;left--;
+   if(left===0){const t=clk.stop();const p=wrong===0?3:wrong<=2?2:1;res.classList.remove('hidden');res.innerHTML=`🎉 完成！時間 <span class="rfbig">${t.toFixed(1)}</span> 秒（答錯 ${wrong} 次）　獲得 ⭐+${p}`;addPts(p,cfg.title);logIt(`${cfg.title} 完成 ${t.toFixed(1)} 秒，錯 ${wrong}`);}}
+  else{wrong++;clk.penal(5);const s=sel;s.classList.add('bad');be.classList.add('flash');setTimeout(()=>{s.classList.remove('bad');be.classList.remove('flash');},450);tip.textContent='❌ 再想想：'+(cd.hint||cd.w||'');}}}
+function orderGame(box,cfg){
+ box.innerHTML='';const tip=el('div',{class:'tip'});const pool=el('div',{class:'pool'});const ans=el('div',{class:'ansrow'});const res=el('div',{class:'result hidden'});let tries=0,won=false;
+ box.append(el('h3',{style:'margin:.1em 0 .3em;color:#7a3416'},cfg.title),el('div',{style:'font-size:.9em'},cfg.prompt),pool,el('div',{style:'font-size:.85em;color:#1e6f8c'},'👇 你的順序（點已選的可退回）'),ans,
+  el('div',null,el('button',{class:'btn alt',onclick:check},'✔ 檢查'),el('button',{class:'btn ghost',onclick:()=>orderGame(box,cfg)},'↺ 重來')),tip,res);
+ shuffle(cfg.items).forEach(t=>{const c=el('button',{class:'chip'},t);c.onclick=()=>{if(won)return;if(c.parentElement===pool)ans.append(c);else pool.append(c);renum();};pool.append(c);});
+ function renum(){[...ans.children].forEach((c,i)=>{c.querySelector('.n')?.remove();c.prepend(el('span',{class:'n'},i+1));});[...pool.children].forEach(c=>c.querySelector('.n')?.remove());}
+ function check(){if(won)return;const got=[...ans.children].map(c=>c.textContent.replace(/^\d+/,''));
+  if(got.length<cfg.items.length){tip.textContent='還有項目沒排喔！';return;}tries++;
+  let ok=0;[...ans.children].forEach((c,i)=>{const r=got[i]===cfg.items[i];c.classList.toggle('good',r);c.classList.toggle('bad',!r);if(r)ok++;});
+  if(ok===cfg.items.length){won=true;const p=tries===1?2:1;res.classList.remove('hidden');res.innerHTML=`🎉 全對！⭐+${p}　`+(cfg.done||'');addPts(p,cfg.title);tip.textContent='';}
+  else tip.textContent=`對了 ${ok}／${cfg.items.length} 個位置。`+(cfg.hint?'提示：'+cfg.hint:'');logIt(`${cfg.title} 對 ${ok}`);}}
+/* numeric practice generator */
+function calcGame(box,cfg){box.innerHTML='';let P=cfg.gen(),tries=0;
+ const qd=el('div',{class:'qtext'});const inp=el('input',{type:'number',step:'any',style:'width:7em;font-size:1em'});const unit=el('span');const out=el('div',{class:'tip',style:'font-size:1em'});
+ const load=()=>{P=cfg.gen();tries=0;qd.innerHTML=P.q;unit.textContent=' '+P.unit;inp.value='';out.innerHTML='';};
+ const check=()=>{const v=parseFloat(inp.value);if(isNaN(v)){out.textContent='請先輸入數字';return;}tries++;const ok=Math.abs(v-P.ans)<=(P.tol||0.01)*Math.max(1,Math.abs(P.ans));
+  if(ok){const p=tries===1?2:1;out.innerHTML=`✅ 正確！⭐+${p}<br>📐 ${P.steps}`;addPts(p,cfg.title);logIt(`${cfg.title} 正確`);}
+  else{out.innerHTML=`❌ 再試一次！💡 ${P.hint||'先寫出公式，再代入數字。'}`;logIt(`${cfg.title} 錯誤`);}};
+ inp.addEventListener('keydown',e=>{if(e.key==='Enter')check();});
+ box.append(el('h3',{style:'margin:.1em 0 .3em;color:#7a3416'},'🧮 '+cfg.title+'（隨機出題）'),qd,el('div',null,inp,unit,' ',el('button',{class:'btn sm',onclick:check},'檢查'),el('button',{class:'btn sm ghost',onclick:()=>{out.innerHTML='📐 '+P.steps;logIt(cfg.title+' 看解法');}},'看解法'),el('button',{class:'btn sm alt',onclick:load},'換一題')),out);load();}
+
+
+/* ================= OX lists ================= */
+const OX={
+ s0:[{s:'水、礦物質和維生素都可以產生能量。',t:false,e:'只有醣類、蛋白質、脂質能產生能量。',go:1},
+  {s:'本氏液加入葡萄糖液後，不必加熱就會變成紅色。',t:false,e:'本氏液要<b>隔水加熱</b>才會變色。',go:2},
+  {s:'酵素能加快反應，反應後本身不被消耗，可以再用。',t:true,e:'酵素是催化劑。',go:3},
+  {s:'唾液煮沸後再和澱粉作用，澱粉一樣會被分解。',t:false,e:'高溫使酵素<b>失去活性</b>，澱粉不會被分解。',go:4},
+  {s:'葉片的表皮細胞含有大量葉綠體。',t:false,e:'表皮透明無色；含葉綠體的是<b>葉肉細胞與保衛細胞</b>。',go:5},
+  {s:'氧氣是光合作用的產物之一。',t:true,e:'水＋二氧化碳 → 葡萄糖＋氧氣＋水。',go:6},
+  {s:'膽汁含有可以分解脂質的酵素。',t:false,e:'膽汁<b>不含酵素</b>，只能把脂質乳化成小脂肪球。',go:7},
+  {s:'人體吸收的水分全部都在大腸吸收。',t:false,e:'<b>大部分在小腸</b>吸收，大腸吸收剩餘水分。',go:8}],
+ s1:[{s:'1 公克脂質產生的熱量比 1 公克醣類多。',t:true,e:'脂質約 9 大卡，醣類約 4 大卡。'},
+  {s:'食物愈重，熱量一定愈高。',t:false,e:'熱量要看<b>成分</b>，不是只看重量。'},
+  {s:'1 大卡等於 1000 卡。',t:true,e:'1 卡＝使 1 公克水升高 1℃ 的熱量。'},
+  {s:'礦物質雖不能產生能量，但可以組成身體構造，例如鈣組成骨骼。',t:true,e:'鐵和造血有關、鈣是骨骼牙齒的成分。'},
+  {s:'人類的肌肉和頭髮主要由脂質構成。',t:false,e:'主要由<b>蛋白質</b>構成。'},
+  {s:'缺乏維生素 A 容易得夜盲症。',t:true,e:'缺乏維生素 C 則容易得壞血病。'}],
+ s2:[{s:'碘液遇到澱粉會變成藍黑色。',t:true,e:'碘液原本是黃褐色。'},
+  {s:'本氏液檢驗時顏色愈接近紅色，表示葡萄糖愈多。',t:true,e:'藍 → 綠 → 黃 → 橙 → 紅。'},
+  {s:'碘液可以用來檢測葡萄糖。',t:false,e:'碘液檢測<b>澱粉</b>；葡萄糖用<b>本氏液</b>。'},
+  {s:'實驗中另外滴一滴清水加碘液，是作為對照組。',t:true,e:'用來和待測物比較顏色。'},
+  {s:'在載玻片下墊白紙，是為了讓碘液反應更快。',t:false,e:'墊白紙是為了<b>看清楚顏色變化</b>。'}],
+ s3:[{s:'酵素可以讓原本不會發生的反應發生。',t:false,e:'催化劑只能加快反應，<b>無法引發新反應</b>。'},
+  {s:'代謝作用包括分解作用和合成作用。',t:true,e:'兩者都需要酵素。'},
+  {s:'酵素只能催化分解作用。',t:false,e:'合成作用也需要酵素。'},
+  {s:'一種酵素只能和特定的受質結合，這是酵素的專一性。',t:true,e:'例如唾液澱粉酶只分解澱粉。'},
+  {s:'酵素離開生物體後就完全無法作用。',t:false,e:'在適當環境下仍可作用，例如加酶洗衣粉。'},
+  {s:'溫度愈高，酵素的活性一定愈高。',t:false,e:'超過適宜溫度後活性下降，甚至<b>失去活性</b>。'}],
+ s4:[{s:'實驗中把試管放在 35～40℃ 溫水中，是為了讓唾液中的酵素有較佳的活性。',t:true,e:'接近人體體溫。'},
+  {s:'在唾液與澱粉中加入醋酸，可以讓酵素作用更快。',t:false,e:'唾液中的酵素適合中性環境，酸性會使活性下降。'},
+  {s:'本實驗的操縱變因是「是否先經過高溫加熱」。',t:true,e:'應變變因是本氏液的顏色變化。'},
+  {s:'加熱過的唾液加本氏液隔水加熱後，會變成紅色。',t:false,e:'酵素失去活性，澱粉沒被分解 → <b>維持藍色</b>。'}],
+ s5:[{s:'角質層可以防止葉片水分散失。',t:true,e:'角質層覆蓋在表皮外。'},
+  {s:'保衛細胞含有葉綠體。',t:true,e:'保衛細胞呈半月形、兩兩成對。'},
+  {s:'葉片呈綠色是因為表皮細胞是綠色的。',t:false,e:'表皮透明無色，綠色是<b>葉肉細胞</b>透出的顏色。'},
+  {s:'二氧化碳經由氣孔進入葉片。',t:true,e:'氣孔也是氧氣和水蒸氣的通道。'},
+  {s:'葉片扁平而薄，可以增加受光面積。',t:true,e:'有利於進行光合作用。'}],
+ s6:[{s:'光合作用需要氧氣才能進行。',t:false,e:'氧氣是<b>產物</b>；需要的是水、二氧化碳、光能、葉綠體。'},
+  {s:'光合作用產生的葡萄糖可轉變成澱粉儲存。',t:true,e:'所以可用碘液檢測葉片中的澱粉。'},
+  {s:'葉片放入沸水中加熱，是為了軟化角質層。',t:true,e:'使酒精容易溶出色素、碘液容易滲入。'},
+  {s:'酒精可以直接放在火上加熱以加快去色素。',t:false,e:'酒精易燃，必須<b>隔水加熱</b>。'},
+  {s:'用鋁箔遮住的葉片部位，滴碘液後呈藍黑色。',t:false,e:'遮光部位不能行光合作用、沒有澱粉 → <b>黃褐色</b>。'},
+  {s:'植物行光合作用對維持大氣中氧氣與二氧化碳濃度的穩定很重要。',t:true,e:'吸收二氧化碳、釋放氧氣。'}],
+ s7:[{s:'肝臟和胰臟屬於消化道，食物會經過它們。',t:false,e:'它們是<b>消化腺</b>，分泌的消化液經導管送入小腸。'},
+  {s:'胰液可以分解醣類、蛋白質和脂質。',t:true,e:'是功能最完整的消化液。'},
+  {s:'胃液中含有鹽酸和可以分解蛋白質的酵素。',t:true,e:'鹽酸也幫助殺菌、幫助酵素作用。'},
+  {s:'唾液中的酵素可以初步分解蛋白質。',t:false,e:'唾液中的酵素初步分解<b>醣類（澱粉）</b>。'},
+  {s:'消化道的蠕動可以推動食物，並使食物和消化液混合。',t:true,e:'胃還能攪拌食物。'},
+  {s:'消化酵素大多由蛋白質構成。',t:true,e:'所以會受溫度、酸鹼性影響。'}],
+ s8:[{s:'小腸是吸收養分的主要場所。',t:true,e:'小腸內壁有皺褶和絨毛。'},
+  {s:'絨毛內的微血管可以把吸收的養分送到全身。',t:true,e:'供細胞利用。'},
+  {s:'小腸的主要功能是儲存食物。',t:false,e:'暫時儲存食物的是<b>胃</b>；小腸負責分解與吸收。'},
+  {s:'人體可以消化纖維素並從中獲得大量能量。',t:false,e:'人類沒有分解纖維素的酵素；纖維素可<b>促進蠕動</b>。'},
+  {s:'膽汁儲存在膽囊中，進食時送入小腸。',t:true,e:'膽汁由肝臟分泌。'}]};
+
+/* ================= question bank (all newly written) ================= */
+const BANK=[
+ {g:'s1',u:'2-1',p:'56',lv:1,q:'下列哪一種養分「不能」為人體提供能量？',o:['維生素','醣類','蛋白質','脂質'],a:0,e:'水、礦物質、維生素不能產生能量。'},
+ {g:'s1',u:'2-1',p:'57',lv:1,q:'1 公克脂質在體內大約可以產生多少熱量？',o:['9 大卡','4 大卡','1 大卡','1000 大卡'],a:0,e:'醣類、蛋白質每克約 4 大卡；脂質約 9 大卡。'},
+ {g:'s1',u:'2-1',p:'57',lv:2,q:'某包餅乾含醣類 20 g、蛋白質 5 g、脂質 10 g，這包餅乾約可提供多少大卡？',o:['190 大卡','140 大卡','350 大卡','35 大卡'],a:0,e:'20×4 ＋ 5×4 ＋ 10×9 ＝ 80＋20＋90 ＝ 190 大卡。',h:'醣類、蛋白質乘 4，脂質乘 9。'},
+ {g:'s1',u:'2-1',p:'57',lv:1,q:'「1 卡」的定義是？',o:['使 1 公克的水溫度升高 1℃ 所需的熱量','使 1 公斤的水溫度升高 1℃ 所需的熱量','1 公克食物所含的熱量','使 1 公克的水沸騰所需的熱量'],a:0,e:'1 大卡（kcal）＝1000 卡。'},
+ {g:'s1',u:'2-1',p:'57',lv:2,q:'燃燒一片洋芋片，使 60 公克的水由 22℃ 升高到 32℃。水吸收了多少熱量？',o:['600 卡','60 卡','1920 卡','10 卡'],a:0,e:'熱量＝水的質量 × 上升溫度＝60 × (32－22)＝600 卡（＝0.6 大卡）。',h:'1 公克水升高 1℃ 需要 1 卡。'},
+ {g:'s1',u:'2-1',p:'58',lv:1,q:'人類的肌肉、頭髮主要由哪一種養分構成？',o:['蛋白質','醣類','脂質','礦物質'],a:0,e:'酵素的主要成分也是蛋白質。'},
+ {g:'s1',u:'2-1',p:'58',lv:1,q:'組成植物細胞壁的「纖維素」屬於哪一類養分？',o:['醣類','蛋白質','脂質','維生素'],a:0,e:'澱粉、肝糖、纖維素都是醣類。'},
+ {g:'s1',u:'2-1',p:'58',lv:1,q:'分布在皮膚下層的脂質，主要功能是？',o:['隔絕熱量散失，保溫','幫助造血','構成骨骼','調節血糖'],a:0,e:'脂質也是細胞膜的主要成分。'},
+ {g:'s1',u:'2-1',p:'58',lv:1,q:'構成骨骼和牙齒的重要礦物質是？',o:['鈣','鐵','鈉','鉀'],a:0,e:'鐵和造血有關。'},
+ {g:'s1',u:'2-1',p:'58',lv:2,q:'古代航海的水手長期吃不到新鮮蔬果，牙齦容易出血，最可能缺乏哪一種養分？',o:['維生素 C','維生素 A','鐵','鈣'],a:0,e:'缺乏維生素 C 容易得壞血病；缺維生素 A 易夜盲。'},
+ {g:'s1',u:'2-1',p:'58',lv:2,q:'水對人體的重要性，下列何者正確？',o:['能溶解許多物質成為水溶液，有利物質反應與運送','可以產生大量能量','是肌肉的主要成分','可以分解澱粉'],a:0,e:'水不能產生能量，但對生理運作很重要。'},
+ {g:'s2',u:'2-1',p:'56',lv:1,q:'食品營養標示上的「碳水化合物」是指哪一類養分？',o:['醣類','蛋白質','脂質','維生素'],a:0,e:'碳水化合物就是醣類。'},
+ {g:'s2',u:'2-1',p:'59',lv:1,q:'在食物上滴碘液後出現藍黑色，表示食物中含有？',o:['澱粉','葡萄糖','蛋白質','脂質'],a:0,e:'顏色愈深，澱粉愈多。'},
+ {g:'s2',u:'2-1',p:'59–60',lv:2,q:'用本氏液檢驗葡萄糖時，正確的做法與結果為何？',o:['加入本氏液後隔水加熱，含葡萄糖時會由藍色變成綠、黃、橙或紅色','加入本氏液後即可看到藍黑色','加入本氏液後放進冰箱，會變成黃褐色','本氏液原本是紅色，遇葡萄糖變藍色'],a:0,e:'本氏液原為藍色，一定要隔水加熱。'},
+ {g:'s2',u:'2-1',p:'59',lv:2,q:'甲、乙兩種果汁各取等量，滴入本氏液後放進熱水浴中加溫，甲變成橙紅色、乙變成綠色。下列推論何者最合理？',o:['甲所含的葡萄糖比乙多','乙所含的葡萄糖比甲多','甲含澱粉、乙不含','兩者都不含葡萄糖'],a:0,e:'愈接近紅色，葡萄糖濃度愈高。'},
+ {g:'s2',u:'2-1',p:'60',lv:2,q:'實驗中除了葡萄糖液的試管外，還另外準備一支只加水的試管，目的是？',o:['作為對照組，以便比較顏色變化','讓本氏液變稀','讓加熱更均勻','增加葡萄糖的量'],a:0,e:'有對照才能判斷顏色變化是不是由葡萄糖造成。'},
+ {g:'s2',u:'2-1',p:'59',lv:2,q:'某溶液加碘液變藍黑色；另取一份加本氏液並隔水加熱後仍維持藍色。這溶液最可能含有？',o:['澱粉，但不含葡萄糖','葡萄糖，但不含澱粉','澱粉和葡萄糖','兩者都沒有'],a:0,e:'碘液陽性 → 有澱粉；本氏液維持藍色 → 沒有葡萄糖。'},
+ {g:'s2',u:'2-1',p:'59',lv:1,q:'碘液原本是什麼顏色？',o:['黃褐色','藍色','紅色','無色'],a:0,e:'遇澱粉才變藍黑色（或紫紅色）。'},
+ {g:'s3',u:'2-2',p:'64',lv:1,q:'大部分酵素的主要成分是？',o:['蛋白質','澱粉','脂質','葡萄糖'],a:0,e:'所以容易受溫度、酸鹼性影響。'},
+ {g:'s3',u:'2-2',p:'62',lv:1,q:'生物體內把較大分子變成較小分子的反應，稱為？',o:['分解作用','合成作用','光合作用','擴散作用'],a:0,e:'小分子變大分子則為合成作用。'},
+ {g:'s3',u:'2-2',p:'62',lv:1,q:'「代謝作用」包括哪些作用？',o:['分解作用與合成作用','只有分解作用','排泄廢物','擴散與滲透'],a:0,e:'生物體內的分解作用與合成作用合稱代謝作用。'},
+ {g:'s3',u:'2-2',p:'62',lv:2,q:'關於酵素，下列敘述何者正確？',o:['能加快反應，反應後本身不被消耗，可再次作用','反應後就會消失','能催化所有種類的反應','能增加產物的總量'],a:0,e:'酵素是催化劑，具專一性。'},
+ {g:'s3',u:'2-2',p:'63',lv:2,q:'唾液中的澱粉酶只能分解澱粉，不能分解蛋白質，這說明酵素具有什麼特性？',o:['專一性','重複性','記憶性','可遺傳性'],a:0,e:'酵素需和特定受質結合才能作用。'},
+ {g:'s3',u:'2-2',p:'64',lv:1,q:'人體內大部分酵素在大約多少℃時活性最好？',o:['37℃ 左右','0℃','60℃','100℃'],a:0,e:'接近體溫；超過一定溫度後會失去活性。'},
+ {g:'s3',u:'2-2',p:'64',lv:2,q:'胃中消化液的酵素，最適合在什麼環境中作用？',o:['酸性','中性','鹼性','任何環境都一樣'],a:0,e:'胃 → 酸性；小腸 → 鹼性。'},
+ {g:'s3',u:'2-2',p:'62',lv:2,q:'下列哪一種變化「不需要」酵素參與？',o:['冰塊融化成水','葡萄糖合成澱粉','澱粉分解成葡萄糖','胺基酸合成蛋白質'],a:0,e:'融化、溶解、擴散是物理變化，不需酵素。'},
+ {g:'s3',u:'2-2',p:'64',lv:2,q:'使用加酶洗衣粉時，若用接近沸騰的熱水，去汙效果反而變差，主要原因是？',o:['高溫使酵素失去活性','熱水會把汙漬變多','酵素在熱水中專一性變強','熱水讓洗衣粉變酸'],a:0,e:'酵素主要成分是蛋白質，高溫會失去活性。'},
+ {g:'s3',u:'2-2',p:'63–64',lv:2,q:'新鮮鳳梨含有蛋白酶。用明膠（蛋白質）做果凍時，加新鮮鳳梨不易凝固，加罐頭鳳梨（經高溫處理）卻可以。最合理的解釋是？',o:['罐頭鳳梨經加熱，蛋白酶失去活性','罐頭鳳梨的糖分比較多','新鮮鳳梨的水分比較少','罐頭鳳梨含有更多蛋白酶'],a:0,e:'新鮮鳳梨的蛋白酶會分解明膠；加熱後酵素失去活性。'},
+ {g:'s3',u:'2-2',p:'62',lv:1,q:'受到酵素作用的物質，稱為什麼？',o:['受質','產物','催化劑','溶劑'],a:0,e:'酵素和受質結合後促使反應進行。'},
+ {g:'s4',u:'2-2',p:'65–66',lv:2,q:'唾液酵素實驗中，加入澱粉液後要把試管放在 35～40℃ 的溫水中，原因是？',o:['接近體溫，讓酵素有較佳的活性','讓澱粉溶解得更快','讓本氏液變色','殺死唾液中的細菌'],a:0,e:'溫度太低或太高都會降低酵素活性。'},
+ {g:'s4',u:'2-2',p:'65–66',lv:2,q:'將唾液先放入沸水中加熱 10 分鐘，冷卻後加入澱粉液並放在溫水中，再加本氏液隔水加熱，結果應為？',o:['維持藍色，因為酵素已失去活性','變成紅色，因為澱粉被分解','變成藍黑色，因為含有澱粉','變成黃褐色'],a:0,e:'澱粉沒被分解，就沒有葡萄糖等醣類讓本氏液變色。'},
+ {g:'s4',u:'2-2',p:'65–66',lv:2,q:'把唾液與澱粉液混合後放在冰水（約 0℃）中 30 分鐘，再用本氏液檢驗，顏色幾乎不變。主要原因是？',o:['低溫使酵素活性很低','澱粉在冰水中會凝固','本氏液在低溫下失效','唾液在冰水中被分解'],a:0,e:'溫度太低，酵素活性低，反應很慢。'},
+ {g:'s4',u:'2-2',p:'65',lv:2,q:'探討「溫度是否影響唾液酵素活性」的實驗中，下列何者是「操縱變因」？',o:['唾液是否經過高溫加熱','唾液的量','澱粉液的濃度','本氏液的顏色變化'],a:0,e:'唾液、澱粉液、本氏液的量是控制變因；顏色變化是應變變因。'},
+ {g:'s4',u:'2-2',p:'64',lv:2,q:'把饅頭在嘴裡慢慢咀嚼很久，會覺得有甜味，主要是因為？',o:['唾液中的酵素把澱粉分解成較小的醣類','饅頭本身含有大量葡萄糖','牙齒把澱粉磨成糖','舌頭分泌糖分'],a:0,e:'唾液中的酵素可初步分解澱粉。'},
+ {g:'s5',u:'2-3',p:'67',lv:1,q:'植物進行光合作用的主要器官是？',o:['葉','根','莖','花'],a:0,e:'葉片扁平而薄，可擴大受光面積。'},
+ {g:'s5',u:'2-3',p:'69',lv:2,q:'葉片中哪些細胞含有葉綠體？',o:['葉肉細胞和保衛細胞','表皮細胞和保衛細胞','只有葉脈中的細胞','所有葉片細胞'],a:0,e:'表皮細胞透明無色，不含葉綠體。'},
+ {g:'s5',u:'2-3',p:'68',lv:1,q:'葉片表皮外的角質層，主要功能是？',o:['防止水分散失','行光合作用','運送養分','控制氣孔開閉'],a:0,e:'角質層透明，覆蓋在表皮細胞外。'},
+ {g:'s5',u:'2-3',p:'68',lv:1,q:'控制氣孔開閉的是？',o:['保衛細胞','表皮細胞','葉肉細胞','角質層'],a:0,e:'保衛細胞呈半月形，兩兩成對。'},
+ {g:'s5',u:'2-3',p:'68',lv:2,q:'光合作用所需的二氧化碳，主要從葉片的哪裡進入？',o:['氣孔','角質層','葉脈','上表皮細胞'],a:0,e:'氣孔是氣體進出及水分蒸散的通道。'},
+ {g:'s5',u:'2-3',p:'69',lv:1,q:'葉脈的主要功能是？',o:['運送水分和養分','行光合作用','防止水分散失','保護葉片'],a:0,e:'葉脈由輸導組織構成。'},
+ {g:'s6',u:'2-3',p:'70',lv:1,q:'光合作用的反應物是？',o:['水和二氧化碳','葡萄糖和氧氣','氧氣和水','澱粉和二氧化碳'],a:0,e:'產物是葡萄糖、氧氣（和水）。'},
+ {g:'s6',u:'2-3',p:'70',lv:1,q:'光合作用在細胞中的哪一個構造進行？',o:['葉綠體','細胞核','細胞壁','液胞'],a:0,e:'葉綠素等色素吸收光能。'},
+ {g:'s6',u:'2-3',p:'70',lv:2,q:'光合作用合成的葡萄糖，在植物體內常轉變成什麼形式儲存？',o:['澱粉','蛋白質','纖維素以外的脂質','氧氣'],a:0,e:'所以可用碘液檢測葉片是否含澱粉。'},
+ {g:'s6',u:'2-3',p:'72',lv:2,q:'實驗 2-3 中，葉片浸在酒精裡、再把酒精燒杯放進熱水中加溫，目的是？',o:['溶出葉綠素等色素，避免影響碘液顏色的觀察','軟化角質層','讓葉片繼續行光合作用','殺死葉片中的細菌'],a:0,e:'先用沸水軟化角質層，再用酒精去色素。'},
+ {g:'s6',u:'2-3',p:'72',lv:1,q:'實驗中酒精一定要「隔水加熱」，主要原因是？',o:['酒精易燃，直接加熱很危險','酒精加熱後會變色','隔水加熱可以產生澱粉','酒精需要很高溫才能作用'],a:0,e:'燒杯也不可加蓋，以免發生危險。'},
+ {g:'s6',u:'2-3',p:'72',lv:2,q:'葉片一部分用鋁箔遮住並照光數日，經處理後滴碘液，遮光部位呈現什麼顏色？',o:['黃褐色，因為沒有光不能行光合作用、沒有澱粉','藍黑色，因為澱粉最多','綠色，因為葉綠素還在','紅色，因為含葡萄糖'],a:0,e:'照光部位 → 藍黑色；遮光部位 → 碘液原色黃褐色。'},
+ {g:'s6',u:'2-3',p:'70',lv:2,q:'把水草放在燈下，燈移得愈近，每分鐘冒出的氣泡愈多。下列推論何者最合理？',o:['在一定範圍內，光愈強，光合作用愈旺盛，產生的氧氣愈多','光愈強，水草吸收的氧氣愈多','氣泡主要是二氧化碳','燈的熱讓水沸騰產生氣泡'],a:0,e:'氣泡主要是光合作用產生的氧氣。'},
+ {g:'s6',u:'2-3',p:'70',lv:2,q:'光合作用對整個地球環境的重要性為何？',o:['吸收二氧化碳、釋放氧氣，維持大氣中兩者濃度穩定','增加大氣中的二氧化碳','消耗大氣中的氧氣','讓土壤中的水分變多'],a:0,e:'同時把光能轉成養分中的能量，供生物利用。'},
+ {g:'s6',u:'2-3',p:'70',lv:1,q:'下列何者「不是」光合作用必須的條件？',o:['氧氣','光','水','二氧化碳'],a:0,e:'氧氣是產物。'},
+ {g:'s7',u:'2-4',p:'73',lv:1,q:'把較大分子的養分轉變成較小分子的過程，稱為？',o:['消化作用','排遺作用','呼吸作用','吸收作用'],a:0,e:'小分子才能通過細胞膜被細胞利用。'},
+ {g:'s7',u:'2-4',p:'73',lv:1,q:'蛋白質經消化後，會變成哪一種小分子？',o:['胺基酸','葡萄糖','脂肪酸','甘油'],a:0,e:'澱粉→葡萄糖；脂質→脂肪酸＋甘油。'},
+ {g:'s7',u:'2-4',p:'73',lv:1,q:'脂質經消化後，會變成哪些小分子？',o:['脂肪酸和甘油','葡萄糖','胺基酸','澱粉'],a:0,e:'膽汁先乳化，再由胰液中的酵素分解。'},
+ {g:'s7',u:'2-4',p:'76',lv:2,q:'關於膽汁，下列敘述何者正確？',o:['由肝臟分泌、不含消化酵素，可將脂質乳化成小脂肪球','由膽囊製造，可分解蛋白質','含有分解澱粉的酵素','由胰臟分泌'],a:0,e:'膽汁儲存在膽囊，進食時送入小腸。'},
+ {g:'s7',u:'2-4',p:'76',lv:2,q:'哪一種消化液能幫助醣類、蛋白質和脂質「三種」養分的分解？',o:['胰液','唾液','胃液','膽汁'],a:0,e:'胰液由胰臟分泌，經導管送入小腸。'},
+ {g:'s7',u:'2-4',p:'75',lv:2,q:'胃液中含有什麼？',o:['鹽酸和可分解蛋白質的酵素','膽汁和澱粉酶','可分解脂質的膽汁','不含任何酵素'],a:0,e:'胃呈囊狀，可攪拌並暫時儲存食物。'},
+ {g:'s7',u:'2-4',p:'74',lv:2,q:'下列哪一個器官屬於「消化腺」，食物不會經過它？',o:['胰臟','胃','小腸','食道'],a:0,e:'肝臟、胰臟分泌消化液，經導管送入小腸。'},
+ {g:'s7',u:'2-4',p:'74',lv:2,q:'消化道管壁收縮產生的蠕動，有什麼作用？',o:['推動食物前進，並使食物和消化液混合','分泌消化液','吸收所有養分','製造酵素'],a:0,e:'食道藉蠕動把食物推入胃中。'},
+ {g:'s7',u:'2-4',p:'75',lv:2,q:'唾液中的酵素隨食物進入胃之後，活性會大幅下降，最主要原因是？',o:['胃中是酸性環境，不適合唾液中的酵素','胃中溫度太低','胃中沒有澱粉','酵素被膽汁乳化'],a:0,e:'不同酵素適合的酸鹼性不同。'},
+ {g:'s8',u:'2-4',p:'76',lv:1,q:'人體吸收養分的主要場所是？',o:['小腸','胃','大腸','食道'],a:0,e:'也是分解食物的主要場所。'},
+ {g:'s8',u:'2-4',p:'77',lv:2,q:'小腸絨毛的功能為何？',o:['增加吸收表面積，並由內部微血管把養分送往全身','磨碎食物','分泌膽汁','儲存糞便'],a:0,e:'環狀皺褶上有指狀突起的絨毛。'},
+ {g:'s8',u:'2-4',p:'77',lv:1,q:'大腸的主要功能是？',o:['吸收剩餘的水分，形成糞便','吸收大部分養分','分泌消化液','分解蛋白質'],a:0,e:'大部分水分在小腸吸收。'},
+ {g:'s8',u:'2-4',p:'82',lv:2,q:'人類吃下蔬菜中的纖維素卻無法消化，主要原因是？',o:['人類的消化液中沒有分解纖維素的酵素','纖維素太小無法吸收','纖維素會被胃酸破壞','纖維素是蛋白質'],a:0,e:'纖維素雖不能消化，但能促進消化道蠕動。'},
+ {g:'s8',u:'2-4',p:'82',lv:2,q:'牛只吃草卻能獲得足夠能量，主要是因為？',o:['消化道中共生的微生物能分泌纖維素酶','牛的唾液含大量澱粉酶','牛能直接吸收纖維素','牛會行光合作用'],a:0,e:'反芻使微生物的纖維素酶和食物長時間接觸。'},
+ {g:'s8',u:'2-4',p:'76',lv:2,q:'膽囊被切除的人，吃太油膩的食物較容易消化不良，最可能的原因是？',o:['膽汁無法集中大量送入小腸，脂質乳化變差','胰液完全無法分泌','胃不能分解蛋白質','小腸無法吸收葡萄糖'],a:0,e:'膽汁乳化脂質，有利胰液中的酵素分解脂質。'},
+ {g:'s8',u:'2-4',p:'77',lv:1,q:'盲腸上的闌尾，對人類而言？',o:['沒有消化功能','是吸收水分的主要構造','能分泌膽汁','能分解纖維素'],a:0,e:'食物若掉入可能引起闌尾炎（P77 知識快遞）。'},
+ {g:'s8',u:'2-4',p:'77',lv:2,q:'多吃高纖維蔬果有助於排便順暢，主要是因為纖維素？',o:['能促進消化道蠕動','能被分解成大量葡萄糖','能殺死腸內細菌','能增加胃酸'],a:0,e:'纖維素無法被人體消化吸收。'}
+];
+BANK.forEach((q,i)=>q.id=i);
+
+/* ================= S0 ================= */
+function initS0(){const res={};oxCards($('#ox0'),OX.s0,{num:true,onAns:(i,ok)=>{res[i]=ok;upd();}});
+ function upd(){const ks=Object.keys(res);const uniq=[...new Set(ks.filter(k=>!res[k]).map(k=>OX.s0[k].go))];
+  const box=$('#ox0sum');box.innerHTML=`已作答 ${ks.length}／8 題　`+(uniq.length?'📍 建議優先複習：':(ks.length===8?'🎉 全對！可以直接挑戰「9 總挑戰」':''));
+  uniq.forEach(g=>box.append(el('button',{class:'btn sm alt',onclick:()=>go(g)},`${g} ${STAGES[g].name}`)));}}
+
+/* ================= S1 calories ================= */
+function calDraw(){const c=+$('#cCr').value,p=+$('#cPr').value,f=+$('#cFr').value;$('#cCv').textContent=c;$('#cPv').textContent=p;$('#cFv').textContent=f;
+ const E=[c*4,p*4,f*9],T=E[0]+E[1]+E[2],W=460;let x=30;let s=`<rect width="520" height="170" fill="#fff"/>`;
+ const cols=['#f1c40f','#e67e22','#c0392b'],nm=['醣類','蛋白質','脂質'];
+ E.forEach((e,i)=>{const w=T?e/Math.max(T,400)*W:0;s+=`<rect x="${x}" y="40" width="${w}" height="50" fill="${cols[i]}"/>`;if(w>40)s+=`<text x="${x+w/2}" y="70" font-size="13" fill="#fff" text-anchor="middle" font-weight="700">${nm[i]} ${e}</text>`;x+=w;});
+ s+=`<rect x="30" y="40" width="${W}" height="50" fill="none" stroke="#999"/><text x="30" y="28" font-size="15">總熱量 ＝ <tspan font-weight="700" fill="#b4532a">${T} 大卡</tspan></text>`;
+ E.forEach((e,i)=>s+=`<rect x="${30+i*150}" y="110" width="16" height="16" fill="${cols[i]}"/><text x="${52+i*150}" y="123" font-size="14">${nm[i]} ${e} 大卡</text>`);s+=`<text x="30" y="155" font-size="12" fill="#666">（長條滿格＝${Math.max(T,400)} 大卡）</text>`;
+ $('#calSvg').innerHTML=s;$('#calOut').innerHTML=`<span class="formula">熱量 ＝ ${c}×4 ＋ ${p}×4 ＋ ${f}×9 ＝ ${E[0]}＋${E[1]}＋${E[2]} ＝ ${T} 大卡</span><br>👀 試試把脂質調高 1 克 → 熱量增加 9 大卡；醣類調高 1 克 → 只增加 4 大卡。`;}
+function initS1(){['cCr','cPr','cFr'].forEach(i=>$('#'+i).oninput=calDraw);calDraw();
+ calcGame($('#c1a'),{title:'食物熱量計算',gen:()=>{const c=rnd(2,15)*2,p=rnd(1,10),f=rnd(1,12);const T=c*4+p*4+f*9;return {q:`某食物含醣類 ${c} g、蛋白質 ${p} g、脂質 ${f} g，共可提供多少大卡？`,ans:T,unit:'大卡',steps:`${c}×4 ＋ ${p}×4 ＋ ${f}×9 ＝ ${c*4}＋${p*4}＋${f*9} ＝ ${T} 大卡`,hint:'醣類、蛋白質×4，脂質×9。'};}});
+ calcGame($('#c1b'),{title:'水吸收的熱量（卡）',gen:()=>{const m=pick([50,60,80,100,120,200]),t1=rnd(18,26),d=rnd(3,15);return {q:`燃燒食物使 ${m} 公克的水由 ${t1}℃ 升高到 ${t1+d}℃，水吸收了多少「卡」的熱量？`,ans:m*d,unit:'卡',steps:`熱量＝水質量×上升溫度＝${m}×(${t1+d}－${t1})＝${m}×${d}＝${m*d} 卡`,hint:'1 公克水升高 1℃ 需要 1 卡。'};}});
+ sortGame($('#g1sort'),{title:'🥗 養分功能配對',bins:[{k:'c',label:'醣類'},{k:'p',label:'蛋白質'},{k:'f',label:'脂質'},{k:'w',label:'水'},{k:'m',label:'礦物質'},{k:'v',label:'維生素'}],cards:[
+  {t:'組成植物細胞壁的纖維素',k:'c'},{t:'澱粉、肝糖：儲存能量',k:'c'},{t:'組成肌肉和頭髮',k:'p'},{t:'酵素的主要成分',k:'p'},{t:'細胞膜的主要成分',k:'f'},{t:'皮下保溫、隔絕熱量散失',k:'f'},
+  {t:'溶解物質，利於反應與運送',k:'w'},{t:'鐵：幫助造血',k:'m'},{t:'鈣：組成骨骼和牙齒',k:'m'},{t:'缺乏時容易夜盲（A）',k:'v'},{t:'缺乏時容易壞血病（C）',k:'v'}]});
+ oxCards($('#ox1'),OX.s1);renderQSet($('#q1'),BANK.filter(q=>q.g==='s1'));}
+
+/* ================= S2 test lab ================= */
+const SAMPLES=[['澱粉液',3,0],['葡萄糖液',0,4],['清水（對照）',0,0],['熟米飯',3,0],['芭樂',0,3],['馬鈴薯',3,0],['花生',1,0],['蘋果汁',0,3],['咀嚼很久的饅頭',2,1]];
+const BEN=['#2f6fd0','#3ea44a','#e9c21c','#e67e22','#c0392b'],BENN=['藍色','綠色','黃色','橙色','紅色'];
+let LS=0,LR='iod',LH=1;
+function labDraw(){const [n,st,gl]=SAMPLES[LS];let s=`<rect width="520" height="260" fill="#fbfbfb"/>`,msg='';
+ if(LR==='iod'){const col=st===0?'#c8941e':st===1?'#6b4c8a':st===2?'#3b2f6b':'#1d1840';
+  s+=`<rect x="80" y="160" width="360" height="60" fill="#fff" stroke="#ccc"/><text x="260" y="245" font-size="12" text-anchor="middle" fill="#888">白紙（方便觀察顏色）</text><rect x="100" y="120" width="320" height="40" rx="4" fill="#e9f3f8" stroke="#9bb"/><ellipse cx="260" cy="140" rx="60" ry="14" fill="${col}"/><text x="260" y="105" font-size="15" text-anchor="middle">${n}＋碘液</text>`;
+  msg=st?`呈<b>${st>=2?'藍黑色':'淡紫藍色'}</b> → 含<b>澱粉</b>${st===1?'（量較少）':st===3?'（量多）':''}。`:'維持碘液的<b>黃褐色</b> → 不含澱粉。';}
+ else{const lv=LH?gl:0;const col=BEN[lv];
+  if(LH)s+=`<rect x="170" y="80" width="180" height="160" rx="6" fill="#bfe3f7" opacity=".45" stroke="#6aa"/><text x="355" y="100" font-size="12" fill="#477">熱水（隔水加熱）</text><path d="M240 258 q5 -10 0 -16 M260 258 q5 -10 0 -16 M280 258 q5 -10 0 -16" stroke="#e67e22" stroke-width="3" fill="none"/>`;
+  s+=`<path d="M230 30 L230 200 Q230 230 260 230 Q290 230 290 200 L290 30" fill="none" stroke="#666" stroke-width="3"/><path d="M232 110 L288 110 L288 200 Q288 228 260 228 Q232 228 232 200 Z" fill="${col}"/>`;
+  s+=`<text x="260" y="22" font-size="15" text-anchor="middle">${n}＋本氏液</text>`;
+  s+=BEN.map((c,i)=>`<rect x="${30+i*30}" y="230" width="28" height="18" fill="${c}"/>`).join('')+`<text x="30" y="225" font-size="11">藍→綠→黃→橙→紅（葡萄糖濃度↑）</text>`;
+  msg=!LH?`<span class="red">沒有加熱 → 維持藍色</span>，無法判斷！本氏液一定要隔水加熱。`:gl?`變成<b>${BENN[gl]}</b> → 含<b>葡萄糖</b>${gl>=3?'（濃度高）':'（濃度較低）'}。`:'維持<b>藍色</b> → 不含葡萄糖。';}
+ $('#labSvg').innerHTML=s;$('#labOut').innerHTML=msg+(n.includes('饅頭')?'<br>💡 饅頭含澱粉；咀嚼時唾液中的酵素把部分澱粉分解成醣類，所以兩種試劑都有反應。':'')+(n.includes('對照')?'<br>💡 清水是<b>對照組</b>，用來比較顏色。':'');logIt(`檢驗台 ${n} ${LR} ${LH}`);}
+function initS2(){const box=$('#labS');SAMPLES.forEach((sm,i)=>box.append(el('button',{class:i===0?'on':'',onclick:e=>{$$('#labS button').forEach(x=>x.classList.remove('on'));e.target.classList.add('on');LS=i;labDraw();}},sm[0])));
+ $$('#labR button').forEach(b=>b.onclick=()=>{$$('#labR button').forEach(x=>x.classList.remove('on'));b.classList.add('on');LR=b.dataset.r;$('#labH').style.display=LR==='ben'?'':'none';labDraw();});
+ $$('#labH button').forEach(b=>b.onclick=()=>{$$('#labH button').forEach(x=>x.classList.remove('on'));b.classList.add('on');LH=+b.dataset.h;labDraw();});
+ $('#labH').style.display='none';labDraw();
+ sortGame($('#g2sort'),{title:'🧪 碘液？本氏液？',bins:[{k:'i',label:'碘液'},{k:'b',label:'本氏液'}],cards:[
+  {t:'檢測澱粉',k:'i'},{t:'原本是黃褐色',k:'i'},{t:'陽性反應呈藍黑色',k:'i'},{t:'直接滴加即可觀察',k:'i'},
+  {t:'檢測葡萄糖',k:'b'},{t:'原本是藍色',k:'b'},{t:'必須隔水加熱',k:'b',hint:'哪一種試劑忘了加熱就看不出結果？'},{t:'陽性由綠、黃、橙到紅',k:'b'}]});
+ oxCards($('#ox2'),OX.s2);renderQSet($('#q2'),BANK.filter(q=>q.g==='s2'));}
+
+/* ================= S3 enzyme activity ================= */
+let ENZ='t';
+const actT=T=>T<=37?Math.exp(-Math.pow((T-37)/18,2)):Math.max(0,1-Math.pow((T-37)/22,2));
+const actP=(p,c)=>Math.exp(-Math.pow((p-c)/1.3,2));
+function enzDraw(){const X=v=>60+v*470,Y=a=>260-a*210;let s=`<rect width="560" height="300" fill="#fff"/><line x1="60" y1="260" x2="540" y2="260" stroke="#333" marker-end="url(#arw)"/><line x1="60" y1="260" x2="60" y2="30" stroke="#333" marker-end="url(#arw)"/><text x="66" y="32" font-size="13">酵素活性</text>`;
+ if(ENZ==='t'){const T=+$('#etr').value;$('#etv').textContent=T;let d='';for(let t=0;t<=80;t++)d+=(t?'L':'M')+X(t/80).toFixed(1)+' '+Y(actT(t)).toFixed(1);
+  s+=`<path d="${d}" fill="none" stroke="#c0392b" stroke-width="4"/>`;[0,20,37,60,80].forEach(t=>s+=`<text x="${X(t/80)}" y="278" font-size="12" text-anchor="middle">${t}</text>`);s+=`<text x="520" y="295" font-size="12">溫度（℃）</text>`;
+  const a=actT(T);s+=`<circle cx="${X(T/80)}" cy="${Y(a)}" r="9" fill="#1f5fa8"/><line x1="${X(T/80)}" y1="${Y(a)}" x2="${X(T/80)}" y2="260" stroke="#1f5fa8" stroke-dasharray="4 3"/>`;
+  $('#enzOut').innerHTML=`${T}℃ 時活性約 <b>${Math.round(a*100)}%</b>。`+(T<25?'溫度低 → 活性低，反應慢。':T<=45?'接近體溫（約 37℃）→ <b>活性最佳</b>。':T<60?'超過適宜溫度 → 活性迅速下降。':'<span class="red">高溫 → 酵素失去活性</span>，即使再降溫也無法恢復（蛋白質被破壞）。');}
+ else{const pH=+$('#epr').value;$('#epv').textContent=pH;const E=[['胃中的酵素',2,'#8e44ad'],['唾液中的酵素',7,'#e67e22'],['小腸中的酵素',8.5,'#16a085']];
+  E.forEach(([n,c,col],k)=>{let d='';for(let p=0;p<=14;p+=0.2)d+=(p?'L':'M')+X(p/14).toFixed(1)+' '+Y(actP(p,c)).toFixed(1);s+=`<path d="${d}" fill="none" stroke="${col}" stroke-width="3"/><text x="${X(c/14)+(k===1?-14:14)}" y="${Y(1)-6}" font-size="12" text-anchor="${k===1?'end':'start'}" fill="${col}">${n}</text>`;});
+  [['酸性',2],['中性',7],['鹼性',12]].forEach(([n,p])=>s+=`<text x="${X(p/14)}" y="278" font-size="12" text-anchor="middle">${n}</text>`);
+  s+=`<line x1="${X(pH/14)}" y1="40" x2="${X(pH/14)}" y2="260" stroke="#1f5fa8" stroke-width="2" stroke-dasharray="5 4"/>`;
+  $('#enzOut').innerHTML=`酸鹼值 ${pH}：`+E.map(([n,c])=>`${n} ${Math.round(actP(pH,c)*100)}%`).join('、')+'<br>📌 不同酵素適合的酸鹼性不同：胃 → <b>酸性</b>；小腸 → <b>鹼性</b>；超過適宜範圍會降低甚至失去活性。';}
+ $('#enzSvg').innerHTML=s;}
+function enzCtl(){$('#enzCtl').innerHTML=ENZ==='t'?'溫度：<b id="etv">37</b> ℃<input type="range" id="etr" min="0" max="80" value="37">':'酸鹼值（pH）：<b id="epv">7</b><input type="range" id="epr" min="1" max="13" step="0.5" value="7">';
+ const r=$(ENZ==='t'?'#etr':'#epr');r.oninput=enzDraw;enzDraw();}
+function initS3(){$$('#enzSel button').forEach(b=>b.onclick=()=>{$$('#enzSel button').forEach(x=>x.classList.remove('on'));b.classList.add('on');ENZ=b.dataset.m;enzCtl();logIt('酵素活性 '+ENZ);});enzCtl();
+ sortGame($('#g3sort'),{title:'⚗️ 分解作用？合成作用？還是不需要酵素？',bins:[{k:'d',label:'分解作用'},{k:'s',label:'合成作用'},{k:'n',label:'不需要酵素'}],cards:[
+  {t:'澱粉 → 葡萄糖',k:'d'},{t:'蛋白質 → 胺基酸',k:'d'},{t:'脂質 → 脂肪酸＋甘油',k:'d'},{t:'酵母菌把糖分解成二氧化碳和酒精',k:'d'},
+  {t:'葡萄糖 → 澱粉',k:'s'},{t:'胺基酸 → 蛋白質',k:'s'},{t:'光合作用合成葡萄糖',k:'s'},
+  {t:'食鹽溶解在水中',k:'n',w:'溶解是物理變化。'},{t:'冰塊融化成水',k:'n'},{t:'香水味道擴散到整個房間',k:'n',hint:'擴散需要酵素嗎？'}]});
+ oxCards($('#ox3'),OX.s3);renderQSet($('#q3'),BANK.filter(q=>q.g==='s3'));}
+
+/* ================= S4 virtual saliva experiment ================= */
+const TUBES=[{sal:'raw',t:'37',ph:'n'},{sal:'boil',t:'37',ph:'n'},{sal:'raw',t:'0',ph:'n'},{sal:'raw',t:'37',ph:'a'}];
+const OPT={sal:[['raw','唾液'],['boil','煮沸過的唾液'],['none','清水（不加唾液）']],t:[['37','35～40℃ 溫水'],['0','冰水 0℃'],['70','70℃ 熱水']],ph:[['n','不加酸'],['a','加醋酸（酸性）']]};
+let tubeDone=false;
+function tubeLevel(c){if(c.sal!=='raw')return 0;let f=c.t==='37'?1:c.t==='0'?0.18:0;if(c.ph==='a')f*=0.1;return Math.round(f*4);}
+function tubeDraw(){let s=`<rect width="560" height="270" fill="#fbfbfb"/><rect x="20" y="70" width="520" height="170" rx="8" fill="#d6ecf7" opacity=".5"/>`;
+ TUBES.forEach((c,i)=>{const x=60+i*125,lv=tubeDone?tubeLevel(c):0;const col=tubeDone?BEN[lv]:'#f3f1ea';
+  s+=`<path d="M${x} 30 L${x} 200 Q${x} 228 ${x+25} 228 Q${x+50} 228 ${x+50} 200 L${x+50} 30" fill="none" stroke="#666" stroke-width="3"/><path d="M${x+2} 110 L${x+48} 110 L${x+48} 200 Q${x+48} 226 ${x+25} 226 Q${x+2} 226 ${x+2} 200 Z" fill="${col}"/>`;
+  s+=`<text x="${x+25}" y="22" font-size="15" text-anchor="middle" font-weight="700">${'甲乙丙丁'[i]}</text>`;if(tubeDone)s+=`<text x="${x+25}" y="255" font-size="13" text-anchor="middle">${BENN[lv]}</text>`;});
+ $('#tubeSvg').innerHTML=s;}
+function tubeCtl(){const box=$('#tubeCtl');box.innerHTML='';TUBES.forEach((c,i)=>{const row=el('div',{style:'margin:.25em 0'},el('b',null,`${'甲乙丙丁'[i]}：`));
+  ['sal','t','ph'].forEach(k=>{const sel=el('select',{style:'font-size:.85em;margin-right:.3em'});OPT[k].forEach(([v,n])=>{const o=el('option',{value:v},n);if(c[k]===v)o.selected=true;sel.append(o);});sel.onchange=()=>{c[k]=sel.value;tubeDone=false;tubeDraw();$('#tubeOut').innerHTML='條件已改變，請重新開始。';};row.append(sel);});
+  box.append(row);});box.append(el('div',{style:'font-size:.85em;color:#666'},'每支試管都加入等量澱粉液，作用 20 分鐘後加本氏液隔水加熱。'));}
+function initS4(){tubeCtl();tubeDraw();
+ $('#tubeGo').onclick=()=>{tubeDone=true;tubeDraw();const why=c=>c.sal==='none'?'沒有唾液 → 沒有酵素':c.sal==='boil'?'唾液煮沸 → 酵素失去活性':c.t==='70'?'70℃ → 酵素失去活性':c.t==='0'?'0℃ → 活性很低，分解很少':c.ph==='a'?'酸性 → 唾液酵素活性大降':'溫度適宜、中性 → 澱粉被分解';
+  $('#tubeOut').innerHTML=TUBES.map((c,i)=>`<b>${'甲乙丙丁'[i]}</b>：${BENN[tubeLevel(c)]}（${why(c)}）`).join('<br>')+'<br>📌 本氏液變色＝澱粉被分解出醣類＝酵素有作用。';logIt('虛擬唾液實驗');};
+ orderGame($('#g4order'),{title:'🧪 實驗2-2 步驟排序',prompt:'依正確順序排列：',items:['兩試管各加入等量唾液','甲試管放入沸水中加熱10分鐘','兩試管各加入澱粉液並搖勻','放入35～40℃溫水中15～20分鐘','各加入本氏液並搖勻','放入沸水中隔水加熱，觀察顏色'],hint:'先處理唾液（加熱），再讓酵素作用，最後才檢驗。'});
+ oxCards($('#ox4'),OX.s4);renderQSet($('#q4'),BANK.filter(q=>q.g==='s4'));}
+
+/* ================= S5 leaf ================= */
+const LF={cut:['角質層','透明，覆蓋在表皮外，<b>防止水分散失</b>（不是細胞）。'],up:['上表皮','排列緊密、透明無色，<b>保護</b>葉片；不含葉綠體。'],pal:['葉肉細胞','含許多<b>葉綠體</b>，是行<b>光合作用</b>的主要場所。'],vein:['葉脈','由輸導組織組成，<b>運送水分和養分</b>。'],low:['下表皮','保護葉片；上面散布許多氣孔。'],gc:['保衛細胞','半月形、兩兩成對，<b>含葉綠體</b>，控制氣孔開閉。'],st:['氣孔','二氧化碳、氧氣進出，水蒸氣散失的通道。']};
+function leafDraw(){let s=`<rect width="520" height="320" fill="#fbfdf7"/><rect class="hot" data-k="cut" x="20" y="30" width="420" height="8" fill="#eaf6ff" stroke="#9cc"/>`;
+ for(let i=0;i<14;i++)s+=`<rect class="hot" data-k="up" x="${20+i*30}" y="38" width="30" height="22" fill="#f4fbef" stroke="#8fb07a"/>`;
+ for(let i=0;i<13;i++){s+=`<rect class="hot" data-k="pal" x="${24+i*32}" y="62" width="26" height="70" rx="9" fill="#7fc062" stroke="#3f7d2c"/>`;for(let k=0;k<4;k++)s+=`<circle cx="${30+i*32+(k%2)*12}" cy="${74+k*16}" r="3.5" fill="#2e6b1f" pointer-events="none"/>`;}
+ for(let i=0;i<11;i++){const cx=40+i*37,cy=170+(i%2)*28;if(cx>215&&cx<315)continue;s+=`<ellipse class="hot" data-k="pal" cx="${cx}" cy="${cy}" rx="17" ry="14" fill="#9fd486" stroke="#3f7d2c"/><circle cx="${cx-4}" cy="${cy}" r="3" fill="#2e6b1f" pointer-events="none"/>`;}
+ s+=`<circle class="hot" data-k="vein" cx="265" cy="180" r="40" fill="#e9dcc1" stroke="#a58a55" stroke-width="2"/><text x="265" y="185" font-size="14" text-anchor="middle" pointer-events="none">葉脈</text>`;
+ for(let i=0;i<14;i++){if(i===11)continue;s+=`<rect class="hot" data-k="low" x="${20+i*30}" y="232" width="30" height="22" fill="#f4fbef" stroke="#8fb07a"/>`;}
+ s+=`<rect class="hot" data-k="cut" x="20" y="254" width="420" height="7" fill="#eaf6ff" stroke="#9cc"/>`;
+ s+=`<ellipse class="hot" data-k="gc" cx="343" cy="243" rx="9" ry="12" fill="#5fa04a" stroke="#2e6b1f"/><ellipse class="hot" data-k="gc" cx="367" cy="243" rx="9" ry="12" fill="#5fa04a" stroke="#2e6b1f"/><rect class="hot" data-k="st" x="352" y="232" width="6" height="30" fill="#fff"/>`;
+ s+=`<path d="M355 300 L355 268" stroke="#1f5fa8" stroke-width="3" marker-end="url(#arw)"/><text x="365" y="300" font-size="13" fill="#1f5fa8">CO₂ 進入</text><path d="M330 268 L320 296" stroke="#c0392b" stroke-width="3" marker-end="url(#arwR)"/><text x="195" y="300" font-size="13" fill="#c0392b">O₂、水蒸氣 散出</text>`;
+ s+=`<g font-size="12" fill="#333" pointer-events="none"><text x="446" y="40">角質層</text><text x="446" y="55">上表皮</text><text x="446" y="100">葉肉</text><text x="446" y="186">葉肉</text><text x="446" y="247">下表皮</text><text x="446" y="263">角質層</text></g><text x="20" y="20" font-size="13" fill="#666">葉片橫切面示意（點各部位）</text>`;
+ const sv=$('#leafSvg');sv.innerHTML=s;sv.querySelectorAll('.hot').forEach(h=>h.addEventListener('click',()=>{const d=LF[h.dataset.k];$('#leafInfo').innerHTML=`<h4>${d[0]}</h4>${d[1]}`;logIt('葉構造：'+d[0]);}));}
+function initS5(){leafDraw();
+ sortGame($('#g5sort'),{title:'🟢 有沒有葉綠體？',bins:[{k:'y',label:'✅ 含葉綠體'},{k:'n',label:'❌ 不含葉綠體'}],cards:[
+  {t:'葉肉細胞',k:'y'},{t:'保衛細胞',k:'y',hint:'保衛細胞也能行光合作用喔！'},{t:'上表皮細胞',k:'n'},{t:'下表皮細胞',k:'n'},{t:'葉脈中的細胞',k:'n'},{t:'根毛細胞',k:'n',w:'根在土中照不到光。'}]});
+ oxCards($('#ox5'),OX.s5);renderQSet($('#q5'),BANK.filter(q=>q.g==='s5'));}
+
+/* ================= S6 photosynthesis ================= */
+let BUB=[],bubLast=0,bubAcc=0,bubCount=0,bubT0=0,LON=1;
+function bubRate(){if(!LON)return 0;const d=+$('#ldr').value;return 60*Math.pow(20/d,2);}
+function bubLoop(now){requestAnimationFrame(bubLoop);if(S.cur!==6)return;const dt=Math.min(0.05,(now-bubLast)/1000||0);bubLast=now;const r=bubRate();bubAcc+=r/60*dt;
+ while(bubAcc>=1){bubAcc-=1;BUB.push({x:250+Math.random()*60-30,y:200+Math.random()*30});bubCount++;}
+ BUB.forEach(b=>b.y-=60*dt);BUB=BUB.filter(b=>b.y>60);
+ const d=+$('#ldr').value,lx=330+d*2.4;let s=`<rect width="520" height="300" fill="#fbfbfb"/><rect x="150" y="60" width="200" height="200" fill="#bfe3f7" stroke="#5a8" stroke-width="3"/><path d="M250 255 C240 200 270 170 250 110 M250 220 l-25 -20 M250 190 l25 -18 M252 150 l-22 -16" stroke="#3f8f2f" stroke-width="6" fill="none"/>`;
+ BUB.forEach(b=>s+=`<circle cx="${b.x}" cy="${b.y}" r="5" fill="#fff" stroke="#6ab"/>`);
+ s+=`<rect x="${lx}" y="120" width="30" height="50" fill="${LON?'#f1c40f':'#777'}"/><path d="M${lx} 130 L${lx-20} 115 M${lx} 145 L${lx-24} 145 M${lx} 160 L${lx-20} 175" stroke="${LON?'#f39c12':'#bbb'}" stroke-width="3"/><text x="${lx+15}" y="190" font-size="12" text-anchor="middle">燈</text>`;
+ s+=`<text x="20" y="30" font-size="15">每分鐘氣泡數 ≈ <tspan font-weight="700" fill="#1f5fa8">${Math.round(r)}</tspan></text>`;$('#bubSvg').innerHTML=s;}
+function bubInfo(){const r=bubRate();$('#ldv').textContent=$('#ldr').value;$('#bubOut').innerHTML=LON?`燈愈近 → 光愈強 → 光合作用愈旺盛 → 產生的<b>氧氣氣泡</b>愈多（約每分鐘 ${Math.round(r)} 個）。<br>📌 可用「<b>一段時間內冒出的氧氣多寡</b>」推測光合作用的快慢。`:'黑暗中沒有光能 → <b>不能行光合作用</b> → 幾乎沒有氧氣氣泡。';}
+const FOIL=['用鋁箔遮住葉片的一部分，照光數日','摘下葉片，取下鋁箔','放入沸水中加熱數分鐘（軟化角質層）','浸入酒精，再隔水加溫（溶出葉綠素）','取出葉片，用熱水漂洗','平放在培養皿中，滴加碘液'];
+const FOILD=['被遮住的部分照不到光。','外表看不出差別。','角質層軟化，酒精才容易溶出色素。','酒精變綠、葉片褪成淡黃白色；去除色素才看得清碘液顏色。<br><span class="red">酒精易燃，必須隔水加熱！</span>','洗去酒精，使葉片變軟。','照光部分 → <b>藍黑色</b>（有澱粉）；遮光部分 → <b>黃褐色</b>（沒有澱粉）。<br>✅ 結論：<b>光合作用需要光</b>。'];
+let FK=0;const FOILS=['遮光照光','摘葉去鋁箔','沸水軟化','酒精去色素','熱水漂洗','滴碘液'];
+function foilDraw(){const leafCol=FK<=2?'#3f8f2f':FK<=4?'#efe6b8':'#1d1840',patchCol=FK===0?'#c8ccd0':FK<=2?'#3f8f2f':FK<=4?'#efe6b8':'#c8941e';
+ let s=`<rect width="520" height="300" fill="#fbfbfb"/><path d="M90 150 C130 50 330 40 420 150 C330 260 130 250 90 150 Z" fill="${leafCol}" stroke="#2e5a1d" stroke-width="3"/><path d="M90 150 L420 150" stroke="${FK>=3&&FK<5?'#c9bd8a':'#24501a'}" stroke-width="2"/><path d="M90 150 L50 170" stroke="#2e5a1d" stroke-width="5"/>`;
+ s+=`<rect x="210" y="110" width="90" height="80" rx="6" fill="${patchCol}" ${FK===0?'stroke="#888" stroke-width="2"':FK>=1?'stroke="#333" stroke-dasharray="5 4"':''}/>`;
+ if(FK===0)s+=`<text x="255" y="155" font-size="13" text-anchor="middle">鋁箔</text>`;
+ if(FK===3)s+=`<rect x="380" y="200" width="80" height="80" fill="#a6d07a" opacity=".7" stroke="#555"/><text x="420" y="295" font-size="12" text-anchor="middle">酒精變綠</text>`;
+ if(FK===5)s+=`<text x="255" y="212" font-size="13" text-anchor="middle" fill="#fff">遮光：黃褐色</text><text x="140" y="110" font-size="13" fill="#fff">照光：藍黑色</text>`;
+ $('#foilSvg').innerHTML=s;$('#foilEv').innerHTML=FOIL.map((e,i)=>`<span class="${i<FK?'done':i===FK?'now':''}">${i+1}. ${FOILS[i]}</span>`).join('');$('#foilOut').innerHTML=`<b>步驟 ${FK+1}：${FOIL[FK]}</b><br>${FOILD[FK]}`;}
+function initS6(){bubLast=performance.now();requestAnimationFrame(bubLoop);$('#ldr').oninput=bubInfo;$$('#lOn button').forEach(b=>b.onclick=()=>{$$('#lOn button').forEach(x=>x.classList.remove('on'));b.classList.add('on');LON=+b.dataset.v;bubInfo();});bubInfo();
+ foilDraw();$('#foilNext').onclick=()=>{if(FK<5){FK++;foilDraw();logIt('遮光實驗步驟'+(FK+1));}};$('#foilPrev').onclick=()=>{if(FK>0){FK--;foilDraw();}};
+ orderGame($('#g6order'),{title:'🍃 實驗2-3 步驟排序',prompt:'依正確順序排列：',items:['葉片部分遮光並照光數日','摘下葉片、取下鋁箔','沸水加熱軟化角質層','酒精隔水加熱去除色素','熱水漂洗葉片','滴加碘液觀察顏色'],hint:'先軟化，再去色素，最後才測澱粉。'});
+ sortGame($('#g6sort'),{title:'☀️ 光合作用：反應物、條件、產物',bins:[{k:'r',label:'反應物'},{k:'c',label:'條件'},{k:'p',label:'產物'}],cards:[
+  {t:'水（由根吸收）',k:'r'},{t:'二氧化碳',k:'r'},{t:'光能',k:'c'},{t:'葉綠體（葉綠素）',k:'c'},{t:'葡萄糖',k:'p'},{t:'氧氣',k:'p',hint:'氧氣是植物「需要」還是「放出」的？'}]});
+ oxCards($('#ox6'),OX.s6);renderQSet($('#q6'),BANK.filter(q=>q.g==='s6'));}
+
+/* ================= S7 digestion ================= */
+const JUICE=[['唾液','唾腺',[1,0,0,1]],['胃液','胃腺',[0,1,0,1]],['膽汁','肝臟',[0,0,1,0]],['胰液','胰臟',[1,1,1,1]],['腸液','腸腺',[1,1,0,1]]];
+function juiceGrid(){const box=$('#juiceGrid');box.innerHTML='';const st=JUICE.map(()=>[0,0,0,0]);
+ const tb=el('table',{class:'t'});tb.append(el('tr',null,el('th',null,'消化液（分泌器官）'),el('th',null,'醣類（澱粉）'),el('th',null,'蛋白質'),el('th',null,'脂質'),el('th',null,'含消化酵素？')));
+ const cells=[];JUICE.forEach((j,r)=>{const tr=el('tr',null,el('td',null,`${j[0]}（${j[1]}）`));cells[r]=[];
+  for(let c=0;c<4;c++){const td=el('td',{style:'cursor:pointer;font-size:1.3em;min-width:3em'},'·');td.onclick=()=>{st[r][c]^=1;td.textContent=st[r][c]?'✔':'·';td.style.background='';};cells[r][c]=td;tr.append(td);}tb.append(tr);});
+ const res=el('div',{class:'tip',style:'font-size:1em'});let won=false;
+ box.append(el('div',{style:'font-size:.9em;color:#555'},'點格子打 ✔：前三欄＝能分解（或幫助消化）該養分；最後一欄＝含有消化酵素。'),tb,el('button',{class:'btn alt',onclick:()=>{let ok=0;JUICE.forEach((j,r)=>{for(let c=0;c<4;c++){const good=st[r][c]===j[2][c];cells[r][c].style.background=good?'#dff5e7':'#fde2df';if(good)ok++;}});
+   res.innerHTML=ok===20?'🎉 全對！⭐+3　📌 膽汁不含酵素，只<b>乳化</b>脂質；胰液三種都能分解；腸液主要分解醣類、蛋白質。':`對了 ${ok}／20 格，紅色格子再想想。`;if(ok===20&&!won){won=true;addPts(3,'消化液任務表');}logIt(`消化液表 ${ok}/20`);}},'✔ 檢查'),el('button',{class:'btn ghost',onclick:juiceGrid},'↺ 重來'),res);}
+function initS7(){juiceGrid();
+ orderGame($('#g7order'),{title:'🍔 食物的旅程',prompt:'食物經過消化道的順序：',items:['口腔','咽','食道','胃','小腸','大腸','肛門']});
+ sortGame($('#g7sort'),{title:'🫃 消化道？消化腺？',bins:[{k:'t',label:'消化道（食物會經過）'},{k:'g',label:'消化腺（分泌消化液）'}],cards:[
+  {t:'口腔',k:'t'},{t:'咽',k:'t'},{t:'食道',k:'t'},{t:'胃',k:'t'},{t:'小腸',k:'t'},{t:'大腸',k:'t'},
+  {t:'唾腺',k:'g'},{t:'胃腺',k:'g'},{t:'肝臟',k:'g',hint:'食物會流進肝臟嗎？'},{t:'胰臟',k:'g'},{t:'腸腺',k:'g'}]});
+ oxCards($('#ox7'),OX.s7);renderQSet($('#q7'),BANK.filter(q=>q.g==='s7'));}
+
+/* ================= S8 absorption ================= */
+function initS8(){sortGame($('#g8sort'),{title:'🗺️ 這是哪一個器官的工作？',bins:[{k:'m',label:'口腔'},{k:'s',label:'胃'},{k:'i',label:'小腸'},{k:'l',label:'大腸'}],cards:[
+  {t:'牙齒咬碎、咀嚼食物',k:'m'},{t:'唾液初步分解澱粉',k:'m'},
+  {t:'攪拌並暫時儲存食物',k:'s'},{t:'分泌含鹽酸的消化液',k:'s'},
+  {t:'吸收大部分養分和水分',k:'i'},{t:'內壁有皺褶和絨毛',k:'i'},{t:'膽汁、胰液送入此處',k:'i'},
+  {t:'吸收剩餘的水分',k:'l',hint:'大部分水分已在小腸吸收了。'},{t:'形成糞便',k:'l'},{t:'起點是盲腸',k:'l'}]});
+ oxCards($('#ox8'),OX.s8);renderQSet($('#q8'),BANK.filter(q=>q.g==='s8'));}
+
+/* ================= S9 challenge ================= */
+const C9={m:'round',u:'all',l:0};
+function c9pool(){return BANK.filter(q=>(C9.u==='all'||q.u===C9.u)&&(!C9.l||q.lv===C9.l));}
+function c9render(){const a=$('#c9area');a.innerHTML='';
+ if(C9.m==='wrong'){const list=BANK.filter(q=>S.wrong.has(q.id));
+  if(!list.length){a.append(el('div',{class:'result'},'📕 錯題本是空的！答錯的題目會自動收進來。'));return;}
+  a.append(el('div',{class:'tip',style:'font-size:1em'},`共有 ${list.length} 題待重練；答對就會移出錯題本。`));const box=el('div');a.append(box);
+  shuffle(list).forEach((q,i)=>renderQ(box,q,{num:i+1}));return;}
+ const pool=c9pool();if(!pool.length){a.textContent='此範圍沒有題目';return;}
+ if(C9.m==='round'){const qs=shuffle(pool).slice(0,10);let i=0,right=0,pts0=S.pts;const head=el('div',{class:'gbar'}),body=el('div');a.append(head,body);
+  const show=()=>{head.innerHTML='';body.innerHTML='';
+   if(i>=qs.length){body.append(el('div',{class:'result'},`🎉 闖關結束！答對 ${right}／${qs.length} 題，本回合得 ⭐${S.pts-pts0} 分 ${right===qs.length?'🏆 全對！':''}`),el('button',{class:'btn',onclick:c9render},'🔁 再闖一關'));logIt(`闖關結束 ${right}/${qs.length}`);return;}
+   head.append(el('b',null,`第 ${i+1}／${qs.length} 題`),el('span',{class:'tip'},`目前答對 ${right}`));
+   renderQ(body,qs[i],{num:i+1,onAns:ok=>{if(ok)right++;body.append(el('button',{class:'btn',onclick:()=>{i++;show();}},i+1<qs.length?'下一題 ▶':'看結果 ▶'));}});};show();}
+ else{const area=el('div');a.append(el('div',{class:'tip',style:'font-size:1em'},`規則：60 秒內連續作答；答對得該題分數（★+1、★★+2），答錯 −1 並停 1 秒看正解。目前最佳：${S.best} 分`),el('button',{class:'btn',onclick:start},'⚡ 開始 60 秒'),area);
+  function start(){let left=60,score=0,n=0,cnt=0;const qs=shuffle(pool);area.innerHTML='';
+   const clk=el('div',{class:'gbar'},el('span',{class:'gclock'},'60'),el('span',{class:'rf'},'得分：'),el('span',{class:'rfbig'},'0'),el('span',{class:'rf'},'　已答：'),el('span',{class:'rf'},'0'));const qa=el('div');area.append(clk,qa);
+   const iv=setInterval(()=>{left--;clk.children[0].textContent=left;if(left<=0){clearInterval(iv);finish();}},1000);
+   function next(){qa.innerHTML='';if(left<=0)return;const q=qs[n++%qs.length];renderQ(qa,q,{noPts:true,onAns:ok=>{cnt++;score+=ok?q.lv:-1;clk.children[2].textContent=score;clk.children[4].textContent=cnt;setTimeout(next,ok?350:1100);}});}
+   function finish(){qa.innerHTML='';const nb=score>S.best;if(nb)S.best=score;if(score>0)addPts(score,'60秒快問快答');renderMe();area.append(el('div',{class:'result'},`⏰ 時間到！共答 ${cnt} 題，得 ${score} 分 ${nb?'🏅 新紀錄！':''}`),el('button',{class:'btn',onclick:c9render},'↺ 再挑戰'));logIt(`快問快答 ${score} 分`);}
+   next();}}}
+function initS9(){
+ [['#c9mode','m'],['#c9unit','u'],['#c9lv','l']].forEach(([id,key])=>$$(id+' button').forEach(b=>b.onclick=()=>{$$(id+' button').forEach(x=>x.classList.remove('on'));b.classList.add('on');let v=b.dataset[key];if(key==='l')v=+v;C9[key]=v;c9render();}));c9render();}
+
+/* ================= S10 ================= */
+const SELF=['我能說出六大類養分，並分辨哪些能產生能量','我能計算食物熱量（醣類、蛋白質×4，脂質×9）','我能正確使用碘液與本氏液（本氏液要隔水加熱）','我能說明酵素的特性：催化、可重複使用、專一性','我能說明溫度、酸鹼性對酵素活性的影響','我能設計並解釋唾液酵素實驗的變因與結果','我能說出葉片各構造的功能，以及哪些細胞含葉綠體','我能寫出光合作用的反應物、產物與條件，並說明遮光實驗步驟','我能說出消化道順序，比較五種消化液的功能','我能說明小腸絨毛、大腸的功能，以及纖維素的作用'];
+function initS10(){const ul=$('#selfchk');SELF.forEach(t=>{const cb=el('input',{type:'checkbox'});cb.onchange=upd;ul.append(el('li',null,el('label',null,cb,t)));});
+ function upd(){const n=$$('#selfchk input:checked').length;$('#selfSum').textContent=`已掌握 ${n}／${SELF.length} 項 ${n===SELF.length?'🎉 準備好了！':n>=7?'💪 再把沒勾的練一次':'📖 回到對應段落再練習'}`;logIt(`自評 ${n}/${SELF.length}`);}upd();}
+
+/* ================= log ================= */
+function downloadLog(){const rate=S.ans?Math.round(S.right/S.ans*100):0;const head=[`自然1上 第2章 養分｜個人複習紀錄`,`學生：${S.who}`,`日期：${new Date().toLocaleString('zh-TW')}`,'',`積分：${S.pts}`,`答題：${S.right}／${S.ans}（${rate}%）`,`明正辨反：${S.ox[0]}／${S.ox[1]}`,`60秒快問快答最佳：${S.best}`,`已瀏覽段落：${[...S.seen].sort((a,b)=>a-b).join('、')}`,'','【錯題本（待重練）】',...BANK.filter(q=>S.wrong.has(q.id)).map(q=>`・${q.u}（P${q.p}）${q.q}`),'','【自評】',...$$('#selfchk li').map(li=>(li.querySelector('input').checked?'☑ ':'☐ ')+li.textContent),'','【過程紀錄】'];
+ const blob=new Blob([head.join('\n')+'\n'+S.log.join('\n')],{type:'text/plain;charset=utf-8'});const a=el('a',{href:URL.createObjectURL(blob),download:`第2章養分_個人複習紀錄_${S.who.replace(/\s/g,'')}_${new Date().toISOString().slice(0,10)}.txt`});document.body.append(a);a.click();a.remove();}
+
+/* ================= login & boot ================= */
+document.addEventListener('keydown',e=>{const tg=e.target.tagName;if(tg==='INPUT'||tg==='SELECT'||tg==='TEXTAREA')return;
+ if(e.key==='Escape'){closeViewer();return;}const k=e.key.toLowerCase();
+ if(e.key==='ArrowRight')go(S.cur+1);else if(e.key==='ArrowLeft')go(S.cur-1);else if(e.key===' '){e.preventDefault();tToggle();}else if(k==='f')cycleZoom();});
+const SCORE_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzM-Wx3_QHqLR9yrIUTaM2X6qrgkhSWDrcSgWVoqmrd6aMc5L46FGVNr61auLCYPkQM6A/exec';
+const TEST_VERSION = 'biology-701-2-v1';
+const TEST_KEY = TEST_VERSION + ':assessment:';
+const TEST_UNITS = {
+ '2-1':'食物中的養分',
+ '2-2':'酵素',
+ '2-3':'植物如何獲得養分',
+ '2-4':'動物如何獲得養分'
+};
+const REVIEW_STAGE={'2-1':1,'2-2':3,'2-3':5,'2-4':7};
+const PASS_SCORE=60;
+const REPLACEMENT_COUNT=5;
+let scoreReceiverReady=false;
+
+function nutritionScoresAvailable(){
+ scoreReceiverReady=true;
+ if(S.cur===11 && currentTest?.finished)renderAssessment(false);
+}
+
+function checkNutritionReceiver(){
+ const probe=el('script',{src:SCORE_ENDPOINT+'?capability='+encodeURIComponent(TEST_VERSION),async:''});
+ document.head.append(probe);
+}
+const ASSESSMENT_TOTAL=10;
+const ASSESSMENT_SIZE=4;
+let activeUnit='2-1';
+let currentTest=null;
+const unsavedTests=new Map();
+let questionIndex=0;
+
+function openUnitTest(unit, navigate=true, fromReview=false){
+ activeUnit=unit;
+ currentTest=restoreTest();
+ if(fromReview && currentTest?.finished && currentTest.reviewRequested){
+  currentTest.reviewed=true;
+  saveTest();
+ }
+ questionIndex=currentTest ? Math.max(0,currentTest.answers.indexOf(null)) : 0;
+ if(navigate)go(11);
+ renderAssessment(false);
+}
+
+function restoreTest(){
+ if(unsavedTests.has(activeUnit))return unsavedTests.get(activeUnit);
+ try {
+  const saved=JSON.parse(localStorage.getItem(TEST_KEY+activeUnit));
+  if(!saved || typeof saved.id!=='string' || !/^[a-f0-9]{32}$/.test(saved.id))return null;
+  if(!Array.isArray(saved.items)||!Array.isArray(saved.answers)||saved.items.length!==ASSESSMENT_TOTAL||saved.answers.length!==ASSESSMENT_TOTAL)return null;
+  const ids=new Set();
+  for(let i=0;i<ASSESSMENT_TOTAL;i++){
+   const item=saved.items[i];
+   if(!item||!Number.isInteger(item.bankIndex)||BANK[item.bankIndex]?.u!==activeUnit||ids.has(item.bankIndex))return null;
+   if(!Array.isArray(item.order)||item.order.length!==ASSESSMENT_SIZE||new Set(item.order).size!==ASSESSMENT_SIZE||
+      !item.order.every(x=>Number.isInteger(x)&&x>=0&&x<ASSESSMENT_SIZE))return null;
+   if(saved.answers[i]!==null && !item.order.includes(saved.answers[i]))return null;
+   ids.add(item.bankIndex);
+  }
+  if(saved.finished&&saved.answers.includes(null))return null;
+  return saved;
+ } catch(error){return null;}
+}
+
+function saveTest(){
+ try{
+  localStorage.setItem(TEST_KEY+activeUnit,JSON.stringify(currentTest));
+  unsavedTests.delete(activeUnit);
+  return true;
+ }catch(error){
+  unsavedTests.set(activeUnit,currentTest);
+  return false;
+ }
+}
+
+function startAssessment(){
+ const previous=currentTest?.finished ? currentTest : null;
+ if(currentTest && (!previous || (!previous.reviewed && assessmentSummary(previous).percent<PASS_SCORE)))return;
+ const candidates=BANK.filter(question=>question.u===activeUnit);
+ const previousIds=new Set(previous?.items.map(item=>item.bankIndex)??[]);
+ const choices=previous
+  ? shuffle([...shuffle(candidates.filter(q=>previousIds.has(q.id))).slice(0,ASSESSMENT_TOTAL-REPLACEMENT_COUNT),
+    ...shuffle(candidates.filter(q=>!previousIds.has(q.id))).slice(0,REPLACEMENT_COUNT)])
+  : shuffle(candidates).slice(0,ASSESSMENT_TOTAL);
+ const items=choices.map(({id:bankIndex})=>({bankIndex,order:shuffle([0,1,2,3])}));
+ const bytes=crypto.getRandomValues(new Uint8Array(16));
+ const id=Array.from(bytes,byte=>byte.toString(16).padStart(2,'0')).join('');
+ const history=previous ? [...(previous.history??[]),{id:previous.id,items:previous.items,answers:previous.answers}] : [];
+ currentTest={id,items,answers:items.map(()=>null),finished:false,history};
+ questionIndex=0;
+ saveTest();
+ renderAssessment(true);
+}
+
+function beginReview(){
+ currentTest.reviewRequested=true;
+ saveTest();
+ go(REVIEW_STAGE[activeUnit]);
+ $('#s'+S.cur+' .retry-review-notice').hidden=false;
+}
+
+function renderAssessment(focusHeading){
+ const box=$('#assessment');
+ box.textContent='';
+ const units=el('div',{class:'seg','aria-label':'選擇測驗小節'});
+ for(const unit of Object.keys(TEST_UNITS)){
+  units.append(el('button',{class:unit===activeUnit?'on':'','aria-pressed':String(unit===activeUnit),
+   onclick:()=>openUnitTest(unit,false)},unit+' '+TEST_UNITS[unit]));
+ }
+ $('#testUnitNav').replaceChildren(units);
+ if(!currentTest){
+  box.append(el('h3',null,activeUnit+' '+TEST_UNITS[activeUnit]),
+   el('p',null,'隨機抽出 10 題，每題 10 分。交卷前可返回修改答案。'),
+   el('button',{class:'btn',onclick:startAssessment},'開始 10 題測驗'));
+ }else if(currentTest.finished){
+  renderAssessmentResult(box);
+ }else{
+  renderAssessmentQuestion(box);
+  appendPreviousScores(box);
+ }
+ if(focusHeading){
+  const heading=box.querySelector('h3');
+  heading.tabIndex=-1;
+  heading.focus();
+ }
+}
+
+function renderAssessmentQuestion(box){
+ const {items,answers}=currentTest;
+ const item=items[questionIndex];
+ const q=BANK[item.bankIndex];
+ const answered=answers.filter(a=>a!==null).length;
+ const live=el('p',{class:'assessment-status',role:'status'},'已作答 '+answered+'／'+items.length+' 題');
+ const opts=el('div',{class:'opts',role:'group','aria-label':'選擇答案'});
+ const message=el('p',{role:'status'});
+ const next=el('button',{class:'btn',disabled:''},questionIndex<items.length-1?'下一題':'交卷計分');
+ const goNext=()=>{
+  if(questionIndex<items.length-1){questionIndex++;renderAssessment(true);return;}
+  const unanswered=answers.indexOf(null);
+  if(unanswered>=0){
+   questionIndex=unanswered;
+   renderAssessment(true);
+   $('#assessment .assessment-error').textContent='請答完所有題目再交卷，已回到第一道未答題。';
+   return;
+  }
+  currentTest.finished=true;
+  saveTest();
+  renderAssessment(true);
+ };
+ next.onclick=goNext;
+ next.disabled=answers[questionIndex]===null;
+ item.order.forEach((option,i)=>{
+  const button=el('button',{class:'opt',type:'button','aria-pressed':String(answers[questionIndex]===option)},'('+'ABCD'[i]+') '+q.o[option]);
+  button.onclick=()=>{
+   answers[questionIndex]=option;
+   for(const sibling of opts.children)sibling.setAttribute('aria-pressed',String(sibling===button));
+   live.textContent='已作答 '+answers.filter(a=>a!==null).length+'／'+items.length+' 題';
+   next.disabled=false;
+   if(!saveTest())message.textContent='這個瀏覽器無法儲存進度，請先完成測驗再關閉網頁。';
+  };
+  opts.append(button);
+ });
+ message.className='assessment-error';
+ const prev=el('button',{class:'btn ghost',onclick:()=>{questionIndex--;renderAssessment(true);}},'上一題');
+ prev.disabled=questionIndex===0;
+ box.append(el('h3',null,'第 '+(questionIndex+1)+'／'+items.length+' 題'),live,
+  el('p',{class:'qtext'},q.q),opts,el('div',{class:'assessment-nav'},prev,next),message);
+}
+
+function assessmentSummary(attempt=currentTest){
+ const mistakes=[];
+ attempt.items.forEach((item,i)=>{
+  const q=BANK[item.bankIndex];
+  const chosen=attempt.answers[i];
+  if(chosen!==q.a)mistakes.push({q,number:i+1,chosen});
+ });
+ const total=attempt.items.length;
+ const correct=total-mistakes.length;
+ return {mistakes,correct,total,percent:10*correct};
+}
+
+function renderAssessmentResult(box){
+ const result=assessmentSummary();
+ box.append(el('h3',null,activeUnit+' '+TEST_UNITS[activeUnit]+'｜測驗成績'),
+  el('p',{class:'assessment-score'},result.percent+' 分（'+result.correct+'／'+result.total+' 題）'));
+ if(result.mistakes.length){
+  const review=el('details',{class:'assessment-review'},el('summary',null,'查看錯題與解析（'+result.mistakes.length+' 題）'));
+  for(const {q,number,chosen} of result.mistakes){
+   review.append(el('div',{class:'qcard'},el('strong',null,number+'. '+q.q),
+    el('div',null,'你的答案｜'+q.o[chosen]),el('div',null,'正確答案｜'+q.o[q.a]),
+    el('div',null,'解析｜'+q.e)));
+  }
+  box.append(review);
+ }
+ if(result.percent<PASS_SCORE){
+  const reminder=el('div',{class:'tip',role:'status'},currentTest.reviewed
+   ? '複習完成。重測會保留 5 題，再從上一輪未出現的題目抽 5 題。'
+   : '這次低於 60 分。請先回頭複習這一節，再重測。下一輪會更換 5 題。');
+  box.append(reminder);
+  box.append(currentTest.reviewed
+   ? el('button',{class:'btn',onclick:startAssessment},'開始換題重測')
+   : el('button',{class:'btn',onclick:beginReview},'回頭複習 '+activeUnit));
+ }else{
+  box.append(el('p',{class:'result',role:'status'},'已達 60 分。可上傳本次成績或前往下一小節。'));
+ }
+ box.append(buildScoreForm(result,currentTest));
+ appendPreviousScores(box);
+}
+
+function appendPreviousScores(box){
+ const history=currentTest?.history??[];
+ if(!history.length)return;
+ const details=el('details',{class:'assessment-review'},el('summary',null,'查看或上傳前次成績'));
+ history.forEach((attempt,index)=>{
+  const result=assessmentSummary(attempt);
+  details.append(el('p',null,'第 '+(index+1)+' 次｜'+result.percent+' 分（'+result.correct+'／10 題）'),
+   buildScoreForm(result,attempt));
+ });
+ box.append(details);
+}
+
+function buildScoreForm(result,attempt){
+ const endpoint=scoreReceiverReady&&/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(SCORE_ENDPOINT)?SCORE_ENDPOINT:'';
+ const form=el('form',{method:'post',target:'_blank',rel:'noopener'});
+ const identity=el('div',{class:'assessment-identity'});
+ const classNo=el('input',{name:'classNo',type:'text',inputmode:'numeric',pattern:'[0-9]{3}',maxlength:'3',required:'',value:'701',readonly:'',autocomplete:'off'});
+ const seat=el('input',{name:'seat',type:'text',inputmode:'numeric',pattern:'[0-9]{1,2}',maxlength:'2',required:'',autocomplete:'off'});
+ const code=el('input',{name:'classCode',type:'text',pattern:'[A-Za-z0-9]{6,16}',maxlength:'16',required:'',autocomplete:'off',autocapitalize:'off'});
+ identity.append(el('label',null,'班級',classNo),el('label',null,'座號',seat));
+ if(endpoint)identity.append(el('label',null,'老師提供的上傳代碼',code));
+ const status=el('p',{class:'assessment-status',role:'status'},endpoint
+  ?'送出後會開啟成績收件頁。請確認畫面顯示「成績已收到」。'
+  :'本章成績收件尚未連線。你可先下載成績，或保留本頁稍後再上傳。');
+ form.append(el('h4',null,'上傳個人成績'),identity,status);
+ const download=el('button',{class:'btn alt',type:'button',onclick:()=>{
+  if(!classNo.reportValidity()||!seat.reportValidity()||Number(seat.value)<1){
+   status.textContent='請輸入三位數班級及正確座號。';return;
+  }
+  const content=['第2章 養分｜'+activeUnit+' '+TEST_UNITS[activeUnit],'班級 '+classNo.value+'｜座號 '+seat.value,
+   '成績 '+result.percent+' 分（'+result.correct+'／'+result.total+' 題）',
+   '測驗編號 '+attempt.id].join('\n');
+  const url=URL.createObjectURL(new Blob([content],{type:'text/plain;charset=utf-8'}));
+  const link=el('a',{href:url,download:'biology-701-'+activeUnit+'-score.txt'});
+  document.body.append(link);link.click();link.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+ }},'下載成績');
+ const actions=el('div',{class:'assessment-nav'},download);
+ if(endpoint){
+  form.action=endpoint;
+  const payload=el('input',{type:'hidden',name:'attempt'});
+  form.append(payload);
+  actions.prepend(el('button',{class:'btn',type:'submit'},'上傳成績'));
+  form.addEventListener('submit',event=>{
+   if(Number(seat.value)<1){
+    event.preventDefault();status.textContent='座號必須大於 0。';seat.focus();return;
+   }
+   payload.value=JSON.stringify({version:TEST_VERSION,unit:activeUnit,id:attempt.id,answers:attempt.items.map((item,i)=>[item.bankIndex,attempt.answers[i]])});
+   status.textContent='請查看新分頁的收件結果。若連線中斷，可重送同一筆成績。';
+  });
+ }else{
+  form.addEventListener('submit',event=>event.preventDefault());
+ }
+ form.append(actions);
+ return form;
+}
+
+function boot(){buildDots();fillMins();
+ [initS0,initS1,initS2,initS3,initS4,initS5,initS6,initS7,initS8,initS9,initS10].forEach(f=>{try{f();}catch(err){console.error(f.name,err);}});
+ openUnitTest('2-1',false);go(0);tRender();checkNutritionReceiver();}
+boot();
+
+</script>
+</body>
+</html>

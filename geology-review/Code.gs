@@ -29,7 +29,11 @@ function setupScoreReceiver() {
   console.log('交給學生的上傳代碼 ' + uploadCode);
 }
 
-function doGet() {
+function doGet(event) {
+  if (event && event.parameter && event.parameter.capability === 'biology-701-2-v1') {
+    return ContentService.createTextOutput('window.nutritionScoresAvailable();')
+      .setMimeType(ContentService.MimeType.JAVASCRIPT);
+  }
   return responsePage_('第6章成績收件端', '請在學生網頁完成測驗，從成績頁上傳。');
 }
 
@@ -128,8 +132,10 @@ const CH3_VERSION = 'work-energy-3-v1';
 const CH3_SHEET_NAME = '第3章功與能成績';
 const CH3_BANK_KEY = [[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0]];
 const BIOLOGY_701_KEY = [[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0]];
+const NUTRITION_701_KEY = [[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0],[4,0]];
 const SECTION_TESTS = Object.freeze(Object.assign(Object.create(null), {
   [CH3_VERSION]: { tab:CH3_SHEET_NAME, key:CH3_BANK_KEY },
+  'biology-701-2-v1': { tab:'701生物第2章成績', key:NUTRITION_701_KEY, classNo:'701', chapter:'2' },
   'biology-701-3-v1': { tab:'701生物第3章成績', key:BIOLOGY_701_KEY, classNo:'701' }
 }));
 const SECTION_TEST_SIZE = 10;
@@ -180,7 +186,7 @@ function validateSectionTest_(incoming, packet, test) {
   const classNo = String(incoming.classNo || '');
   const seatInput = String(incoming.seat || '');
   if (!/^[0-9]{3}$/.test(classNo) || !/^[0-9]{1,2}$/.test(seatInput) || Number(seatInput) < 1 ||
-      (test.classNo && classNo !== test.classNo) || typeof packet.unit !== 'string' || !/^3-[1-4]$/.test(packet.unit) ||
+      (test.classNo && classNo !== test.classNo) || typeof packet.unit !== 'string' || !/^[23]-[1-4]$/.test(packet.unit) || packet.unit[0] !== (test.chapter || '3') ||
       typeof packet.id !== 'string' || !/^[a-f0-9]{32}$/.test(packet.id) ||
       !Array.isArray(packet.answers) || packet.answers.length !== SECTION_TEST_SIZE) throw new Error('Invalid assessment');
   const unitNumber = Number(packet.unit.slice(-1));
