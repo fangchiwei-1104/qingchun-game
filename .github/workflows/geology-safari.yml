@@ -121,6 +121,34 @@ jobs:
                   click("#testUnitNav button:nth-child(%d)" % unit)
                   assert script("return !!document.querySelector('.assessment-score')")
               print("PASS: Safari", value["capabilities"]["browserVersion"], "completed all biology 701 section tests and verified their upload forms.")
+              url = "https://fangchiwei-1104.github.io/qingchun-game/biology-701-nutrition/"
+              for _ in range(16):
+                  request("POST", session + "/url", {"url": url})
+                  if script("return !!document.querySelector('#s0.on #ox0 button')"):
+                      break
+                  time.sleep(5)
+              assert script("return !!document.querySelector('#s0.on #ox0 button')")
+              click("button[onclick='go(11)']")
+              for i in range(1, 5):
+                  click("#testUnitNav button:nth-child(%d)" % i)
+                  click("#assessment button")
+                  original = script("return currentTest.items.map(item => item.bankIndex)")
+                  assert len(set(original)) == 10
+                  for question in range(10):
+                      option = script("const item = currentTest.items[questionIndex]; return item.order.indexOf((BANK[item.bankIndex].a + 1) % 4) + 1")
+                      click("#assessment .opt:nth-child(%d)" % option)
+                      click("#assessment .assessment-nav button:last-child")
+                  assert script("return document.querySelector('.assessment-score').textContent").startswith("0 分")
+                  assert script("return document.querySelector('#assessment input[name=classNo]').value") == "701"
+                  click("#assessment > button")
+                  expected_stage = 2 * i - 1
+                  assert script("return document.querySelector('.stage.on').id") == "s" + str(expected_stage)
+                  click("#s%d button[onclick*='openUnitTest']" % expected_stage)
+                  click("#assessment > button")
+                  retry = script("return currentTest.items.map(item => item.bankIndex)")
+                  assert len(set(retry)) == 10 and len(set(retry) - set(original)) == 5, [original, retry]
+                  assert script("return currentTest.history.length") == 1
+              print("PASS: Safari", value["capabilities"]["browserVersion"], "checked all four 701 nutrition review-and-retake flows with exactly five replacement questions each.")
           finally:
               request("DELETE", session)
           PY
