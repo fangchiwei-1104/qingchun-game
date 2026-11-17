@@ -152,3 +152,22 @@ jobs:
           finally:
               request("DELETE", session)
           PY
+
+  nutrition-receiver:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Verify public nutrition score capability
+        shell: bash
+        run: |
+          response=$(mktemp)
+          curl --silent --show-error --location --max-time 25 'https://script.google.com/macros/s/AKfycbzM-Wx3_QHqLR9yrIUTaM2X6qrgkhSWDrcSgWVoqmrd6aMc5L46FGVNr61auLCYPkQM6A/exec?capability=biology-701-2-v1' --output "$response"
+          if grep -Fq 'window.nutritionScoresAvailable();' "$response"; then
+            echo 'NUTRITION_RECEIVER_ACTIVE'
+          elif grep -Fq '第6章成績收件端' "$response"; then
+            echo 'OLD_RECEIVER_VERSION'
+            exit 1
+          else
+            echo 'NUTRITION_CAPABILITY_NOT_ADVERTISED'
+            exit 1
+          fi
