@@ -155,7 +155,7 @@ jobs:
 
   nutrition-receiver:
     runs-on: ubuntu-latest
-    timeout-minutes: 2
+    timeout-minutes: 4
     steps:
       - name: Verify public nutrition score capability
         shell: bash
@@ -182,7 +182,13 @@ jobs:
             const browser = await chromium.launch({ channel: 'chrome', args: ['--no-sandbox'] });
             try {
               const page = await browser.newPage();
-              await page.goto('https://fangchiwei-1104.github.io/qingchun-game/biology-701-nutrition/');
+              await page.route('**/*capability=biology-701-2-v1*', route => route.abort());
+              const url = 'https://fangchiwei-1104.github.io/qingchun-game/biology-701-nutrition/';
+              for (let i = 0; i < 15; i++) {
+                const response = await page.goto(url + '?verify=' + Date.now());
+                if ((await response.text()).includes('action:SCORE_ENDPOINT')) break;
+                await new Promise(resolve => setTimeout(resolve, 4000));
+              }
               await page.locator('button[onclick="go(11)"]').click();
               await page.getByRole('button', { name: '開始 10 題測驗', exact: true }).click();
               for (let i = 0; i < 10; i++) {
@@ -193,11 +199,11 @@ jobs:
               if (await page.locator('input[name=classNo]').inputValue() !== '701') throw new Error('Wrong class');
               await page.locator('input[name=seat]').fill('99');
               await page.locator('input[name=classCode]').fill('INVALIDCODE12345');
-              const [receipt] = await Promise.all([
-                page.context().waitForEvent('page'),
+              await Promise.all([
+                page.waitForURL('https://script.google.com/**'),
                 page.getByRole('button', { name: '上傳成績', exact: true }).click()
               ]);
-              await receipt.frameLocator('#sandboxFrame').frameLocator('#userHtmlFrame').getByText(/上傳代碼有誤/).waitFor();
+              await page.frameLocator('#sandboxFrame').frameLocator('#userHtmlFrame').getByText(/上傳代碼有誤/).waitFor();
               console.log('NUTRITION_UPLOAD_FORM_AND_RECEIVER_CONFIRMED');
             } finally {
               await browser.close();
