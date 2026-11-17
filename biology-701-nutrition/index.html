@@ -1021,17 +1021,6 @@ const TEST_UNITS = {
 const REVIEW_STAGE={'2-1':1,'2-2':3,'2-3':5,'2-4':7};
 const PASS_SCORE=60;
 const REPLACEMENT_COUNT=5;
-let scoreReceiverReady=false;
-
-function nutritionScoresAvailable(){
- scoreReceiverReady=true;
- if(S.cur===11 && currentTest?.finished)renderAssessment(false);
-}
-
-function checkNutritionReceiver(){
- const probe=el('script',{src:SCORE_ENDPOINT+'?capability='+encodeURIComponent(TEST_VERSION),async:''});
- document.head.append(probe);
-}
 const ASSESSMENT_TOTAL=10;
 const ASSESSMENT_SIZE=4;
 let activeUnit='2-1';
@@ -1229,17 +1218,14 @@ function appendPreviousScores(box){
 }
 
 function buildScoreForm(result,attempt){
- const endpoint=scoreReceiverReady&&/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(SCORE_ENDPOINT)?SCORE_ENDPOINT:'';
- const form=el('form',{method:'post',target:'_blank',rel:'noopener'});
+ const form=el('form',{method:'post',action:SCORE_ENDPOINT,novalidate:''});
  const identity=el('div',{class:'assessment-identity'});
  const classNo=el('input',{name:'classNo',type:'text',inputmode:'numeric',pattern:'[0-9]{3}',maxlength:'3',required:'',value:'701',readonly:'',autocomplete:'off'});
  const seat=el('input',{name:'seat',type:'text',inputmode:'numeric',pattern:'[0-9]{1,2}',maxlength:'2',required:'',autocomplete:'off'});
  const code=el('input',{name:'classCode',type:'text',pattern:'[A-Za-z0-9]{6,16}',maxlength:'16',required:'',autocomplete:'off',autocapitalize:'off'});
  identity.append(el('label',null,'班級',classNo),el('label',null,'座號',seat));
- if(endpoint)identity.append(el('label',null,'老師提供的上傳代碼',code));
- const status=el('p',{class:'assessment-status',role:'status'},endpoint
-  ?'送出後會開啟成績收件頁。請確認畫面顯示「成績已收到」。'
-  :'本章成績收件尚未連線。你可先下載成績，或保留本頁稍後再上傳。');
+ identity.append(el('label',null,'老師提供的上傳代碼',code));
+ const status=el('p',{class:'assessment-status',role:'status'},'送出後請等候「成績已收到」的回執。');
  form.append(el('h4',null,'上傳個人成績'),identity,status);
  const download=el('button',{class:'btn alt',type:'button',onclick:()=>{
   if(!classNo.reportValidity()||!seat.reportValidity()||Number(seat.value)<1){
@@ -1254,28 +1240,31 @@ function buildScoreForm(result,attempt){
   setTimeout(()=>URL.revokeObjectURL(url),1000);
  }},'下載成績');
  const actions=el('div',{class:'assessment-nav'},download);
- if(endpoint){
-  form.action=endpoint;
-  const payload=el('input',{type:'hidden',name:'attempt'});
-  form.append(payload);
-  actions.prepend(el('button',{class:'btn',type:'submit'},'上傳成績'));
-  form.addEventListener('submit',event=>{
-   if(Number(seat.value)<1){
-    event.preventDefault();status.textContent='座號必須大於 0。';seat.focus();return;
-   }
-   payload.value=JSON.stringify({version:TEST_VERSION,unit:activeUnit,id:attempt.id,answers:attempt.items.map((item,i)=>[item.bankIndex,attempt.answers[i]])});
-   status.textContent='請查看新分頁的收件結果。若連線中斷，可重送同一筆成績。';
-  });
- }else{
-  form.addEventListener('submit',event=>event.preventDefault());
- }
+ const payload=el('input',{type:'hidden',name:'attempt'});
+ payload.value=JSON.stringify({version:TEST_VERSION,unit:activeUnit,id:attempt.id,answers:attempt.items.map((item,i)=>[item.bankIndex,attempt.answers[i]])});
+ form.append(payload);
+ actions.prepend(el('button',{class:'btn',type:'submit'},'上傳成績'));
+ form.addEventListener('submit',event=>{
+  seat.value=seat.value.normalize('NFKC').trim();
+  code.value=code.value.normalize('NFKC').trim();
+  if(!seat.reportValidity() || Number(seat.value)<1 || !code.reportValidity()){
+   event.preventDefault();
+   status.textContent='請輸入有效座號及上傳代碼。';
+   return;
+  }
+  if(!saveTest()){
+   form.target='_blank';
+   form.rel='noopener';
+  }
+  status.textContent='正在送出成績，請等候收件回執。';
+ });
  form.append(actions);
  return form;
 }
 
 function boot(){buildDots();fillMins();
  [initS0,initS1,initS2,initS3,initS4,initS5,initS6,initS7,initS8,initS9,initS10].forEach(f=>{try{f();}catch(err){console.error(f.name,err);}});
- openUnitTest('2-1',false);go(0);tRender();checkNutritionReceiver();}
+ openUnitTest('2-1',false);go(0);tRender();}
 boot();
 
 </script>
