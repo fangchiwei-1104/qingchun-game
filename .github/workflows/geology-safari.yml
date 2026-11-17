@@ -171,3 +171,36 @@ jobs:
             echo 'NUTRITION_CAPABILITY_NOT_ADVERTISED'
             exit 1
           fi
+
+      - name: Check live student form in Chrome
+        shell: bash
+        run: |
+          npm install --no-save playwright
+          node <<'JS'
+          const { chromium } = require('playwright');
+          (async () => {
+            const browser = await chromium.launch({ channel: 'chrome', args: ['--no-sandbox'] });
+            try {
+              const page = await browser.newPage();
+              await page.goto('https://fangchiwei-1104.github.io/qingchun-game/biology-701-nutrition/');
+              await page.locator('button[onclick="go(11)"]').click();
+              await page.getByRole('button', { name: '開始 10 題測驗', exact: true }).click();
+              for (let i = 0; i < 10; i++) {
+                await page.locator('#assessment .opt').first().click();
+                await page.locator('#assessment .assessment-nav button').last().click();
+              }
+              await page.getByRole('button', { name: '上傳成績', exact: true }).waitFor();
+              if (await page.locator('input[name=classNo]').inputValue() !== '701') throw new Error('Wrong class');
+              await page.locator('input[name=seat]').fill('99');
+              await page.locator('input[name=classCode]').fill('INVALIDCODE12345');
+              const [receipt] = await Promise.all([
+                page.context().waitForEvent('page'),
+                page.getByRole('button', { name: '上傳成績', exact: true }).click()
+              ]);
+              await receipt.frameLocator('#sandboxFrame').frameLocator('#userHtmlFrame').getByText(/上傳代碼有誤/).waitFor();
+              console.log('NUTRITION_UPLOAD_FORM_AND_RECEIVER_CONFIRMED');
+            } finally {
+              await browser.close();
+            }
+          })().catch(error => { console.error(error); process.exitCode = 1; });
+          JS
